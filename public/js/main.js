@@ -14,8 +14,8 @@
 let allProducts = [];   // stores all loaded products
 let shopSettings = {};  // stores shop info from shop.json
 let quizAnswers = {};   // stores quiz selections
-const CMS_REPO = 'Jashwanth12707/client-optical-shop';
-const CMS_BRANCH = 'cms';
+const CMS_REPO = 'halilrahuman/vision-opticals-tvr';
+const CMS_BRANCH = 'main';
 
 // ══════════════════════════════════════
 // NAV — scroll effect + mobile menu
