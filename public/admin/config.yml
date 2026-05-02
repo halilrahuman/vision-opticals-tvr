@@ -1,0 +1,137 @@
+backend:
+   name: github
+   repo: Jashwanth12707/client-optical-shop
+   branch: cms
+ 
+publish_mode: simple
+
+
+media_folder: "public/content/uploads"
+public_folder: "/content/uploads"
+
+locale: en
+
+collections:
+
+  # ── PRODUCTS (frames + lenses) ──
+  - name: "products"
+    label: "Products"
+    label_singular: "Product"
+    folder: "public/content/products"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: "name"
+    summary: "{{name}} — {{category}} — {{price}}"
+    fields:
+      - label: "Product Name"
+        name: "name"
+        widget: "string"
+        hint: "e.g. Slim Rectangle Black or Acuvue Daily"
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Eyewear Frame", value: "frames" }
+          - { label: "Sunglasses", value: "sunglasses" }
+          - { label: "Contact Lens", value: "lenses" }
+          - { label: "Premium Frame", value: "premium" }
+
+      - label: "Price (in ₹)"
+        name: "price"
+        widget: "string"
+        hint: "e.g. ₹1,299 or ₹850"
+
+      - label: "Badge"
+        name: "badge"
+        widget: "select"
+        required: false
+        options:
+          - { label: "None", value: "" }
+          - { label: "Bestseller", value: "Bestseller" }
+          - { label: "New Arrival", value: "New" }
+          - { label: "Popular", value: "Popular" }
+          - { label: "Premium", value: "Premium" }
+          - { label: "Polarized", value: "Polarized" }
+          - { label: "UV400", value: "UV400" }
+          - { label: "Daily", value: "Daily" }
+          - { label: "Monthly", value: "Monthly" }
+          - { label: "Coloured", value: "Coloured" }
+
+      - label: "Product Image"
+        name: "image"
+        widget: "image"
+        hint: "Upload a clear product photo on white/light background"
+
+      - label: "Short Description"
+        name: "description"
+        widget: "string"
+        required: false
+
+      - label: "Recommended for Face Shape"
+        name: "faceShape"
+        widget: "select"
+        required: false
+        options:
+          - { label: "All", value: "all" }
+          - { label: "Oval", value: "oval" }
+          - { label: "Round", value: "round" }
+          - { label: "Square", value: "square" }
+          - { label: "Heart", value: "heart" }
+
+      - label: "Matches Style"
+        name: "style"
+        widget: "select"
+        required: false
+        options:
+          - { label: "All", value: "all" }
+          - { label: "Professional", value: "professional" }
+          - { label: "Trendy", value: "trendy" }
+          - { label: "Minimalist", value: "minimal" }
+          - { label: "Casual", value: "casual" }
+
+      - label: "Show on Website"
+        name: "published"
+        widget: "boolean"
+        default: true
+
+  # ── SHOP SETTINGS ──
+  - name: "settings"
+    label: "Shop Settings"
+    files:
+      - label: "Contact & Business Info"
+        name: "shop"
+        file: "public/content/settings/shop.json"
+        fields:
+          - label: "Shop Name"
+            name: "shopName"
+            widget: "string"
+            default: "Vision Opticals"
+
+          - label: "WhatsApp Number (with country code, no +)"
+            name: "whatsapp"
+            widget: "string"
+            hint: "e.g. 919486552324"
+
+          - label: "Phone Number"
+            name: "phone"
+            widget: "string"
+
+          - label: "Email"
+            name: "email"
+            widget: "string"
+
+          - label: "Monday – Saturday Hours"
+            name: "hoursWeekday"
+            widget: "string"
+            hint: "e.g. 10:00 AM – 9:30 PM"
+
+          - label: "Sunday Hours"
+            name: "hoursSunday"
+            widget: "string"
+            hint: "e.g. 10:30 AM – 2:00 PM / 5:00 PM – 9:30 PM"
+
+          - label: "Address"
+            name: "address"
+            widget: "string"
