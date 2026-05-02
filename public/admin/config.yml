@@ -1,7 +1,7 @@
 backend:
    name: github
-   repo: Jashwanth12707/client-optical-shop
-   branch: cms
+   repo: halilrahuman/vision-opticals-tvr
+   branch: main
  
 publish_mode: simple
 
