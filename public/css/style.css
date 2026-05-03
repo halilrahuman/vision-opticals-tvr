@@ -1618,10 +1618,10 @@ em {
 }
 
 .hours-row {
-    display: flex;
-    justify-content: space-between;
+    display: contents;
+    justify-content: center;
     font-size: 0.88rem;
-    padding: 6px 0;
+    padding: 5px 0;
 }
 
 .hours-row span {
