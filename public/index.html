@@ -1,886 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-        content="Vision Opticals – Thiruvarur's most trusted eyewear and contact lens clinic. Computerised eye testing, premium frames, and expert lens fitting." />
-    <title>Vision Opticals – Premium Eyewear & Contact Lens Clinic, Thiruvarur</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
-</head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Vision Opticals – Premium Eyewear & Contact Lenses, Thiruvarur</title>
+<meta name="description" content="Vision Opticals – Thiruvarur's most trusted eyewear and contact lens clinic. 25+ years. 500+ frames. Expert eye care."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f2ee;--bg2:#edeae4;--bg3:#e4e0d8;
+  --white:#ffffff;--ink:#1a1714;--ink2:#5a5550;--ink3:#9a948e;
+  --border:rgba(26,23,20,0.1);--border2:rgba(26,23,20,0.18);
+  --radius:14px;--rsm:8px;--nav-h:60px;
+  --f-display:'DM Serif Display',serif;--f-body:'DM Sans',sans-serif;
+  --ease:0.2s ease;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
 
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:var(--nav-h);background:var(--bg);border-bottom:0.5px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;gap:1rem}
+.nav-logo{font-family:var(--f-display);font-size:20px;color:var(--ink);cursor:pointer;user-select:none;white-space:nowrap}
+.nav-logo em{font-style:italic;color:var(--ink2)}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{font-size:13px;color:var(--ink2);background:none;border:none;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--f-body);transition:all var(--ease)}
+.nav-tab:hover{color:var(--ink);background:var(--bg2)}
+.nav-tab.active{color:var(--ink);background:var(--bg3);font-weight:500}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.search-box{display:flex;align-items:center;gap:6px;border:0.5px solid var(--border2);border-radius:20px;padding:6px 12px;background:var(--white)}
+.search-box svg{width:13px;height:13px;stroke:var(--ink3);flex-shrink:0}
+.search-box input{border:none;background:transparent;font-size:12px;font-family:var(--f-body);color:var(--ink);outline:none;width:120px}
+.search-box input::placeholder{color:var(--ink3)}
+.wa-btn{display:flex;align-items:center;gap:6px;background:var(--ink);color:var(--white);font-size:12px;padding:8px 14px;border-radius:20px;border:none;cursor:pointer;font-family:var(--f-body);text-decoration:none;white-space:nowrap;transition:opacity var(--ease)}
+.wa-btn:hover{opacity:0.85}
+.wa-btn svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+
+/* PAGES */
+.page{display:none}.page.active{display:block}
+
+/* HERO */
+.hero{padding:2.25rem 1.5rem 1.75rem;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;border-bottom:0.5px solid var(--border)}
+.hero h1{font-family:var(--f-display);font-size:clamp(26px,3.5vw,38px);font-weight:400;line-height:1.15;letter-spacing:-0.5px}
+.hero h1 em{font-style:italic;color:var(--ink2)}
+.hero p{font-size:13px;color:var(--ink2);margin-top:8px;line-height:1.65;max-width:360px}
+.hero-stats{display:flex;gap:2rem;flex-shrink:0}
+.stat-num{font-family:var(--f-display);font-size:26px;color:var(--ink)}
+.stat-lbl{font-size:11px;color:var(--ink3);margin-top:2px}
+
+/* SHOP PHOTO */
+.shop-strip{margin:1.5rem;border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--border2);position:relative;background:var(--bg2)}
+.shop-strip img{width:100%;max-height:280px;object-fit:cover;display:block}
+.shop-placeholder{height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink3)}
+.shop-placeholder svg{width:48px;height:48px;stroke:currentColor;opacity:0.35}
+.shop-placeholder p{font-size:12px;opacity:0.6}
+.shop-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(26,23,20,0.55));padding:1.25rem 1.5rem;color:#fff}
+.shop-overlay h3{font-family:var(--f-display);font-size:20px;font-weight:400}
+.shop-overlay p{font-size:12px;opacity:0.8;margin-top:4px}
+
+/* FILTER BAR */
+.filter-bar{display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.5rem;gap:1rem;border-bottom:0.5px solid var(--border);background:var(--bg);position:sticky;top:var(--nav-h);z-index:90;overflow-x:auto}
+.filter-bar::-webkit-scrollbar{display:none}
+.pills{display:flex;gap:6px;flex-shrink:0}
+.pill{font-size:12px;padding:5px 13px;border-radius:20px;border:0.5px solid var(--border2);background:var(--white);color:var(--ink2);cursor:pointer;font-family:var(--f-body);transition:all var(--ease);white-space:nowrap}
+.pill:hover{border-color:var(--ink);color:var(--ink)}
+.pill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.count-lbl{font-size:12px;color:var(--ink3);white-space:nowrap;flex-shrink:0}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;padding:1.5rem}
+.pcard{background:var(--white);border-radius:var(--radius);border:0.5px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color var(--ease),transform var(--ease);animation:fadeUp 0.3s ease both}
+.pcard:hover{border-color:var(--border2);transform:translateY(-2px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.pcard-img{background:var(--bg2);height:150px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s ease}
+.pcard:hover .pcard-img img{transform:scale(1.04)}
+.pcard-img .ico{width:56px;height:56px;stroke:var(--ink);opacity:0.15}
+.pbadge{position:absolute;top:8px;left:8px;font-size:10px;font-weight:500;padding:3px 8px;border-radius:10px}
+.b-popular{background:#fff3e0;color:#bf360c}
+.b-new{background:#e8f5e9;color:#1b5e20}
+.b-sale{background:#fce4ec;color:#880e4f}
+.b-kids{background:#e3f2fd;color:#0d47a1}
+.b-daily{background:#f3e5f5;color:#6a1b9a}
+.b-monthly{background:#e0f2f1;color:#00695c}
+.b-coloured{background:#fce4ec;color:#880e4f}
+.b-toric{background:#e8eaf6;color:#283593}
+.pcard-body{padding:11px 13px 13px}
+.pcard-name{font-size:13px;font-weight:500;color:var(--ink)}
+.pcard-sub{font-size:11px;color:var(--ink3);margin-top:2px}
+.pcard-foot{display:flex;align-items:center;justify-content:space-between;margin-top:9px}
+.pcard-chip{font-size:10px;color:var(--ink2);background:var(--bg2);padding:3px 8px;border-radius:7px}
+.pcard-arr{width:16px;height:16px;stroke:var(--ink3)}
+
+/* DETAIL */
+.detail-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);cursor:pointer;padding:1.25rem 1.5rem 0;background:none;border:none;font-family:var(--f-body);transition:color var(--ease)}
+.detail-back:hover{color:var(--ink)}
+.detail-back svg{width:16px;height:16px;stroke:currentColor}
+.detail-layout{display:grid;grid-template-columns:1fr 1fr;border-top:0.5px solid var(--border);margin-top:1.25rem}
+.dgallery{background:var(--bg2);min-height:400px;padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;border-right:0.5px solid var(--border)}
+.main-wrap{width:100%;max-width:320px;aspect-ratio:4/3;background:var(--bg3);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.main-wrap img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius)}
+.main-wrap .ico-lg{width:72px;height:72px;stroke:var(--ink);opacity:0.12}
+.thumb-row{display:flex;gap:8px}
+.thumb{width:50px;height:50px;border-radius:10px;border:1.5px solid transparent;background:var(--bg3);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:border-color var(--ease)}
+.thumb.on{border-color:var(--ink)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb svg{width:20px;height:20px;stroke:var(--ink3);opacity:0.4}
+.dinfo{padding:2rem}
+.d-badge{display:inline-block;font-size:10px;font-weight:500;padding:3px 10px;border-radius:10px;margin-bottom:10px}
+.d-name{font-family:var(--f-display);font-size:26px;font-weight:400;color:var(--ink);line-height:1.2}
+.d-sub{font-size:13px;color:var(--ink3);margin-top:5px;margin-bottom:1.5rem}
+.d-lbl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;margin-top:1.2rem}
+.swatches{display:flex;gap:8px}
+.sw{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;position:relative;transition:border-color var(--ease)}
+.sw.on::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--ink)}
+.sizes{display:flex;gap:7px;flex-wrap:wrap}
+.sz{font-size:12px;padding:5px 13px;border-radius:10px;border:0.5px solid var(--border2);background:var(--white);color:var(--ink2);cursor:pointer;font-family:var(--f-body);transition:all var(--ease)}
+.sz:hover{border-color:var(--ink);color:var(--ink)}
+.sz.on{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.spec-box{background:var(--bg2);border-radius:var(--rsm);padding:9px 11px}
+.spec-lbl{font-size:10px;color:var(--ink3);margin-bottom:2px}
+.spec-val{font-size:13px;font-weight:500;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;padding:4px 10px;border-radius:7px;background:var(--bg2);color:var(--ink2);border:0.5px solid var(--border)}
+.d-actions{margin-top:1.75rem;display:flex;flex-direction:column;gap:8px}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:var(--white);font-family:var(--f-body);font-size:14px;padding:13px;border-radius:var(--rsm);border:none;cursor:pointer;width:100%;text-decoration:none;transition:opacity var(--ease)}
+.btn-wa:hover{opacity:0.85}
+.btn-wa svg{width:17px;height:17px;fill:currentColor}
+.btn-store{font-family:var(--f-body);font-size:13px;padding:12px;border-radius:var(--rsm);border:0.5px solid var(--border2);background:var(--white);color:var(--ink2);cursor:pointer;width:100%;transition:all var(--ease)}
+.btn-store:hover{border-color:var(--ink);color:var(--ink)}
+.store-note{margin-top:10px;padding:10px 13px;border-radius:var(--rsm);border:0.5px solid var(--border);background:var(--bg2);display:flex;align-items:flex-start;gap:8px}
+.store-note svg{width:14px;height:14px;stroke:var(--ink3);flex-shrink:0;margin-top:1px}
+.store-note span{font-size:11px;color:var(--ink2);line-height:1.55}
+
+/* LENS DETAIL EXTRA */
+.lens-info-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:0}
+.feat-list{display:flex;flex-direction:column;gap:6px}
+.feat-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2)}
+.feat-item svg{width:14px;height:14px;stroke:#16a34a;flex-shrink:0}
+
+/* FOOTER */
+footer{border-top:0.5px solid var(--border2);padding:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.footer-logo{font-family:var(--f-display);font-size:16px;color:var(--ink)}
+.footer-logo em{font-style:italic;color:var(--ink2)}
+.footer-links{display:flex;gap:1.25rem}
+.footer-links a{font-size:12px;color:var(--ink3);text-decoration:none}
+.footer-links a:hover{color:var(--ink)}
+.footer-copy{font-size:11px;color:var(--ink3)}
+.empty{padding:4rem 2rem;text-align:center;color:var(--ink3);font-size:14px}
+
+/* MOBILE */
+@media(max-width:680px){
+  .nav-tabs{display:none}
+  .search-box{display:none}
+  .mobile-tabs{display:flex;gap:4px;padding:0.75rem 1rem;border-bottom:0.5px solid var(--border);overflow-x:auto}
+  .mobile-tabs::-webkit-scrollbar{display:none}
+  .hero{flex-direction:column;align-items:flex-start}
+  .hero-stats{width:100%;justify-content:flex-start;gap:1.5rem}
+  .grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:1rem}
+  .detail-layout{grid-template-columns:1fr}
+  .dgallery{border-right:none;border-bottom:0.5px solid var(--border);min-height:260px}
+  .dinfo{padding:1.25rem 1rem}
+  .lens-info-row{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;align-items:flex-start}
+}
+@media(min-width:681px){.mobile-tabs{display:none}}
+</style>
+</head>
 <body>
 
-    <!-- ══════════════════════════════════════
-       NAV
-  ══════════════════════════════════════ -->
-    <nav class="nav" id="nav">
-        <div class="nav-inner">
-            <!-- Logo -->
-            <a href="#" class="nav-logo">
-                <img src="images/Vison Logo.png" alt="Vision Opticals Logo" class="nav-logo-img" />
-                <span class="nav-logo-text">Vision <em>Opticals</em></span>
-            </a>
-
-            <!-- Desktop Links -->
-            <ul class="nav-links">
-                <li><a href="#eyewear">Eyewear</a></li>
-                <li><a href="#lenses">Contact Lenses</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-
-            <!-- Nav CTA -->
-            <a href="https://wa.me/9486552324?text=Hi,%20could%20you%20provide%20details%20about%20your%20frames%20and%20lenses?"
-                target="_blank" class="nav-cta">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-                WhatsApp Us
-            </a>
-
-            <!-- Hamburger for mobile -->
-            <button class="hamburger" id="hamburger" aria-label="Open menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="#eyewear" class="mobile-link">Eyewear</a>
-            <a href="#lenses" class="mobile-link">Contact Lenses</a>
-            <a href="#services" class="mobile-link">Services</a>
-            <a href="#about" class="mobile-link">About</a>
-            <a href="#contact" class="mobile-link">Contact</a>
-            <a href="https://wa.me/9486552324" target="_blank" class="mobile-wa">💬 Chat on WhatsApp</a>
-        </div>
-    </nav>
-
-    <!-- ══════════════════════════════════════
-       HERO SECTION
-  ══════════════════════════════════════ -->
-    <section class="hero" id="home">
-        <!-- Background image — shop exterior -->
-        <div class="hero-bg">
-            <img src="images/exterior.webp">
-            <div class="hero-overlay"></div>
-        </div>
-
-        <div class="hero-inner">
-            <div class="hero-content reveal">
-                <!-- Badge -->
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    ISO 9001:2008 Certified &middot; 25+ Years in Thiruvarur
-                </div>
-
-                <!-- Main headline -->
-                <h1 class="hero-title">
-                    See the World with<br />
-                    <em>Precision Vision,
-                        Timeless Style.</em>
-                </h1>
-
-                <!-- Subtext — short and punchy -->
-                <p class="hero-sub">
-                    Thiruvarur's most trusted optical store for 25 years.
-                    <br />Expert eye care. Premium frames. Same-day ready lenses.
-                </p>
-
-                <!-- CTAs -->
-                <div class="hero-btns">
-                    <a href="#eyewear" class="btn-outline">Explore Eyewear</a>
-                    <a href="#lenses" class="btn-outline">Find your Lenses</a>
-                </div>
-
-                <!-- Stats row -->
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <span class="stat-num">500+</span>
-                        <span class="stat-label">Frame Styles</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="hero-stat">
-                        <span class="stat-num">25+</span>
-                        <span class="stat-label">Years Trusted</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="hero-stat">
-                        <span class="stat-num">20+</span>
-                        <span class="stat-label">Premium Brands</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="hero-stat">
-                        <span class="stat-num">1000+</span>
-                        <span class="stat-label">Happy Customers</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hero side image -->
-            <div class="hero-visual reveal-right">
-                <div class="hero-card-main">
-                    <img src="https://images.unsplash.com/photo-1559070081-648fb00b2ed1?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGV5ZXdlYXJ8ZW58MHx8MHx8fDA%3D
-                        alt="Premium Eyewear" />
-                </div>
-                <div class="hero-card-float">
-                    <span class="float-icon">👁️</span>
-                    <div>
-                        <strong>Computerised Eye Testing</strong>
-                        <div class="hours-row">
-                            <span>Monday – Saturday : </span>
-                            <strong>10:00 AM – 9:30 PM</strong>
-                        </div>
-                        <div class="hours-row">
-                            <span> Sunday: </span>
-                            <strong> 10:30 AM – 2:00 PM / 5:00 PM – 9:30 PM</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Scroll indicator -->
-        <div class="scroll-hint">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       EYEWEAR COLLECTION (CMS MANAGED)
-  ══════════════════════════════════════ -->
-    <section class="section eyewear-section" id="eyewear">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Our Collection</span>
-                <h2 class="section-title">Curated Eyewear<br /><em>for Every Face</em></h2>
-                <p class="section-sub">Handpicked frames for every face, style, and budget.</p>
-            </div>
-
-            <!-- Filter tabs -->
-            <div class="filter-tabs reveal">
-                <button class="tab active" data-filter="all">All</button>
-                <button class="tab" data-filter="daily">Everyday</button>
-                <button class="tab" data-filter="premium">Premium</button>
-                <button class="tab" data-filter="sunglasses">Sunglasses</button>
-            </div>
-
-            <!-- Product grid — populated by JS from CMS -->
-            <div class="products-grid" id="eyewear-grid">
-                <!-- JS renders cards here from content/products/ -->
-                <!-- Skeleton loaders shown while loading -->
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       CONTACT LENSES SECTION (CMS MANAGED)
-  ══════════════════════════════════════ -->
-    <section class="section lenses-section" id="lenses">
-        <!-- Subtle background -->
-        <div class="lenses-bg"></div>
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Contact Lenses</span>
-                <h2 class="section-title">Freedom <br /><em>Beyond Frames.</em></h2>
-                <p class="section-sub">Clear, comfortable vision — no frames, no fuss.</p>
-            </div>
-
-            <!-- Lens types highlight -->
-            <div class="lens-types reveal">
-                <div class="lens-type-card">
-                    <div class="lens-type-icon">🌅</div>
-                    <h4>Daily Disposable</h4>
-                    <p>Fresh every day. Zero maintenance.</p>
-                </div>
-                <div class="lens-type-card">
-                    <div class="lens-type-icon">📅</div>
-                    <h4>Monthly Wear</h4>
-                    <p>Long-lasting comfort. Smart and cost-effective.</p>
-                </div>
-                <div class="lens-type-card">
-                    <div class="lens-type-icon">✨</div>
-                    <h4>Coloured Lenses</h4>
-                    <p>Subtle, natural colours. Confidence in every glance.</p>
-                </div>
-                <div class="lens-type-card">
-                    <div class="lens-type-icon">🎯</div>
-                    <h4>Toric Lenses</h4>
-                    <p>Precision correction for astigmatism. Crystal-clear.</p>
-                </div>
-            </div>
-
-            <!-- Lens products grid — CMS managed -->
-            <div class="products-grid" id="lenses-grid">
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-img"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line"></div>
-                        <div class="skeleton-line short"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Lens CTA -->
-            <div class="lenses-cta reveal">
-                <p>Not sure which lens suits you? Let our specialists guide you.</p>
-                <a href="https://wa.me/9486552324?text=Hi,%20could%20you%20give%20me%20some%20information%20about%20contact%20lenses?"
-                    target="_blank" class="btn-primary">Ask a Lens Specialist</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       FRAME FINDER QUIZ
-  ══════════════════════════════════════ -->
-    <section class="section quiz-section" id="quiz">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Frame Finder</span>
-                <h2 class="section-title">Which Frame Suits<br /><em>Your Face?</em></h2>
-                <p class="section-sub">Answer 3 quick questions. We'll recommend the perfect frame style for you.</p>
-            </div>
-
-            <div class="quiz-card reveal">
-                <!-- Progress bar -->
-                <div class="quiz-progress-bar">
-                    <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
-                </div>
-                <div class="quiz-progress-dots">
-                    <div class="qdot active" id="qd1"></div>
-                    <div class="qdot" id="qd2"></div>
-                    <div class="qdot" id="qd3"></div>
-                </div>
-
-                <!-- Step 1: Face Shape -->
-                <div class="quiz-step active" id="qs1">
-                    <p class="quiz-q">What is your face shape?</p>
-                    <div class="quiz-opts">
-                        <div class="qopt" onclick="pickOpt(this,'face','oval')">
-                            <span class="qopt-icon">🥚</span>
-                            <span class="qopt-label">Oval</span>
-                            <span class="qopt-desc">Balanced, slightly longer than wide</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'face','round')">
-                            <span class="qopt-icon">🔵</span>
-                            <span class="qopt-label">Round</span>
-                            <span class="qopt-desc">Soft curves, equal width & length</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'face','square')">
-                            <span class="qopt-icon">⬛</span>
-                            <span class="qopt-label">Square</span>
-                            <span class="qopt-desc">Strong jaw, broad forehead</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'face','heart')">
-                            <span class="qopt-icon">💜</span>
-                            <span class="qopt-label">Heart</span>
-                            <span class="qopt-desc">Wide forehead, narrow chin</span>
-                        </div>
-                    </div>
-                    <div class="quiz-nav">
-                        <button class="btn-quiz-next" onclick="goQuizStep(2)">Next →</button>
-                    </div>
-                </div>
-
-                <!-- Step 2: Style -->
-                <div class="quiz-step" id="qs2">
-                    <p class="quiz-q">What describes your personal style?</p>
-                    <div class="quiz-opts">
-                        <div class="qopt" onclick="pickOpt(this,'style','professional')">
-                            <span class="qopt-icon">💼</span>
-                            <span class="qopt-label">Professional</span>
-                            <span class="qopt-desc">Sharp, polished, office-ready</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'style','trendy')">
-                            <span class="qopt-icon">✨</span>
-                            <span class="qopt-label">Trendy</span>
-                            <span class="qopt-desc">Fashion-forward, bold choices</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'style','minimal')">
-                            <span class="qopt-icon">🤍</span>
-                            <span class="qopt-label">Minimalist</span>
-                            <span class="qopt-desc">Clean, subtle, understated</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'style','casual')">
-                            <span class="qopt-icon">😎</span>
-                            <span class="qopt-label">Casual</span>
-                            <span class="qopt-desc">Relaxed, everyday comfort</span>
-                        </div>
-                    </div>
-                    <div class="quiz-nav">
-                        <button class="btn-quiz-back" onclick="goQuizStep(1)">← Back</button>
-                        <button class="btn-quiz-next" onclick="goQuizStep(3)">Next →</button>
-                    </div>
-                </div>
-
-                <!-- Step 3: Usage -->
-                <div class="quiz-step" id="qs3">
-                    <p class="quiz-q">How will you primarily use them?</p>
-                    <div class="quiz-opts">
-                        <div class="qopt" onclick="pickOpt(this,'use','office')">
-                            <span class="qopt-icon">🏢</span>
-                            <span class="qopt-label">Office / Daily</span>
-                            <span class="qopt-desc">Long hours, all-day comfort</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'use','screen')">
-                            <span class="qopt-icon">💻</span>
-                            <span class="qopt-label">Screen Time</span>
-                            <span class="qopt-desc">Heavy computer or phone use</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'use','outdoor')">
-                            <span class="qopt-icon">☀️</span>
-                            <span class="qopt-label">Outdoors</span>
-                            <span class="qopt-desc">Sun protection, sports, travel</span>
-                        </div>
-                        <div class="qopt" onclick="pickOpt(this,'use','reading')">
-                            <span class="qopt-icon">📖</span>
-                            <span class="qopt-label">Reading</span>
-                            <span class="qopt-desc">Books, close work, low light</span>
-                        </div>
-                    </div>
-                    <div class="quiz-nav">
-                        <button class="btn-quiz-back" onclick="goQuizStep(2)">← Back</button>
-                        <button class="btn-quiz-next" onclick="showQuizResult()">Find My Frame ✨</button>
-                    </div>
-                </div>
-
-                <!-- Quiz Result -->
-                <div class="quiz-result" id="quiz-result">
-                    <div class="result-icon">🎉</div>
-                    <h3 class="result-title" id="result-title">Your Perfect Match</h3>
-                    <p class="result-desc" id="result-desc">Based on your answers, here are our top picks.</p>
-                    <div class="result-lens-tip" id="result-lens-tip"></div>
-                    <div class="result-frames" id="result-frames"></div>
-                    <div class="result-btns">
-                        <a href="https://wa.me/9486552324?text=Hi%20I%20took%20the%20Frame%20Finder%20quiz%20and%20want%20to%20see%20the%20recommended%20frames!"
-                            target="_blank" class="btn-primary">
-                            💬 See These Frames in Store
-                        </a>
-                        <button class="btn-retake" onclick="retakeQuiz()">Retake Quiz</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       SERVICES SECTION
-  ══════════════════════════════════════ -->
-    <section class="section services-section" id="services">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">What We Do</span>
-                <h2 class="section-title">Complete Eye Care<br /><em>Under One Roof</em></h2>
-            </div>
-
-            <div class="services-grid reveal">
-                <!-- Service 1 -->
-                <div class="service-card">
-                    <div class="service-num">01</div>
-                    <div class="service-icon">🔬</div>
-                    <h3 class="service-name">Computerised Eye Testing</h3>
-                    <p class="service-desc">Modern autorefractors. Accurate results in minutes — no guesswork.</p>
-                    <a href="https://wa.me/9486552324?text=Hi,%20I%20need%20to%20make%20an%20appointment%20for%20an%20eye%20test"
-                        target="_blank" class="service-link">Book an Eye Test →</a>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="service-card">
-                    <div class="service-num">02</div>
-                    <div class="service-icon">👁️</div>
-                    <h3 class="service-name">Contact Lens Fitting</h3>
-                    <p class="service-desc">Expert fitting for daily, monthly, toric & coloured lenses. Matched to your
-                        prescription.</p>
-                    <a href="https://wa.me/9486552324?text=Hello,%20can%20I%20book%20a%20contact%20lens%20consultation?"
-                        target="_blank" class="service-link">Book Lens Fitting →</a>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="service-card">
-                    <div class="service-num">03</div>
-                    <div class="service-icon">🕶️</div>
-                    <h3 class="service-name">Frame Consultation</h3>
-                    <p class="service-desc">We analyse your face shape and lifestyle — then find your ideal frame.</p>
-                    <a href="#quiz" class="service-link">Take the Quiz →</a>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="service-card">
-                    <div class="service-num">04</div>
-                    <div class="service-icon">🔧</div>
-                    <h3 class="service-name">Repairs &amp; Adjustments</h3>
-                    <p class="service-desc">Nose pads, hinges, temple reshaping — done while you wait. Most repairs
-                        free.</p>
-                    <a href="tel:9486552324" class="service-link">Call Us →</a>
-                </div>
-
-                <!-- Service 5 -->
-                <div class="service-card">
-                    <div class="service-num">05</div>
-                    <div class="service-icon">🔭</div>
-                    <h3 class="service-name">Precision Lens Fitting</h3>
-                    <p class="service-desc">Accurate PD measurement and optical centration. Every lens performs exactly
-                        as prescribed.</p>
-                    <a href="https://wa.me/9486552324" target="_blank" class="service-link">Enquire →</a>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="service-card">
-                    <div class="service-num">06</div>
-                    <div class="service-icon">💎</div>
-                    <h3 class="service-name">Premium Lens Coatings</h3>
-                    <p class="service-desc">Anti-reflective, blue-cut, photochromic, UV400 — choose the right protection
-                        for your lifestyle.</p>
-                    <a href="https://wa.me/9486552324?text=Hi,%20could%20you%20provide%20information%20on%20lens%20coatings?"
-                        target="_blank" class="service-link">Learn More →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       ABOUT / WHY CHOOSE US
-  ══════════════════════════════════════ -->
-    <section class="section about-section" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <!-- Images collage -->
-                <div class="about-images reveal">
-                    <div class="about-img-main">
-                        <img src="images/framedisplay.webp" alt="Vision Opticals Interior" />
-                    </div>
-                    <div class="about-img-secondary">
-                        <img src="images/exterior.webp" alt="Vision Opticals Frame Display" />
-                    </div>
-                    <!-- ISO badge overlay -->
-                    <div class="about-iso-badge">
-                        <span class="iso-icon">🏅</span>
-                        <strong>25 Years &amp; Counting</strong>
-                        <span>Thiruvarur's most trusted optical store</span>
-                    </div>
-                </div>
-
-                <!-- About content -->
-                <div class="about-content reveal-right">
-                    <span class="section-tag">About Us</span>
-                    <h2 class="section-title">Thiruvarur's Most Trusted<br /><em>Eye Care — 25 Years Strong</em></h2>
-
-                    <p class="about-text">Since 2000, Vision Opticals has been the name Thiruvarur trusts for precise
-                        eye care, premium eyewear, and genuine service. Over 1,000 families visit us every year —
-                        because we get it right, every time.</p>
-
-                    <!-- Why choose us points -->
-                    <div class="why-items">
-                        <div class="why-item">
-                            <div class="why-icon">🏅</div>
-                            <div class="why-text">
-                                <h4>ISO 9001:2008 Certified</h4>
-                                <p>Quality you can trust, standards you can verify.</p>
-                            </div>
-                        </div>
-                        <div class="why-item">
-                            <div class="why-icon">🔬</div>
-                            <div class="why-text">
-                                <h4>Computerised Eye Testing</h4>
-                                <p>Precision diagnosis with modern clinical equipment.</p>
-                            </div>
-                        </div>
-                        <div class="why-item">
-                            <div class="why-icon">👁️</div>
-                            <div class="why-text">
-                                <h4>Contact Lens Specialists</h4>
-                                <p>From daily disposables to monthly wear — we find your perfect fit.</p>
-                            </div>
-                        </div>
-                        <div class="why-item">
-                            <div class="why-icon">💎</div>
-                            <div class="why-text">
-                                <h4>Premium Global Brands</h4>
-                                <p>Essilor, Ray-Ban, Crizal, Zeiss, Vari-Lux &amp; Fastrack — all in one store.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="#contact" class="btn-primary" style="margin-top:2rem;display:inline-flex;">Visit Us in
-                        Thiruvarur →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       SHOP GALLERY
-  ══════════════════════════════════════ -->
-    <section class="section gallery-section">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Our Store</span>
-                <h2 class="section-title">Step Inside<br /><em>Vision Opticals</em></h2>
-            </div>
-            <div class="gallery-grid reveal">
-                <div class="gallery-item large">
-                    <img src="images/exterior.webp" alt="Vision Opticals Store Front" />
-                    <div class="gallery-overlay"><span>Our Store</span></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/framedisplay.webp" alt="Frame Display" />
-                    <div class="gallery-overlay"><span>Frame Display</span></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/interior.webp" alt="Interior" />
-                    <div class="gallery-overlay"><span>Interior</span></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image1.jpg" alt="Exterior" />
-                    <div class="gallery-overlay"><span>Exterior</span></div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image5.webp" alt="Interior" />
-                    <div class="gallery-overlay"><span>Interior</span></div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       GOOGLE REVIEWS
-  ══════════════════════════════════════ -->
-    <section class="section reviews-section" id="reviews">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Customer Reviews</span>
-                <h2 class="section-title">What Our Customers<br /><em>Say About Us</em></h2>
-                <div class="overall-rating">
-                    <span class="rating-stars">★★★★★</span>
-                    <span class="rating-num">5.0</span>
-                    <span class="rating-label">on Google Reviews</span>
-                </div>
-            </div>
-
-            <div class="reviews-grid reveal">
-                <!-- Review 1 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Professional people willing to help others. Fast and friendly. They made my
-                        glasses in 2–3 days and readjusted them twice for free. They worked perfectly afterwards. Very
-                        satisfied."</p>
-                    <div class="review-author">
-                        <div class="review-avatar">AS</div>
-                        <div class="review-info">
-                            <strong>Alexandre Samy</strong>
-                            <span>Local Guide · 2 years ago</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 2 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Very good service. Thank you so much. I took more than 2 hours to select a
-                        frame but the staff didn't get upset at all — so patient and helpful. Highly recommended!"</p>
-                    <div class="review-author">
-                        <div class="review-avatar">SR</div>
-                        <div class="review-info">
-                            <strong>S Rathika</strong>
-                            <span>4 years ago</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 3 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Reasonable prices for all products and quality you can trust. Wonderful
-                        service and a genuinely helpful team. Keep rocking!"</p>
-                    <div class="review-author">
-                        <div class="review-avatar">SS</div>
-                        <div class="review-info">
-                            <strong>Sowmiya Saravanan</strong>
-                            <span>Local Guide · 4 years ago</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 4 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Really good service and valuable products. One of the best optical shops in
-                        Thiruvarur. Great collection at fair prices."</p>
-                    <div class="review-author">
-                        <div class="review-avatar">FA</div>
-                        <div class="review-info">
-                            <strong>Faizal AbdulAziz</strong>
-                            <span>6 months ago</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 5 -->
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Very good customer service. Staff are knowledgeable, friendly, and made the
-                        whole process easy. Will definitely come back."</p>
-                    <div class="review-author">
-                        <div class="review-avatar">CP</div>
-                        <div class="review-info">
-                            <strong>CP</strong>
-                            <span>7 months ago</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       CONTACT + MAP
-  ══════════════════════════════════════ -->
-    <section class="section contact-section" id="contact">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Visit Us</span>
-                <h2 class="section-title">Find Us in<br /><em>Thiruvarur</em></h2>
-            </div>
-
-            <div class="contact-grid reveal">
-                <!-- Contact info -->
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <h4>Address</h4>
-                            <p>No 83/8<br />South Main Street, Thiruvarur – 610001,<br />Tamil
-                                Nadu</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">📞</div>
-                        <div>
-                            <h4>Phone</h4>
-                            <a href="tel:9486552324">9486552324</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">💬</div>
-                        <div>
-                            <h4>WhatsApp</h4>
-                            <a href="https://wa.me/9486552324" target="_blank">Chat with us on WhatsApp</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">✉️</div>
-                        <div>
-                            <h4>Email</h4>
-                            <a href="mailto:visionopticalstvr2001@gmail.com">visionopticalstvr2001@gmail.com</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">🕐</div>
-                        <div>
-                            <h4>Business Hours</h4>
-                            <div class="hours-table">
-                                <div class="hours-row">
-                                    <span>Every Day :</span>
-                                    <strong>MON–SAT: 10:00 AM – 9:30 PM<br>SUN:10:30 AM - 2:00 PM / 5:00 PM - 9:30 PM
-                                    </strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact buttons -->
-                    <div class="contact-btns">
-                        <a href="https://wa.me/9486552324?text=Hi,%20could%20you%20provide%20details%20about%20yout%20frames%20and%20lenses?"
-                            target="_blank" class="btn-wa-full">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                            Chat on WhatsApp
-                        </a>
-                        <a href="tel:9486552324" class="btn-call-full">📞 Call Now</a>
-                    </div>
-                </div>
-
-                <!-- Google Map -->
-                <div class="map-wrap">
-                    <iframe src="https://maps.google.com/maps?q=Vision+Opticals+Thiruvarur&output=embed&z=16"
-                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                        title="Vision Opticals Location">
-                    </iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
-       BRAND MARQUEE (above footer)
-  ══════════════════════════════════════ -->
-    <div class="brand-marquee-section">
-        <p class="marquee-label">Brands We Carry</p>
-        <div class="marquee-track">
-            <div class="marquee-inner" id="marquee-inner">
-                <!-- Brand logos — duplicated for seamless loop -->
-                <div class="brand-logo brand-text">Ray-Ban</div>
-                <div class="brand-logo brand-text">Essilor</div>
-                <div class="brand-logo brand-text">Zeiss</div>
-                <div class="brand-logo brand-text">Fastrack</div>
-                <div class="brand-logo brand-text">Crizal</div>
-                <div class="brand-logo brand-text">Vari-Lux</div>
-                <!-- Duplicate for seamless loop -->
-                <div class="brand-logo brand-text">Ray-Ban</div>
-                <div class="brand-logo brand-text">Essilor</div>
-                <div class="brand-logo brand-text">Zeiss</div>
-                <div class="brand-logo brand-text">Fastrack</div>
-                <div class="brand-logo brand-text">Crizal</div>
-                <div class="brand-logo brand-text">Vari-Lux</div>
-            </div>
-        </div>
+<nav>
+  <div class="nav-logo" onclick="showPage('frames')">Vision <em>Opticals</em></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tab-frames" onclick="showPage('frames')">Eyewear</button>
+    <button class="nav-tab" id="tab-lenses" onclick="showPage('lenses')">Contact lenses</button>
+    <button class="nav-tab" id="tab-about" onclick="showPage('about')">Our store</button>
+  </div>
+  <div class="nav-right">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Search…" oninput="onSearch()"/>
     </div>
+    <a class="wa-btn" href="https://wa.me/9486552324" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.017 2C6.491 2 2.019 6.471 2.019 11.996c0 1.76.462 3.463 1.342 4.964L2 22l5.232-1.338A10.013 10.013 0 0012.017 22C17.543 22 22 17.529 22 12.004 22 6.471 17.543 2 12.017 2z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</nav>
 
-    <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Brand -->
-                <div class="footer-brand">
-                    <img src="images/logo.jpg" alt="Vision Opticals" class="footer-logo" />
-                    <p>Thiruvarur's most trusted eye care destination since 1999. Computerised eye testing, premium
-                        eyewear &amp;
-                        contact lenses — 25 years of clear vision.</p>
-                    <div class="footer-cert">🏅 ISO 9001:2008 Certified</div>
-                </div>
+<!-- MOBILE TABS -->
+<div class="mobile-tabs">
+  <button class="pill active" id="mtab-frames" onclick="showPage('frames')">Eyewear</button>
+  <button class="pill" id="mtab-lenses" onclick="showPage('lenses')">Contact lenses</button>
+  <button class="pill" id="mtab-about" onclick="showPage('about')">Our store</button>
+</div>
 
-                <!-- Quick Links -->
-                <div class="footer-col">
-                    <h5>Quick Links</h5>
-                    <ul>
-                        <li><a href="#eyewear">Eyewear Collection</a></li>
-                        <li><a href="#lenses">Contact Lenses</a></li>
-                        <li><a href="#quiz">Frame Finder</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#about">About Us</a></li>
-                    </ul>
-                </div>
+<!-- ═══ FRAMES PAGE ═══ -->
+<div id="page-frames" class="page active">
+  <div class="hero">
+    <div>
+      <h1>Eyewear crafted<br><em>for every face.</em></h1>
+      <p>500+ styles · 20+ premium brands · Expert fitting in Thiruvarur for 25 years. Click any frame to explore details.</p>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">500+</div><div class="stat-lbl">Frame styles</div></div>
+      <div><div class="stat-num">25</div><div class="stat-lbl">Years trusted</div></div>
+      <div><div class="stat-num">1000+</div><div class="stat-lbl">Happy customers</div></div>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <div class="pills">
+      <button class="pill active" onclick="filterFrames('All',this)">All</button>
+      <button class="pill" onclick="filterFrames('Everyday',this)">Everyday</button>
+      <button class="pill" onclick="filterFrames('Premium',this)">Premium</button>
+      <button class="pill" onclick="filterFrames('Sunglasses',this)">Sunglasses</button>
+      <button class="pill" onclick="filterFrames('Kids',this)">Kids</button>
+    </div>
+    <span class="count-lbl" id="frame-count"></span>
+  </div>
+  <div class="grid" id="frames-grid"></div>
+  <div id="frames-empty" class="empty" style="display:none">No frames found. Try a different search or filter.</div>
+  <footer>
+    <div class="footer-logo">Vision <em>Opticals</em></div>
+    <div class="footer-links">
+      <a href="https://wa.me/9486552324" target="_blank">WhatsApp</a>
+      <a href="tel:9486552324">Call us</a>
+      <a href="https://maps.google.com/?q=Vision+Opticals+Thiruvarur" target="_blank">Find us</a>
+    </div>
+    <div class="footer-copy">© 2025 Vision Opticals, Thiruvarur · ISO 9001:2008</div>
+  </footer>
+</div>
 
-                <!-- Services -->
-                <div class="footer-col">
-                    <h5>Services</h5>
-                    <ul>
-                        <li><a href="#services">Eye Testing</a></li>
-                        <li><a href="#services">Lens Fitting</a></li>
-                        <li><a href="#services">Frame Consultation</a></li>
-                        <li><a href="#services">Repairs</a></li>
-                        <li><a href="#services">Lens Coatings</a></li>
-                    </ul>
-                </div>
+<!-- ═══ LENSES PAGE ═══ -->
+<div id="page-lenses" class="page">
+  <div class="hero">
+    <div>
+      <h1>Contact lenses<br><em>for every eye.</em></h1>
+      <p>Daily, monthly, coloured and toric lenses. Expert fitting matched to your prescription.</p>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">4</div><div class="stat-lbl">Lens types</div></div>
+      <div><div class="stat-num">10+</div><div class="stat-lbl">Top brands</div></div>
+      <div><div class="stat-num">Free</div><div class="stat-lbl">Fitting advice</div></div>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <div class="pills">
+      <button class="pill active" onclick="filterLenses('All',this)">All</button>
+      <button class="pill" onclick="filterLenses('Daily',this)">Daily disposable</button>
+      <button class="pill" onclick="filterLenses('Monthly',this)">Monthly</button>
+      <button class="pill" onclick="filterLenses('Coloured',this)">Coloured</button>
+      <button class="pill" onclick="filterLenses('Toric',this)">Toric</button>
+    </div>
+    <span class="count-lbl" id="lens-count"></span>
+  </div>
+  <div class="grid" id="lenses-grid"></div>
+  <div id="lenses-empty" class="empty" style="display:none">No lenses found.</div>
+  <footer>
+    <div class="footer-logo">Vision <em>Opticals</em></div>
+    <div class="footer-links">
+      <a href="https://wa.me/9486552324" target="_blank">WhatsApp</a>
+      <a href="tel:9486552324">Call us</a>
+    </div>
+    <div class="footer-copy">© 2025 Vision Opticals, Thiruvarur</div>
+  </footer>
+</div>
 
-                <!-- Contact -->
-                <div class="footer-col">
-                    <h5>Contact</h5>
-                    <ul>
-                        <li><a href="tel:9486552324">94865 52324</a></li>
-                        <li><a href="https://wa.me/9486552324" target="_blank">WhatsApp Us</a></li>
-                        <li><a href="mailto:visionopticalstvr2001@gmail.com">visionopticalstvr2001@gmail.com</a></li>
-                        <li>No 83/8, South Main St,<br />Thiruvarur – 610001</li>
-                    </ul>
-                </div>
-            </div>
+<!-- ═══ ABOUT / SHOP PAGE ═══ -->
+<div id="page-about" class="page">
+  <div class="hero">
+    <div>
+      <h1>Thiruvarur's most<br><em>trusted optical store.</em></h1>
+      <p>Since 2000, Vision Opticals has served over 1,000 families with genuine care, premium eyewear, and expert eye testing.</p>
+    </div>
+  </div>
+  <div class="shop-strip" id="shop-strip">
+    <div class="shop-placeholder" id="shop-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <p>Add your shop photo — see setup guide below</p>
+    </div>
+    <div class="shop-overlay">
+      <h3>Vision Opticals, Thiruvarur</h3>
+      <p>ISO 9001:2008 Certified · 25 years · Mon–Sat 10 AM–9:30 PM</p>
+    </div>
+  </div>
+  <div style="padding:1.5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+    <div class="spec-box" style="padding:1.25rem">
+      <div class="spec-lbl">Computerised eye testing</div>
+      <div class="spec-val" style="margin-top:6px;font-size:13px;font-weight:400;color:var(--ink2)">Modern autorefractors. Accurate results in minutes — no guesswork.</div>
+    </div>
+    <div class="spec-box" style="padding:1.25rem">
+      <div class="spec-lbl">Contact lens fitting</div>
+      <div class="spec-val" style="margin-top:6px;font-size:13px;font-weight:400;color:var(--ink2)">Expert fitting for daily, monthly, toric and coloured lenses.</div>
+    </div>
+    <div class="spec-box" style="padding:1.25rem">
+      <div class="spec-lbl">Repairs & adjustments</div>
+      <div class="spec-val" style="margin-top:6px;font-size:13px;font-weight:400;color:var(--ink2)">Nose pads, hinges, temple reshaping — most repairs free, done while you wait.</div>
+    </div>
+    <div class="spec-box" style="padding:1.25rem">
+      <div class="spec-lbl">Premium brands</div>
+      <div class="spec-val" style="margin-top:6px;font-size:13px;font-weight:400;color:var(--ink2)">Essilor, Ray-Ban, Crizal, Zeiss, Vari-Lux, Fastrack — all in one store.</div>
+    </div>
+  </div>
+  <div style="padding:0 1.5rem 1.5rem;display:flex;gap:10px;flex-wrap:wrap">
+    <a class="wa-btn" href="https://wa.me/9486552324?text=Hi, I want to book an eye test" target="_blank" style="flex:1;min-width:200px;justify-content:center">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.017 2C6.491 2 2.019 6.471 2.019 11.996c0 1.76.462 3.463 1.342 4.964L2 22l5.232-1.338A10.013 10.013 0 0012.017 22C17.543 22 22 17.529 22 12.004 22 6.471 17.543 2 12.017 2z"/></svg>
+      Book an eye test
+    </a>
+    <a class="btn-store" href="https://maps.google.com/?q=Vision+Opticals+Thiruvarur" target="_blank" style="flex:1;min-width:200px;display:flex;align-items:center;justify-content:center;text-decoration:none">Get directions</a>
+  </div>
+  <footer>
+    <div class="footer-logo">Vision <em>Opticals</em></div>
+    <div class="footer-links">
+      <a href="https://wa.me/9486552324" target="_blank">WhatsApp</a>
+      <a href="tel:9486552324">Call: 9486552324</a>
+    </div>
+    <div class="footer-copy">© 2025 Vision Opticals, Thiruvarur · ISO 9001:2008</div>
+  </footer>
+</div>
 
-            <div class="footer-bottom">
-                <p>© 2026 Vision Opticals, Thiruvarur. All rights reserved.</p>
-                <p class="footer-hours">Open Every Day : MON–SAT: 10:00 AM – 9:30 PM<br>SUN:10:30 AM - 2:00 PM/5:00 PM -
-                    9:30 PM</p>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ══════════════════════════════════════
-       FLOATING WHATSAPP BUTTON
-  ══════════════════════════════════════ -->!
-    <div class="wa-float" id="wa-float">
-        <div class="wa-tooltip">Chat with us!</div>
-        <a href="https://wa.me/9486552324?text=Hi,%20could%20you%20provide%20details%20about%20your%20frames%20and%20lenses?"
-            target="_blank" class="wa-float-btn" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="white">
-                <path
-                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-            </svg>
+<!-- ═══ FRAME DETAIL PAGE ═══ -->
+<div id="page-frame-detail" class="page">
+  <button class="detail-back" onclick="backTo('frames')">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to eyewear
+  </button>
+  <div class="detail-layout">
+    <div class="dgallery">
+      <div class="main-wrap" id="fd-main-img">
+        <svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <div class="thumb-row">
+        <div class="thumb on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg></div>
+      </div>
+    </div>
+    <div class="dinfo">
+      <div class="d-badge" id="fd-badge"></div>
+      <div class="d-name" id="fd-name"></div>
+      <div class="d-sub" id="fd-type"></div>
+      <div class="d-lbl">Frame colour</div>
+      <div class="swatches" id="fd-colors"></div>
+      <div class="d-lbl">Frame size</div>
+      <div class="sizes" id="fd-sizes"></div>
+      <div class="d-lbl">Specifications</div>
+      <div class="specs-grid" id="fd-specs"></div>
+      <div class="d-lbl">Available lens coatings</div>
+      <div class="chips" id="fd-coatings"></div>
+      <div class="d-actions">
+        <a class="btn-wa" id="fd-wa" href="#" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.017 2C6.491 2 2.019 6.471 2.019 11.996c0 1.76.462 3.463 1.342 4.964L2 22l5.232-1.338A10.013 10.013 0 0012.017 22C17.543 22 22 17.529 22 12.004 22 6.471 17.543 2 12.017 2z"/></svg>
+          Enquire on WhatsApp
         </a>
+        <button class="btn-store" onclick="window.open('https://maps.google.com/?q=Vision+Opticals+Thiruvarur','_blank')">Visit us in store — Thiruvarur</button>
+      </div>
+      <div class="store-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Mon–Sat: 10:00 AM – 9:30 PM &nbsp;|&nbsp; Sun: 10:30 AM – 2:00 PM &amp; 5:00 PM – 9:30 PM</span>
+      </div>
     </div>
+  </div>
+</div>
 
-    <script src="js/main.js"></script>
-    <!-- Netlify Identity Widget — handles login/signup popups -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/";
-                    });
-                }
-            });
-        }
-    </script>
+<!-- ═══ LENS DETAIL PAGE ═══ -->
+<div id="page-lens-detail" class="page">
+  <button class="detail-back" onclick="backTo('lenses')">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to contact lenses
+  </button>
+  <div class="detail-layout">
+    <div class="dgallery">
+      <div class="main-wrap" id="ld-main-img">
+        <svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+      </div>
+      <div class="thumb-row">
+        <div class="thumb on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
+      </div>
+    </div>
+    <div class="dinfo">
+      <div class="d-badge" id="ld-badge"></div>
+      <div class="d-name" id="ld-name"></div>
+      <div class="d-sub" id="ld-brand"></div>
+      <div class="d-lbl">Lens information</div>
+      <div class="lens-info-row specs-grid" id="ld-info"></div>
+      <div class="d-lbl">Wear duration</div>
+      <div class="chip" id="ld-duration" style="display:inline-block;margin-bottom:0"></div>
+      <div class="d-lbl">Key features</div>
+      <div class="feat-list" id="ld-features"></div>
+      <div class="d-actions">
+        <a class="btn-wa" id="ld-wa" href="#" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.017 2C6.491 2 2.019 6.471 2.019 11.996c0 1.76.462 3.463 1.342 4.964L2 22l5.232-1.338A10.013 10.013 0 0012.017 22C17.543 22 22 17.529 22 12.004 22 6.471 17.543 2 12.017 2z"/></svg>
+          Enquire on WhatsApp
+        </a>
+        <button class="btn-store" onclick="window.open('https://maps.google.com/?q=Vision+Opticals+Thiruvarur','_blank')">Visit us in store — Thiruvarur</button>
+      </div>
+      <div class="store-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Mon–Sat: 10:00 AM – 9:30 PM &nbsp;|&nbsp; Sun: 10:30 AM – 2:00 PM &amp; 5:00 PM – 9:30 PM</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PHONE = "9486552324";
+const REPO  = "halilrahuman/vision-opticals-tvr";
+let DB = { frames: [], lenses: [] };
+let frameCat = "All", lensCat = "All", searchQ = "";
+let prevPage = "frames";
+
+const badgeClass = {
+  Popular:"b-popular", New:"b-new", Sale:"b-sale", Kids:"b-kids",
+  Daily:"b-daily", Monthly:"b-monthly", Coloured:"b-coloured", Toric:"b-toric"
+};
+
+// Load products.json from same repo
+async function loadData() {
+  try {
+    const r = await fetch("products.json?v=" + Date.now());
+    DB = await r.json();
+  } catch(e) {
+    console.warn("Could not load products.json, using empty catalog", e);
+  }
+  renderFrames(); renderLenses();
+}
+
+// NAVIGATION
+function showPage(p) {
+  document.querySelectorAll(".page").forEach(x => x.classList.remove("active"));
+  document.getElementById("page-" + p).classList.add("active");
+  ["frames","lenses","about"].forEach(t => {
+    const el = document.getElementById("tab-"+t);
+    const mel = document.getElementById("mtab-"+t);
+    if(el) el.classList.toggle("active", t===p);
+    if(mel) mel.classList.toggle("active", t===p);
+  });
+  if(p === "frames" || p === "lenses") prevPage = p;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function backTo(p) { showPage(p); }
+
+// FRAME CARD HTML
+function frameCard(p, i) {
+  const bc = badgeClass[p.badge] || "";
+  return `<div class="pcard" style="animation-delay:${i*0.04}s" onclick="openFrame(${p.id})">
+    <div class="pcard-img">
+      ${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy"/>` :
+        `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg>`}
+      ${p.badge ? `<span class="pbadge ${bc}">${p.badge}</span>` : ""}
+    </div>
+    <div class="pcard-body">
+      <div class="pcard-name">${p.name}</div>
+      <div class="pcard-sub">${p.type}</div>
+      <div class="pcard-foot">
+        <span class="pcard-chip">${p.coatings[0]||""}</span>
+        <svg class="pcard-arr" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </div>`;
+}
+
+// LENS CARD HTML
+function lensCard(l, i) {
+  const bc = badgeClass[l.badge] || badgeClass[l.category] || "";
+  return `<div class="pcard" style="animation-delay:${i*0.04}s" onclick="openLens(${l.id})">
+    <div class="pcard-img">
+      ${l.img ? `<img src="${l.img}" alt="${l.name}" loading="lazy"/>` :
+        `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>`}
+      <span class="pbadge ${badgeClass[l.category]||""}">${l.category}</span>
+    </div>
+    <div class="pcard-body">
+      <div class="pcard-name">${l.name}</div>
+      <div class="pcard-sub">${l.brand}</div>
+      <div class="pcard-foot">
+        <span class="pcard-chip">${l.duration.split("—")[0].trim()}</span>
+        <svg class="pcard-arr" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+  </div>`;
+}
+
+// RENDER FRAMES
+function renderFrames() {
+  const q = searchQ.toLowerCase();
+  const list = DB.frames.filter(p => {
+    const mc = frameCat==="All" || p.category===frameCat;
+    const mq = !q || p.name.toLowerCase().includes(q) || p.type.toLowerCase().includes(q);
+    return mc && mq;
+  });
+  const grid = document.getElementById("frames-grid");
+  const empty = document.getElementById("frames-empty");
+  document.getElementById("frame-count").textContent = list.length + " frame" + (list.length!==1?"s":"");
+  if(!list.length){ grid.innerHTML=""; empty.style.display="block"; return; }
+  empty.style.display="none";
+  grid.innerHTML = list.map((p,i) => frameCard(p,i)).join("");
+}
+
+// RENDER LENSES
+function renderLenses() {
+  const q = searchQ.toLowerCase();
+  const list = DB.lenses.filter(l => {
+    const mc = lensCat==="All" || l.category===lensCat;
+    const mq = !q || l.name.toLowerCase().includes(q) || l.brand.toLowerCase().includes(q);
+    return mc && mq;
+  });
+  const grid = document.getElementById("lenses-grid");
+  const empty = document.getElementById("lenses-empty");
+  document.getElementById("lens-count").textContent = list.length + " lens" + (list.length!==1?"es":"");
+  if(!list.length){ grid.innerHTML=""; empty.style.display="block"; return; }
+  empty.style.display="none";
+  grid.innerHTML = list.map((l,i) => lensCard(l,i)).join("");
+}
+
+// FILTER
+function filterFrames(cat, el) {
+  frameCat = cat;
+  document.querySelectorAll("#page-frames .pill").forEach(p=>p.classList.remove("active"));
+  el.classList.add("active"); renderFrames();
+}
+function filterLenses(cat, el) {
+  lensCat = cat;
+  document.querySelectorAll("#page-lenses .pill").forEach(p=>p.classList.remove("active"));
+  el.classList.add("active"); renderLenses();
+}
+function onSearch() {
+  searchQ = document.getElementById("search-input").value;
+  renderFrames(); renderLenses();
+}
+
+// OPEN FRAME DETAIL
+function openFrame(id) {
+  const p = DB.frames.find(x=>x.id===id); if(!p) return;
+  const bc = badgeClass[p.badge]||"b-new";
+  const badge = document.getElementById("fd-badge");
+  badge.textContent = p.badge||p.category; badge.className="d-badge "+bc;
+  document.getElementById("fd-name").textContent = p.name;
+  document.getElementById("fd-type").textContent = p.type;
+  const mi = document.getElementById("fd-main-img");
+  mi.innerHTML = p.img ? `<img src="${p.img}" alt="${p.name}"/>` :
+    `<svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg>`;
+  document.getElementById("fd-colors").innerHTML = (p.colors||[]).map((c,i)=>
+    `<div class="sw${i===0?" on":""}" style="background:${c.hex}" title="${c.name}" onclick="selSw(this)"></div>`).join("");
+  document.getElementById("fd-sizes").innerHTML = (p.sizes||[]).map((s,i)=>
+    `<button class="sz${i===0?" on":""}" onclick="selSz(this)">${s}</button>`).join("");
+  document.getElementById("fd-specs").innerHTML = Object.entries(p.specs||{}).map(([k,v])=>
+    `<div class="spec-box"><div class="spec-lbl">${k}</div><div class="spec-val">${v}</div></div>`).join("");
+  document.getElementById("fd-coatings").innerHTML = (p.coatings||[]).map(c=>`<span class="chip">${c}</span>`).join("");
+  document.getElementById("fd-wa").href = "https://wa.me/"+PHONE+"?text="+encodeURIComponent(p.waMsg||"Hi, I'm interested in "+p.name);
+  showPage("frame-detail");
+}
+
+// OPEN LENS DETAIL
+function openLens(id) {
+  const l = DB.lenses.find(x=>x.id===id); if(!l) return;
+  const bc = badgeClass[l.category]||"b-daily";
+  const badge = document.getElementById("ld-badge");
+  badge.textContent = l.category; badge.className="d-badge "+bc;
+  document.getElementById("ld-name").textContent = l.name;
+  document.getElementById("ld-brand").textContent = l.brand;
+  const mi = document.getElementById("ld-main-img");
+  mi.innerHTML = l.img ? `<img src="${l.img}" alt="${l.name}"/>` :
+    `<svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>`;
+  document.getElementById("ld-info").innerHTML = [
+    ["Power range", l.power], ["Material", l.material], ["Water content", l.water]
+  ].map(([k,v])=>`<div class="spec-box"><div class="spec-lbl">${k}</div><div class="spec-val">${v}</div></div>`).join("");
+  document.getElementById("ld-duration").textContent = l.duration;
+  document.getElementById("ld-features").innerHTML = (l.features||[]).map(f=>
+    `<div class="feat-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>${f}</div>`).join("");
+  document.getElementById("ld-wa").href = "https://wa.me/"+PHONE+"?text="+encodeURIComponent(l.waMsg||"Hi, I'm interested in "+l.name);
+  showPage("lens-detail");
+}
+
+// SWATCH / SIZE
+function selSw(el){document.querySelectorAll(".sw").forEach(s=>s.classList.remove("on"));el.classList.add("on")}
+function selSz(el){document.querySelectorAll(".sz").forEach(s=>s.classList.remove("on"));el.classList.add("on")}
+
+// SHOP PHOTO — set src here once you add the image to your repo
+const SHOP_IMG = ""; // e.g. "images/shop.jpg"
+if(SHOP_IMG) {
+  const strip = document.getElementById("shop-strip");
+  document.getElementById("shop-placeholder").innerHTML = `<img src="${SHOP_IMG}" alt="Vision Opticals store" style="width:100%;max-height:280px;object-fit:cover;display:block"/>`;
+}
+
+loadData();
+</script>
 </body>
-
 </html>
