@@ -1,7 +1,7 @@
 {
   "frames": [
     {
-      "id": 1, "name": "Slim rectangle", "type": "Everyday · Unisex", "category": "Everyday", "badge": "Popular", "img": "",
+      "id": 1, "name": "kumlim rectangle", "type": "Everyday · Unisex", "category": "Everyday", "badge": "Popular", "img": "",
       "colors": [{"name":"Black","hex":"#1a1a1a"},{"name":"Brown","hex":"#7b4f2e"},{"name":"Navy","hex":"#1e3a5f"}],
       "sizes": ["S","M","L"],
       "specs": {"Material":"Acetate","Style":"Rectangle","Lens width":"52 mm","Bridge":"16 mm"},
