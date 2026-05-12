@@ -1,0 +1,25 @@
+{
+  "frames": [
+    {
+      "id": 1,
+      "name": "rayban",
+      "type": "male",
+      "category": "Premium",
+      "badge": "Popular",
+      "img": "public/images/lens1.jpg",
+      "colors": [],
+      "sizes": [
+        "M"
+      ],
+      "specs": {
+        "Material": "",
+        "Style": "",
+        "Lens width": "",
+        "Bridge": ""
+      },
+      "coatings": [],
+      "waMsg": ""
+    }
+  ],
+  "lenses": []
+}
