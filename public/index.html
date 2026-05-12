@@ -581,7 +581,7 @@ function selSw(el){document.querySelectorAll(".sw").forEach(s=>s.classList.remov
 function selSz(el){document.querySelectorAll(".sz").forEach(s=>s.classList.remove("on"));el.classList.add("on")}
 
 // SHOP PHOTO — set src here once you add the image to your repo
-const SHOP_IMG = ""; // e.g. "images/shop.jpg"
+const SHOP_IMG = "public/images/exterior.webp"; // e.g. "images/shop.jpg"
 if(SHOP_IMG) {
   const strip = document.getElementById("shop-strip");
   document.getElementById("shop-placeholder").innerHTML = `<img src="${SHOP_IMG}" alt="Vision Opticals store" style="width:100%;max-height:280px;object-fit:cover;display:block"/>`;
