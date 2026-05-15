@@ -19,5 +19,20 @@
       "waMsg": ""
     }
   ],
-  "lenses": []
+  "lenses": [
+    {
+      "id": 101,
+      "name": "hhhhhhhhhhh",
+      "brand": "",
+      "category": "Daily",
+      "badge": "",
+      "img": "",
+      "power": "",
+      "material": "",
+      "water": "",
+      "duration": "",
+      "features": [],
+      "waMsg": ""
+    }
+  ]
 }
