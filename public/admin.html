@@ -8,27 +8,22 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f2ee;--bg2:#edeae4;--white:#fff;
+  --bg:#f5f2ee;--bg2:#edeae4;--bg3:#e4e0d8;--white:#fff;
   --ink:#1a1714;--ink2:#5a5550;--ink3:#9a948e;
   --border:rgba(26,23,20,0.12);--border2:rgba(26,23,20,0.2);
-  --green:#16a34a;--red:#dc2626;--blue:#2563eb;
-  --radius:12px;--rsm:8px;
-  --f:'DM Sans',sans-serif;
+  --green:#16a34a;--red:#dc2626;--blue:#2563eb;--orange:#ea580c;
+  --radius:12px;--rsm:8px;--f:'DM Sans',sans-serif;
 }
 body{font-family:var(--f);background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
-
-/* LOGIN */
 #login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1.5rem;padding:2rem}
 .login-card{background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:2.5rem 2rem;max-width:360px;width:100%;text-align:center}
 .login-logo{font-size:22px;font-weight:500;margin-bottom:6px}
 .login-logo em{font-style:italic;color:var(--ink2)}
 .login-sub{font-size:13px;color:var(--ink2);margin-bottom:2rem;line-height:1.6}
-.gh-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:var(--white);font-family:var(--f);font-size:14px;font-weight:500;padding:13px 20px;border-radius:var(--rsm);border:none;cursor:pointer;width:100%;text-decoration:none;transition:opacity 0.2s}
-.gh-btn:hover{opacity:0.85}
+.gh-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:var(--white);font-family:var(--f);font-size:14px;font-weight:500;padding:13px 20px;border-radius:var(--rsm);border:none;cursor:pointer;width:100%;transition:opacity .2s}
+.gh-btn:hover{opacity:.85}
 .gh-btn svg{width:20px;height:20px;fill:currentColor}
 .login-note{font-size:11px;color:var(--ink3);margin-top:1rem;line-height:1.6}
-
-/* MAIN */
 #main-screen{display:none}
 .topbar{background:var(--white);border-bottom:0.5px solid var(--border2);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between}
 .topbar-logo{font-size:16px;font-weight:500}
@@ -38,25 +33,21 @@ body{font-family:var(--f);background:var(--bg);color:var(--ink);min-height:100vh
 .user-pill img{width:22px;height:22px;border-radius:50%}
 .logout-btn{font-size:12px;color:var(--ink3);background:none;border:0.5px solid var(--border2);padding:6px 12px;border-radius:20px;cursor:pointer;font-family:var(--f)}
 .logout-btn:hover{color:var(--ink)}
-
-.layout{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 56px)}
+.layout{display:grid;grid-template-columns:210px 1fr;min-height:calc(100vh - 56px)}
 .sidebar{background:var(--white);border-right:0.5px solid var(--border2);padding:1rem}
-.sitem{display:flex;align-items:center;gap:8px;font-size:13px;padding:9px 12px;border-radius:var(--rsm);cursor:pointer;color:var(--ink2);transition:all 0.15s;border:none;background:none;font-family:var(--f);width:100%;text-align:left}
+.sitem{display:flex;align-items:center;gap:8px;font-size:13px;padding:9px 12px;border-radius:var(--rsm);cursor:pointer;color:var(--ink2);transition:all .15s;border:none;background:none;font-family:var(--f);width:100%;text-align:left}
 .sitem:hover{background:var(--bg2);color:var(--ink)}
 .sitem.on{background:var(--bg2);color:var(--ink);font-weight:500}
 .sitem svg{width:16px;height:16px;stroke:currentColor;flex-shrink:0}
 .sdiv{height:0.5px;background:var(--border);margin:8px 0}
-
 .content{padding:1.5rem;overflow-y:auto}
 .section{display:none}.section.on{display:block}
 .sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
 .sec-title{font-size:18px;font-weight:500}
 .add-btn{display:flex;align-items:center;gap:6px;background:var(--ink);color:var(--white);font-size:13px;padding:8px 16px;border-radius:var(--rsm);border:none;cursor:pointer;font-family:var(--f)}
 .add-btn svg{width:15px;height:15px;stroke:currentColor}
-
-/* PRODUCT TABLE */
 .prod-table{width:100%;border-collapse:collapse}
-.prod-table th{font-size:11px;font-weight:500;color:var(--ink3);text-align:left;padding:8px 12px;border-bottom:0.5px solid var(--border2);text-transform:uppercase;letter-spacing:0.8px}
+.prod-table th{font-size:11px;font-weight:500;color:var(--ink3);text-align:left;padding:8px 12px;border-bottom:0.5px solid var(--border2);text-transform:uppercase;letter-spacing:.8px}
 .prod-table td{font-size:13px;padding:11px 12px;border-bottom:0.5px solid var(--border);color:var(--ink2);vertical-align:middle}
 .prod-table tr:hover td{background:var(--bg2)}
 .prod-name{font-weight:500;color:var(--ink)}
@@ -65,40 +56,94 @@ body{font-family:var(--f);background:var(--bg);color:var(--ink);min-height:100vh
 .edit-btn,.del-btn{font-size:11px;padding:5px 11px;border-radius:var(--rsm);border:0.5px solid var(--border2);cursor:pointer;font-family:var(--f);background:var(--white)}
 .edit-btn{color:var(--blue)}.edit-btn:hover{background:#eff6ff;border-color:var(--blue)}
 .del-btn{color:var(--red)}.del-btn:hover{background:#fef2f2;border-color:var(--red)}
-.img-thumb{width:40px;height:30px;border-radius:5px;object-fit:cover;background:var(--bg2);display:inline-block;vertical-align:middle}
-.no-img{width:40px;height:30px;border-radius:5px;background:var(--bg2);display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
+.img-thumb{width:44px;height:34px;border-radius:6px;object-fit:cover;display:inline-block;vertical-align:middle}
+.no-img{width:44px;height:34px;border-radius:6px;background:var(--bg2);display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
 .no-img svg{width:14px;height:14px;stroke:var(--ink3)}
-
-/* TOAST */
-.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:var(--white);font-size:13px;padding:10px 16px;border-radius:var(--rsm);z-index:9999;animation:toastIn 0.2s ease;display:none}
-.toast.show{display:block}
-.toast.err{background:var(--red)}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:var(--white);font-size:13px;padding:10px 16px;border-radius:var(--rsm);z-index:9999;display:none;max-width:320px;line-height:1.4}
+.toast.show{display:block;animation:toastIn .2s ease}
+.toast.err{background:var(--red)}.toast.ok{background:var(--green)}
 @keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* MODAL */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:500;align-items:flex-start;justify-content:center;padding:2rem;overflow-y:auto}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:500;align-items:flex-start;justify-content:center;padding:2rem;overflow-y:auto}
 .modal-bg.open{display:flex}
-.modal{background:var(--white);border-radius:var(--radius);padding:1.75rem;width:100%;max-width:560px;position:relative;margin:auto}
+.modal{background:var(--white);border-radius:var(--radius);padding:1.75rem;width:100%;max-width:580px;position:relative;margin:auto}
 .modal-title{font-size:17px;font-weight:500;margin-bottom:1.5rem}
 .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:var(--ink3)}
 .modal-close svg{width:18px;height:18px;stroke:currentColor}
 .form-row{margin-bottom:1rem}
 .form-row label{font-size:12px;color:var(--ink2);display:block;margin-bottom:5px;font-weight:500}
-.form-row input,.form-row select,.form-row textarea{width:100%;border:0.5px solid var(--border2);border-radius:var(--rsm);padding:8px 11px;font-size:13px;font-family:var(--f);color:var(--ink);background:var(--white);outline:none;transition:border-color 0.15s}
+.form-row input,.form-row select,.form-row textarea{width:100%;border:0.5px solid var(--border2);border-radius:var(--rsm);padding:8px 11px;font-size:13px;font-family:var(--f);color:var(--ink);background:var(--white);outline:none;transition:border-color .15s}
 .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--ink)}
-.form-row textarea{resize:vertical;min-height:70px}
+.form-row textarea{resize:vertical;min-height:68px}
 .form-hint{font-size:11px;color:var(--ink3);margin-top:4px}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+.modal-footer{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
 .save-btn{background:var(--ink);color:var(--white);font-size:13px;padding:9px 20px;border-radius:var(--rsm);border:none;cursor:pointer;font-family:var(--f)}
-.save-btn:disabled{opacity:0.5;cursor:not-allowed}
+.save-btn:disabled{opacity:.5;cursor:not-allowed}
 .cancel-btn{background:none;border:0.5px solid var(--border2);color:var(--ink2);font-size:13px;padding:9px 16px;border-radius:var(--rsm);cursor:pointer;font-family:var(--f)}
-.saving-bar{font-size:12px;color:var(--ink3);display:none;align-items:center;gap:6px}
+.saving-bar{font-size:12px;color:var(--ink3);display:none;align-items:center;gap:6px;margin-right:auto}
 .saving-bar.show{display:flex}
-.spinner{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--ink);border-radius:50%;animation:spin 0.7s linear infinite}
+.spinner{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--ink);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* SETUP GUIDE */
+/* MINI UPLOAD (in modal) */
+.mini-upload-box{border:1.5px dashed var(--border2);border-radius:var(--rsm);padding:1.1rem;text-align:center;cursor:pointer;transition:all .15s;background:var(--bg);position:relative}
+.mini-upload-box:hover,.mini-upload-box.drag{border-color:var(--ink);background:var(--bg2)}
+.mini-upload-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.mini-upload-box svg{width:22px;height:22px;stroke:var(--ink3);display:block;margin:0 auto 6px}
+.mini-upload-box p{font-size:12px;color:var(--ink2)}
+.mini-upload-box span{font-size:10px;color:var(--ink3);display:block;margin-top:2px}
+.mini-preview{display:none;align-items:center;gap:10px;padding:8px;background:var(--bg2);border-radius:var(--rsm);margin-bottom:6px}
+.mini-preview.show{display:flex}
+.mini-preview img{width:56px;height:44px;object-fit:cover;border-radius:6px;border:0.5px solid var(--border2);flex-shrink:0}
+.mini-preview-info{flex:1;min-width:0}
+.mini-preview-name{font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-preview-sub{font-size:11px;color:var(--ink3);margin-top:2px}
+.mini-prog{height:3px;background:var(--bg3);border-radius:2px;margin-top:5px;overflow:hidden;display:none}
+.mini-prog.show{display:block}
+.mini-bar{height:100%;background:var(--ink);border-radius:2px;width:0%;transition:width .3s}
+.mini-sts{font-size:10px;margin-top:3px}
+.mini-sts.done{color:var(--green)}.mini-sts.err{color:var(--red)}
+.mini-remove{background:none;border:none;cursor:pointer;color:var(--ink3);font-size:16px;flex-shrink:0;padding:0 2px}
+.path-or{font-size:11px;color:var(--ink3);margin:6px 0 4px;display:block}
+
+/* BIG UPLOAD PAGE */
+.big-dz{border:2px dashed var(--border2);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;cursor:pointer;transition:all .15s;background:var(--white);position:relative;margin-bottom:1.25rem}
+.big-dz:hover,.big-dz.drag{border-color:var(--ink);background:var(--bg2)}
+.big-dz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.big-dz svg{width:36px;height:36px;stroke:var(--ink3);display:block;margin:0 auto 10px}
+.big-dz h3{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.big-dz p{font-size:13px;color:var(--ink2)}
+.big-dz small{font-size:11px;color:var(--ink3);display:block;margin-top:4px}
+.queue{display:flex;flex-direction:column;gap:7px;margin-bottom:1.25rem}
+.q-item{background:var(--white);border:0.5px solid var(--border);border-radius:var(--rsm);padding:9px 12px;display:flex;align-items:center;gap:10px}
+.q-thumb{width:44px;height:34px;border-radius:5px;object-fit:cover;flex-shrink:0;background:var(--bg2)}
+.q-info{flex:1;min-width:0}
+.q-name{font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.q-size{font-size:10px;color:var(--ink3);margin-top:1px}
+.q-prog{height:3px;background:var(--bg3);border-radius:2px;margin-top:4px;overflow:hidden}
+.q-bar{height:100%;border-radius:2px;width:0%;transition:width .3s}
+.q-bar.uploading{background:var(--orange)}.q-bar.done{background:var(--green);width:100%}.q-bar.err{background:var(--red);width:100%}
+.q-sts{font-size:10px;margin-top:2px}
+.q-sts.uploading{color:var(--orange)}.q-sts.done{color:var(--green)}.q-sts.err{color:var(--red)}
+.q-remove{background:none;border:none;cursor:pointer;color:var(--ink3);font-size:17px;flex-shrink:0;padding:0 4px}
+.upload-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:var(--white);font-size:14px;padding:11px;border-radius:var(--rsm);border:none;cursor:pointer;font-family:var(--f);width:100%;transition:opacity .15s;margin-bottom:2rem}
+.upload-btn:disabled{opacity:.5;cursor:not-allowed}
+.upload-btn svg{width:16px;height:16px;stroke:currentColor}
+.lib-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}
+.lib-note{font-size:12px;color:var(--ink2);margin-bottom:1rem}
+.lib-note strong{font-weight:500;color:var(--ink)}
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.lib-card{background:var(--white);border:0.5px solid var(--border);border-radius:var(--rsm);overflow:hidden}
+.lib-card img{width:100%;height:88px;object-fit:cover;display:block}
+.lib-body{padding:7px 8px}
+.lib-name{font-size:11px;color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lib-path{font-size:10px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;font-family:monospace}
+.lib-actions{display:flex;gap:5px;margin-top:6px}
+.lib-copy{font-size:10px;padding:3px 8px;border-radius:5px;border:0.5px solid var(--border2);background:var(--white);color:var(--blue);cursor:pointer;font-family:var(--f)}
+.lib-del{font-size:10px;padding:3px 8px;border-radius:5px;border:0.5px solid var(--border2);background:var(--white);color:var(--red);cursor:pointer;font-family:var(--f)}
+.lib-empty{padding:2.5rem;text-align:center;color:var(--ink3);font-size:13px;grid-column:1/-1}
+
+/* SETUP */
 .guide{background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.5rem;max-width:640px}
 .guide h3{font-size:15px;font-weight:500;margin-bottom:1rem}
 .step{display:flex;gap:12px;margin-bottom:1rem;padding-bottom:1rem;border-bottom:0.5px solid var(--border)}
@@ -107,105 +152,123 @@ body{font-family:var(--f);background:var(--bg);color:var(--ink);min-height:100vh
 .step-body{font-size:13px;color:var(--ink2);line-height:1.65}
 .step-body strong{color:var(--ink);font-weight:500}
 code{background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:12px;font-family:monospace;color:var(--ink)}
-
-@media(max-width:600px){
-  .layout{grid-template-columns:1fr}
-  .sidebar{display:none}
-  .form-grid{grid-template-columns:1fr}
-}
+@media(max-width:600px){.layout{grid-template-columns:1fr}.sidebar{display:none}.form-grid{grid-template-columns:1fr}.lib-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-card">
     <div class="login-logo">Vision <em>Opticals</em></div>
-    <p class="login-sub">Admin panel · Sign in with your GitHub account to manage frames and lenses.</p>
+    <p class="login-sub">Admin panel · Sign in with GitHub to manage frames, lenses and photos.</p>
     <button class="gh-btn" onclick="githubLogin()">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
       Sign in with GitHub
     </button>
-    <p class="login-note">Only your GitHub account (halilrahuman) can access this panel. First-time setup instructions are on the Setup tab after login.</p>
+    <p class="login-note">Only halilrahuman can access this panel.</p>
   </div>
 </div>
 
-<!-- MAIN -->
 <div id="main-screen">
   <div class="topbar">
     <div class="topbar-logo">Vision <em>Opticals</em> — Admin</div>
     <div class="topbar-right">
-      <div class="user-pill">
-        <img id="user-avatar" src="" alt=""/>
-        <span id="user-name"></span>
-      </div>
+      <div class="user-pill"><img id="user-avatar" src="" alt=""/><span id="user-name"></span></div>
       <button class="logout-btn" onclick="logout()">Sign out</button>
     </div>
   </div>
   <div class="layout">
     <div class="sidebar">
       <button class="sitem on" id="si-frames" onclick="switchSec('frames')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg>
-        Eyewear frames
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg>Eyewear frames
       </button>
       <button class="sitem" id="si-lenses" onclick="switchSec('lenses')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-        Contact lenses
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>Contact lenses
+      </button>
+      <div class="sdiv"></div>
+      <button class="sitem" id="si-images" onclick="switchSec('images')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photo uploads
       </button>
       <div class="sdiv"></div>
       <button class="sitem" id="si-setup" onclick="switchSec('setup')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
-        Setup guide
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>Setup guide
       </button>
       <a class="sitem" href="index.html" target="_blank" style="text-decoration:none">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        View live site
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View live site
       </a>
     </div>
     <div class="content">
 
-      <!-- FRAMES SECTION -->
+      <!-- FRAMES -->
       <div class="section on" id="sec-frames">
         <div class="sec-header">
           <div class="sec-title">Eyewear frames</div>
-          <button class="add-btn" onclick="openFrameModal()">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add frame
-          </button>
+          <button class="add-btn" onclick="openFM()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add frame</button>
         </div>
         <table class="prod-table">
-          <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Badge</th><th>Colours</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Photo</th><th>Name</th><th>Category</th><th>Badge</th><th>Colours</th><th>Actions</th></tr></thead>
           <tbody id="frames-tbody"></tbody>
         </table>
       </div>
 
-      <!-- LENSES SECTION -->
+      <!-- LENSES -->
       <div class="section" id="sec-lenses">
         <div class="sec-header">
           <div class="sec-title">Contact lenses</div>
-          <button class="add-btn" onclick="openLensModal()">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add lens
-          </button>
+          <button class="add-btn" onclick="openLM()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add lens</button>
         </div>
         <table class="prod-table">
-          <thead><tr><th>Image</th><th>Name</th><th>Brand</th><th>Category</th><th>Power</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Photo</th><th>Name</th><th>Brand</th><th>Category</th><th>Power</th><th>Actions</th></tr></thead>
           <tbody id="lenses-tbody"></tbody>
         </table>
       </div>
 
-      <!-- SETUP SECTION -->
+      <!-- PHOTO UPLOADS -->
+      <div class="section" id="sec-images">
+        <div class="sec-header">
+          <div class="sec-title">Photo uploads</div>
+          <span style="font-size:12px;color:var(--ink3)">Photos are saved to <code>images/</code> in your repo</span>
+        </div>
+
+        <div class="big-dz" id="big-dz"
+          ondragover="bigDrag(event,true)" ondragleave="bigDrag(event,false)" ondrop="bigDrop(event)">
+          <input type="file" accept="image/*" multiple onchange="bigPick(event)"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <h3>Drag &amp; drop photos here</h3>
+          <p>or click to pick photos from your phone / computer</p>
+          <small>JPG · PNG · WEBP · max 5 MB each · you can select multiple at once</small>
+        </div>
+
+        <div class="queue" id="queue"></div>
+        <button class="upload-btn" id="upload-btn" onclick="uploadAll()" style="display:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload all to GitHub
+        </button>
+
+        <div class="lib-header">
+          <div style="font-size:15px;font-weight:500">Uploaded photos</div>
+          <button onclick="loadLib()" style="font-size:12px;color:var(--ink3);background:none;border:none;cursor:pointer;font-family:var(--f)">↻ Refresh</button>
+        </div>
+        <p class="lib-note">Click <strong>Copy path</strong> on any photo, then paste the path into the photo field when adding a frame or lens.</p>
+        <div class="lib-grid" id="lib-grid"><div class="lib-empty">Loading…</div></div>
+      </div>
+
+      <!-- SETUP -->
       <div class="section" id="sec-setup">
         <div class="sec-title" style="margin-bottom:1.25rem">Setup guide</div>
         <div class="guide">
-          <h3>How to enable GitHub login for this admin page</h3>
+          <h3>How to connect admin to your GitHub repo</h3>
           <div class="step"><div class="step-num">1</div><div class="step-body">Go to <strong>github.com → Settings → Developer settings → OAuth Apps → New OAuth App</strong></div></div>
           <div class="step"><div class="step-num">2</div><div class="step-body">Fill in:<br><strong>Application name:</strong> Vision Opticals Admin<br><strong>Homepage URL:</strong> <code>https://visionopticalstvr.in</code><br><strong>Callback URL:</strong> <code>https://visionopticalstvr.in/admin.html</code></div></div>
-          <div class="step"><div class="step-num">3</div><div class="step-body">Click <strong>Register application</strong>. Copy the <strong>Client ID</strong> shown on the next page.</div></div>
-          <div class="step"><div class="step-num">4</div><div class="step-body">In <code>admin.html</code>, find the line <code>const CLIENT_ID = ""</code> near the top of the script and paste your Client ID there.</div></div>
-          <div class="step"><div class="step-num">5</div><div class="step-body">You also need a <strong>GitHub Personal Access Token</strong> with <code>repo</code> scope so the admin can save to your repo.<br>Go to <strong>GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token</strong><br>Select scope: <code>repo</code> → Generate → Copy the token.<br>Paste it in <code>admin.html</code> where it says <code>const PAT = ""</code>.</div></div>
-          <div class="step"><div class="step-num">6</div><div class="step-body">Push <code>admin.html</code>, <code>index.html</code>, and <code>products.json</code> to your GitHub repo. Netlify will deploy automatically.</div></div>
-          <div class="step"><div class="step-num">7</div><div class="step-body">To add your <strong>shop photo</strong>: upload the image to your repo as <code>images/shop.jpg</code>, then in <code>index.html</code> find <code>const SHOP_IMG = ""</code> and change it to <code>"images/shop.jpg"</code>.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Click <strong>Register application</strong>. Copy the <strong>Client ID</strong>.</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">In <code>admin.html</code> find <code>const CLIENT_ID = ""</code> and paste your Client ID inside the quotes.</div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body">Go to <strong>GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token</strong>. Select scope: <code>repo</code>. Copy the token and paste it where it says <code>const PAT = ""</code>.</div></div>
+          <div class="step"><div class="step-num">6</div><div class="step-body">Push all 3 files (<code>index.html</code>, <code>admin.html</code>, <code>products.json</code>) to your repo. Netlify will auto-deploy.</div></div>
+          <div class="step"><div class="step-num">7</div><div class="step-body">Visit <code>visionopticalstvr.in/admin.html</code> → Sign in → go to <strong>Photo uploads</strong> → drag your frame photos → click Upload → then click <strong>Copy path</strong> and paste it into the photo field when adding a frame.</div></div>
+          <div class="step"><div class="step-num">8</div><div class="step-body">For your <strong>shop front photo</strong>: upload it in Photo uploads, copy its path (e.g. <code>images/shop.jpg</code>), open <code>index.html</code>, find <code>const SHOP_IMG = ""</code> and paste the path there.</div></div>
         </div>
       </div>
 
@@ -214,31 +277,41 @@ code{background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:12px;font
 </div>
 
 <!-- FRAME MODAL -->
-<div class="modal-bg" id="frame-modal">
+<div class="modal-bg" id="fm">
   <div class="modal">
-    <div class="modal-title" id="frame-modal-title">Add frame</div>
-    <button class="modal-close" onclick="closeModal('frame-modal')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="modal-title" id="fm-title">Add frame</div>
+    <button class="modal-close" onclick="closeM('fm')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <input type="hidden" id="f-id"/>
     <div class="form-grid">
       <div class="form-row"><label>Frame name</label><input type="text" id="f-name" placeholder="e.g. Slim rectangle"/></div>
       <div class="form-row"><label>Type / subtitle</label><input type="text" id="f-type" placeholder="e.g. Everyday · Unisex"/></div>
     </div>
     <div class="form-grid">
-      <div class="form-row">
-        <label>Category</label>
-        <select id="f-category">
-          <option>Everyday</option><option>Premium</option><option>Sunglasses</option><option>Kids</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Badge (optional)</label>
-        <select id="f-badge">
-          <option value="">None</option><option>New</option><option>Popular</option><option>Sale</option><option>Kids</option>
-        </select>
-      </div>
+      <div class="form-row"><label>Category</label><select id="f-cat"><option>Everyday</option><option>Premium</option><option>Sunglasses</option><option>Kids</option></select></div>
+      <div class="form-row"><label>Badge</label><select id="f-badge"><option value="">None</option><option>New</option><option>Popular</option><option>Sale</option><option>Kids</option></select></div>
     </div>
-    <div class="form-row"><label>Image path (after uploading to repo)</label><input type="text" id="f-img" placeholder="images/slim-rectangle.jpg"/><div class="form-hint">Upload the photo to your GitHub repo first, then paste the path here.</div></div>
-    <div class="form-row"><label>Available sizes (comma separated)</label><input type="text" id="f-sizes" placeholder="S, M, L"/></div>
+    <div class="form-row">
+      <label>Frame photo</label>
+      <div class="mini-preview" id="fp-preview">
+        <img id="fp-img" src="" alt=""/>
+        <div class="mini-preview-info">
+          <div class="mini-preview-name" id="fp-name"></div>
+          <div class="mini-preview-sub" id="fp-sub"></div>
+          <div class="mini-prog" id="fp-prog"><div class="mini-bar" id="fp-bar"></div></div>
+          <div class="mini-sts" id="fp-sts"></div>
+        </div>
+        <button class="mini-remove" onclick="clearMini('f')">✕</button>
+      </div>
+      <div class="mini-upload-box" id="f-dz"
+        ondragover="miniDrag(event,'f',true)" ondragleave="miniDrag(event,'f',false)" ondrop="miniDrop(event,'f')">
+        <input type="file" accept="image/*" id="f-file" onchange="miniPick(event,'f')"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p>Click or drag a photo here</p><span>JPG · PNG · WEBP · max 5 MB</span>
+      </div>
+      <span class="path-or">— or paste a path from Photo uploads —</span>
+      <input type="text" id="f-img" placeholder="images/slim-rectangle.jpg"/>
+    </div>
+    <div class="form-row"><label>Sizes (comma separated)</label><input type="text" id="f-sizes" placeholder="S, M, L"/></div>
     <div class="form-grid">
       <div class="form-row"><label>Material</label><input type="text" id="f-material" placeholder="Acetate"/></div>
       <div class="form-row"><label>Style</label><input type="text" id="f-style" placeholder="Rectangle"/></div>
@@ -247,40 +320,52 @@ code{background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:12px;font
       <div class="form-row"><label>Lens width</label><input type="text" id="f-lensw" placeholder="52 mm"/></div>
       <div class="form-row"><label>Bridge</label><input type="text" id="f-bridge" placeholder="16 mm"/></div>
     </div>
-    <div class="form-row"><label>Lens coatings (comma separated)</label><input type="text" id="f-coatings" placeholder="Anti-reflective, Blue-cut, UV400"/></div>
-    <div class="form-row"><label>Frame colours (name:hex, comma separated)</label><input type="text" id="f-colors" placeholder="Black:#1a1a1a, Brown:#7b4f2e"/></div>
-    <div class="form-row"><label>WhatsApp enquiry message</label><textarea id="f-wa" rows="2" placeholder="Hi, I'm interested in the … frame."></textarea></div>
+    <div class="form-row"><label>Coatings (comma separated)</label><input type="text" id="f-coatings" placeholder="Anti-reflective, Blue-cut, UV400"/></div>
+    <div class="form-row"><label>Colours (Name:#hex, comma separated)</label><input type="text" id="f-colors" placeholder="Black:#1a1a1a, Brown:#7b4f2e"/></div>
+    <div class="form-row"><label>WhatsApp message</label><textarea id="f-wa" rows="2"></textarea></div>
     <div class="modal-footer">
-      <div class="saving-bar" id="f-saving"><div class="spinner"></div> Saving to GitHub…</div>
-      <button class="cancel-btn" onclick="closeModal('frame-modal')">Cancel</button>
-      <button class="save-btn" id="f-save-btn" onclick="saveFrame()">Save frame</button>
+      <div class="saving-bar" id="f-saving"><div class="spinner"></div>Saving…</div>
+      <button class="cancel-btn" onclick="closeM('fm')">Cancel</button>
+      <button class="save-btn" id="f-save" onclick="saveFrame()">Save frame</button>
     </div>
   </div>
 </div>
 
 <!-- LENS MODAL -->
-<div class="modal-bg" id="lens-modal">
+<div class="modal-bg" id="lm">
   <div class="modal">
-    <div class="modal-title" id="lens-modal-title">Add contact lens</div>
-    <button class="modal-close" onclick="closeModal('lens-modal')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="modal-title" id="lm-title">Add contact lens</div>
+    <button class="modal-close" onclick="closeM('lm')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <input type="hidden" id="l-id"/>
     <div class="form-grid">
       <div class="form-row"><label>Lens name</label><input type="text" id="l-name" placeholder="e.g. 1-Day Acuvue Moist"/></div>
       <div class="form-row"><label>Brand</label><input type="text" id="l-brand" placeholder="e.g. Johnson & Johnson"/></div>
     </div>
     <div class="form-grid">
-      <div class="form-row">
-        <label>Category</label>
-        <select id="l-category">
-          <option>Daily</option><option>Monthly</option><option>Coloured</option><option>Toric</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Badge (optional)</label>
-        <select id="l-badge"><option value="">None</option><option>New</option><option>Popular</option><option>Sale</option></select>
-      </div>
+      <div class="form-row"><label>Category</label><select id="l-cat"><option>Daily</option><option>Monthly</option><option>Coloured</option><option>Toric</option></select></div>
+      <div class="form-row"><label>Badge</label><select id="l-badge"><option value="">None</option><option>New</option><option>Popular</option><option>Sale</option></select></div>
     </div>
-    <div class="form-row"><label>Image path</label><input type="text" id="l-img" placeholder="images/acuvue-moist.jpg"/></div>
+    <div class="form-row">
+      <label>Lens / box photo</label>
+      <div class="mini-preview" id="lp-preview">
+        <img id="lp-img" src="" alt=""/>
+        <div class="mini-preview-info">
+          <div class="mini-preview-name" id="lp-name"></div>
+          <div class="mini-preview-sub" id="lp-sub"></div>
+          <div class="mini-prog" id="lp-prog"><div class="mini-bar" id="lp-bar"></div></div>
+          <div class="mini-sts" id="lp-sts"></div>
+        </div>
+        <button class="mini-remove" onclick="clearMini('l')">✕</button>
+      </div>
+      <div class="mini-upload-box" id="l-dz"
+        ondragover="miniDrag(event,'l',true)" ondragleave="miniDrag(event,'l',false)" ondrop="miniDrop(event,'l')">
+        <input type="file" accept="image/*" id="l-file" onchange="miniPick(event,'l')"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p>Click or drag a photo here</p><span>JPG · PNG · WEBP · max 5 MB</span>
+      </div>
+      <span class="path-or">— or paste a path from Photo uploads —</span>
+      <input type="text" id="l-img" placeholder="images/acuvue-moist.jpg"/>
+    </div>
     <div class="form-grid">
       <div class="form-row"><label>Power range</label><input type="text" id="l-power" placeholder="-0.50 to -6.00"/></div>
       <div class="form-row"><label>Material</label><input type="text" id="l-material" placeholder="Etafilcon A"/></div>
@@ -289,12 +374,12 @@ code{background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:12px;font
       <div class="form-row"><label>Water content</label><input type="text" id="l-water" placeholder="58%"/></div>
       <div class="form-row"><label>Wear duration</label><input type="text" id="l-duration" placeholder="Daily disposable"/></div>
     </div>
-    <div class="form-row"><label>Key features (comma separated)</label><textarea id="l-features" rows="2" placeholder="UV blocking, Moisture technology, Thin edge design"></textarea></div>
-    <div class="form-row"><label>WhatsApp enquiry message</label><textarea id="l-wa" rows="2" placeholder="Hi, I'm interested in … lenses."></textarea></div>
+    <div class="form-row"><label>Key features (comma separated)</label><textarea id="l-features" rows="2"></textarea></div>
+    <div class="form-row"><label>WhatsApp message</label><textarea id="l-wa" rows="2"></textarea></div>
     <div class="modal-footer">
-      <div class="saving-bar" id="l-saving"><div class="spinner"></div> Saving to GitHub…</div>
-      <button class="cancel-btn" onclick="closeModal('lens-modal')">Cancel</button>
-      <button class="save-btn" id="l-save-btn" onclick="saveLens()">Save lens</button>
+      <div class="saving-bar" id="l-saving"><div class="spinner"></div>Saving…</div>
+      <button class="cancel-btn" onclick="closeM('lm')">Cancel</button>
+      <button class="save-btn" id="l-save" onclick="saveLens()">Save lens</button>
     </div>
   </div>
 </div>
@@ -302,285 +387,322 @@ code{background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:12px;font
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ─────────────────────────────────────────────────────
-// After creating your GitHub OAuth App, paste your Client ID here:
-const CLIENT_ID = "Ov23li3lV0JTGxlauNsX";
-// Paste your GitHub Personal Access Token (repo scope) here:
-const PAT = "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";
+const CLIENT_ID = "";   // ← paste your GitHub OAuth App Client ID
+const PAT       = "";   // ← paste your GitHub Personal Access Token
 const REPO  = "halilrahuman/vision-opticals-tvr";
 const FILE  = "products.json";
-const ALLOWED_USER = "halilrahuman";
-// ──────────────────────────────────────────────────────────────
+const IMGD  = "images";
 
-let DB = { frames: [], lenses: [] };
-let fileSHA = "";
-let token = "";
+let DB={frames:[],lenses:[]}, fileSHA="", token="";
+let queue=[];
 
-// GITHUB OAUTH
-function githubLogin() {
-  if(!CLIENT_ID){ showToast("Paste your GitHub Client ID in admin.html first. See Setup guide.", true); return; }
-  const state = Math.random().toString(36).slice(2);
-  sessionStorage.setItem("oauth_state", state);
-  window.location.href = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=repo&state=${state}`;
+// ── AUTH ──────────────────────────────────────
+function githubLogin(){
+  if(!CLIENT_ID){toast("Paste your Client ID in admin.html first — see Setup guide.",true);return;}
+  const s=Math.random().toString(36).slice(2); sessionStorage.setItem("os",s);
+  window.location.href=`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=repo&state=${s}`;
+}
+async function handleCB(){
+  const p=new URLSearchParams(window.location.search);
+  if(!p.get("code")) return false;
+  if(p.get("state")!==sessionStorage.getItem("os")){toast("State mismatch",true);return false;}
+  if(PAT){token=PAT;const u=await getUser();if(u){window.history.replaceState({},"","/admin.html");showMain(u);return true;}}
+  toast("Set your PAT in admin.html",true);return false;
+}
+async function getUser(){try{const r=await gh("https://api.github.com/user");return r.ok?await r.json():null;}catch{return null;}}
+async function tryAuto(){if(!PAT)return;token=PAT;const u=await getUser();if(u&&u.login==="halilrahuman")showMain(u);else token="";}
+function showMain(u){
+  document.getElementById("login-screen").style.display="none";
+  document.getElementById("main-screen").style.display="block";
+  document.getElementById("user-name").textContent=u.login||"";
+  if(u.avatar_url)document.getElementById("user-avatar").src=u.avatar_url;
+  loadDB();loadLib();
+}
+function logout(){token="";document.getElementById("main-screen").style.display="none";document.getElementById("login-screen").style.display="flex";}
+
+// ── GITHUB ────────────────────────────────────
+function gh(url,opts={}){return fetch(url,{...opts,headers:{Authorization:"token "+token,"Content-Type":"application/json",...(opts.headers||{})}});}
+async function loadDB(){
+  try{const r=await gh(`https://api.github.com/repos/${REPO}/contents/${FILE}`);const d=await r.json();fileSHA=d.sha;DB=JSON.parse(atob(d.content.replace(/\n/g,"")));renderTables();}
+  catch{toast("Could not load products.json — check your PAT and repo name.",true);}
+}
+async function saveDB(){
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify(DB,null,2))));
+  try{const r=await gh(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{method:"PUT",body:JSON.stringify({message:"Update products via admin",content,sha:fileSHA})});
+  const d=await r.json();if(d.content){fileSHA=d.content.sha;return true;}toast("Save failed: "+(d.message||""),true);return false;}
+  catch{toast("Network error",true);return false;}
+}
+async function uploadImg(file,onPct){
+  return new Promise((res,rej)=>{
+    const rd=new FileReader();
+    rd.onload=async e=>{
+      try{
+        const b64=e.target.result.split(",")[1];
+        const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"_").toLowerCase();
+        const path=`${IMGD}/${safe}`;
+        onPct(30);
+        let sha;try{const c=await gh(`https://api.github.com/repos/${REPO}/contents/${path}`);if(c.ok){const d=await c.json();sha=d.sha;}}catch{}
+        onPct(60);
+        const body={message:`Upload image: ${safe}`,content:b64};if(sha)body.sha=sha;
+        const r=await gh(`https://api.github.com/repos/${REPO}/contents/${path}`,{method:"PUT",body:JSON.stringify(body)});
+        const d=await r.json();onPct(100);
+        if(d.content)res(path);else rej(d.message||"Failed");
+      }catch(ex){rej(ex.message||"Error");}
+    };rd.readAsDataURL(file);
+  });
 }
 
-async function handleCallback() {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
-  const state = params.get("state");
-  if(!code) return false;
-  if(state !== sessionStorage.getItem("oauth_state")){ showToast("OAuth state mismatch", true); return false; }
-  // Exchange code for token via a CORS proxy (Netlify function or direct if PAT mode)
-  // For simplicity we use the PAT directly — GitHub OAuth requires a backend for token exchange
-  // So: if PAT is set, skip OAuth and just verify the user is correct
-  if(PAT) {
-    token = PAT;
-    const user = await getUser();
-    if(!user) return false;
-    window.history.replaceState({}, document.title, "/admin.html");
-    showMain(user);
-    return true;
+// ── IMAGE LIBRARY ─────────────────────────────
+async function loadLib(){
+  const g=document.getElementById("lib-grid");
+  g.innerHTML='<div class="lib-empty">Loading…</div>';
+  try{
+    const r=await gh(`https://api.github.com/repos/${REPO}/contents/${IMGD}`);
+    if(!r.ok){g.innerHTML='<div class="lib-empty">No images folder yet — upload a photo above to create it.</div>';return;}
+    const files=await r.json();
+    const imgs=files.filter(f=>f.type==="file"&&/\.(jpg|jpeg|png|webp|gif)$/i.test(f.name));
+    if(!imgs.length){g.innerHTML='<div class="lib-empty">No photos yet — upload some above!</div>';return;}
+    g.innerHTML=imgs.map(f=>`
+      <div class="lib-card">
+        <img src="${f.download_url}" alt="${f.name}" loading="lazy"/>
+        <div class="lib-body">
+          <div class="lib-name">${f.name}</div>
+          <div class="lib-path">${IMGD}/${f.name}</div>
+          <div class="lib-actions">
+            <button class="lib-copy" onclick="copyPath('${IMGD}/${f.name}')">Copy path</button>
+            <button class="lib-del" onclick="delImg('${IMGD}/${f.name}','${f.sha}')">Delete</button>
+          </div>
+        </div>
+      </div>`).join("");
+  }catch{g.innerHTML='<div class="lib-empty">Error loading images.</div>';}
+}
+function copyPath(p){navigator.clipboard.writeText(p).then(()=>toast("Copied: "+p,false,true));}
+async function delImg(path,sha){
+  if(!confirm("Delete this image from GitHub?"))return;
+  const r=await gh(`https://api.github.com/repos/${REPO}/contents/${path}`,{method:"DELETE",body:JSON.stringify({message:"Delete image",sha})});
+  if(r.ok){toast("Deleted.",false,true);loadLib();}else toast("Could not delete.",true);
+}
+
+// ── BIG DROPZONE ──────────────────────────────
+function bigDrag(e,on){e.preventDefault();document.getElementById("big-dz").classList.toggle("drag",on);}
+function bigDrop(e){e.preventDefault();document.getElementById("big-dz").classList.remove("drag");addQ([...e.dataTransfer.files]);}
+function bigPick(e){addQ([...e.target.files]);e.target.value="";}
+function addQ(files){
+  const ok=files.filter(f=>f.type.startsWith("image/")&&f.size<=5*1024*1024);
+  const bad=files.filter(f=>!f.type.startsWith("image/")||f.size>5*1024*1024);
+  if(bad.length)toast(bad.length+" file(s) skipped (must be image under 5 MB)",true);
+  ok.forEach(f=>queue.push({file:f,name:f.name,size:f.size,status:"pending",id:Date.now()+Math.random()}));
+  renderQ();
+}
+function renderQ(){
+  const wrap=document.getElementById("queue");
+  const btn=document.getElementById("upload-btn");
+  if(!queue.length){wrap.innerHTML="";btn.style.display="none";return;}
+  btn.style.display="flex";
+  wrap.innerHTML=queue.map((item,i)=>`
+    <div class="q-item" id="qi-${item.id}">
+      <img class="q-thumb" id="qt-${item.id}" src="" alt=""/>
+      <div class="q-info">
+        <div class="q-name">${item.name}</div>
+        <div class="q-size">${(item.size/1024).toFixed(0)} KB</div>
+        <div class="q-prog"><div class="q-bar ${item.status}" id="qb-${item.id}"></div></div>
+        <div class="q-sts ${item.status}" id="qs-${item.id}">${qStsText(item)}</div>
+      </div>
+      ${item.status==="pending"?`<button class="q-remove" onclick="rmQ(${i})">✕</button>`:""}
+    </div>`).join("");
+  queue.forEach(item=>{
+    if(!item.url){const rd=new FileReader();rd.onload=e=>{item.url=e.target.result;const el=document.getElementById("qt-"+item.id);if(el)el.src=e.target.result;};rd.readAsDataURL(item.file);}
+    else{const el=document.getElementById("qt-"+item.id);if(el)el.src=item.url;}
+  });
+}
+function qStsText(item){return item.status==="pending"?"Ready":item.status==="uploading"?"Uploading…":item.status==="done"?"✓ Uploaded — "+IMGD+"/"+item.name.replace(/[^a-zA-Z0-9._-]/g,"_").toLowerCase():"✕ Error — try again";}
+function rmQ(i){queue.splice(i,1);renderQ();}
+async function uploadAll(){
+  const btn=document.getElementById("upload-btn");btn.disabled=true;
+  for(const item of queue){
+    if(item.status==="done")continue;
+    item.status="uploading";upQ(item);
+    try{await uploadImg(item.file,pct=>{const b=document.getElementById("qb-"+item.id);if(b)b.style.width=pct+"%";});item.status="done";}
+    catch{item.status="err";}
+    upQ(item);
   }
-  showToast("Please set your PAT in admin.html. See Setup guide.", true);
-  return false;
+  btn.disabled=false;
+  toast("Done! See Uploaded photos below to copy paths.",false,true);
+  loadLib();
+}
+function upQ(item){
+  const bar=document.getElementById("qb-"+item.id);
+  const sts=document.getElementById("qs-"+item.id);
+  if(!bar||!sts)return;
+  bar.className="q-bar "+item.status;
+  sts.className="q-sts "+item.status;
+  sts.textContent=qStsText(item);
 }
 
-async function getUser() {
-  try {
-    const r = await fetch("https://api.github.com/user", {
-      headers: { Authorization: "token " + token }
-    });
-    return await r.json();
-  } catch(e){ return null; }
+// ── MINI DROPZONE (in modals) ─────────────────
+function miniDrag(e,p,on){e.preventDefault();document.getElementById(p+"-dz").classList.toggle("drag",on);}
+function miniDrop(e,p){e.preventDefault();document.getElementById(p+"-dz").classList.remove("drag");const f=e.dataTransfer.files[0];if(f)setMini(f,p);}
+function miniPick(e,p){const f=e.target.files[0];if(f)setMini(f,p);}
+function setMini(file,p){
+  if(!file.type.startsWith("image/")){toast("Please select an image.",true);return;}
+  if(file.size>5*1024*1024){toast("Max 5 MB.",true);return;}
+  document.getElementById(p+"-dz")._pf=file;
+  const rd=new FileReader();
+  rd.onload=e=>{
+    document.getElementById(p+"p-img").src=e.target.result;
+    document.getElementById(p+"p-name").textContent=file.name;
+    document.getElementById(p+"p-sub").textContent=(file.size/1024).toFixed(0)+" KB — will upload on save";
+    document.getElementById(p+"p-preview").classList.add("show");
+    document.getElementById(p+"-dz").style.display="none";
+    document.getElementById(p+"p-sts").textContent="";
+    document.getElementById(p+"p-sts").className="mini-sts";
+    document.getElementById(p+"p-prog").classList.remove("show");
+    document.getElementById(p+"p-bar").style.width="0%";
+  };
+  rd.readAsDataURL(file);
+}
+function clearMini(p){
+  document.getElementById(p+"p-preview").classList.remove("show");
+  document.getElementById(p+"-dz").style.display="block";
+  document.getElementById(p+"-dz")._pf=null;
+  document.getElementById(p+"-img").value="";
+  document.getElementById(p+"-file").value="";
+}
+async function uploadMini(p){
+  const dz=document.getElementById(p+"-dz");
+  const file=dz._pf;
+  if(!file)return document.getElementById(p+"-img").value.trim()||"";
+  const prog=document.getElementById(p+"p-prog");
+  const bar=document.getElementById(p+"p-bar");
+  const sts=document.getElementById(p+"p-sts");
+  prog.classList.add("show");sts.textContent="Uploading…";
+  try{
+    const path=await uploadImg(file,pct=>{bar.style.width=pct+"%";});
+    sts.textContent="✓ "+path;sts.className="mini-sts done";
+    document.getElementById(p+"-img").value=path;
+    dz._pf=null;loadLib();return path;
+  }catch(e){sts.textContent="✕ Failed — "+e;sts.className="mini-sts err";return document.getElementById(p+"-img").value.trim()||"";}
 }
 
-async function tryAutoLogin() {
-  if(!PAT) return;
-  token = PAT;
-  const user = await getUser();
-  if(user && user.login === ALLOWED_USER) {
-    showMain(user);
-    return true;
-  }
-  token = "";
-  return false;
-}
-
-function showMain(user) {
-  document.getElementById("login-screen").style.display = "none";
-  document.getElementById("main-screen").style.display = "block";
-  document.getElementById("user-name").textContent = user.login || user.name || "";
-  if(user.avatar_url) document.getElementById("user-avatar").src = user.avatar_url;
-  loadDB();
-}
-
-function logout() {
-  token = "";
-  document.getElementById("main-screen").style.display = "none";
-  document.getElementById("login-screen").style.display = "flex";
-}
-
-// LOAD products.json FROM GITHUB
-async function loadDB() {
-  try {
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-      headers: { Authorization: "token " + token }
-    });
-    const data = await r.json();
-    fileSHA = data.sha;
-    DB = JSON.parse(atob(data.content.replace(/\n/g,"")));
-    renderTables();
-  } catch(e) {
-    showToast("Could not load products.json from GitHub. Check your PAT and repo name.", true);
-  }
-}
-
-// SAVE products.json TO GITHUB
-async function saveDB() {
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(DB, null, 2))));
-  try {
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-      method: "PUT",
-      headers: { Authorization: "token " + token, "Content-Type": "application/json" },
-      body: JSON.stringify({ message: "Update products via admin", content, sha: fileSHA })
-    });
-    const data = await r.json();
-    if(data.content) { fileSHA = data.content.sha; return true; }
-    showToast("GitHub save failed: " + (data.message||"unknown error"), true);
-    return false;
-  } catch(e) {
-    showToast("Network error saving to GitHub", true);
-    return false;
-  }
-}
-
-// RENDER TABLES
-function renderTables() {
-  // Frames
-  document.getElementById("frames-tbody").innerHTML = DB.frames.map(p => `
-    <tr>
-      <td>${p.img ? `<img class="img-thumb" src="${p.img}" alt=""/>` : `<div class="no-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/></svg></div>`}</td>
-      <td class="prod-name">${p.name}</td>
-      <td>${p.category}</td>
-      <td>${p.badge ? `<span class="prod-badge">${p.badge}</span>` : "—"}</td>
-      <td>${(p.colors||[]).map(c=>`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${c.hex};margin-right:3px;vertical-align:middle;border:1px solid rgba(0,0,0,0.1)"></span>`).join("")}</td>
-      <td><div class="row-actions">
-        <button class="edit-btn" onclick="editFrame(${p.id})">Edit</button>
-        <button class="del-btn" onclick="deleteFrame(${p.id})">Delete</button>
-      </div></td>
-    </tr>`).join("") || `<tr><td colspan="6" style="text-align:center;color:var(--ink3);padding:2rem">No frames yet. Click "Add frame" to start.</td></tr>`;
-
-  // Lenses
-  document.getElementById("lenses-tbody").innerHTML = DB.lenses.map(l => `
-    <tr>
-      <td>${l.img ? `<img class="img-thumb" src="${l.img}" alt=""/>` : `<div class="no-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>`}</td>
-      <td class="prod-name">${l.name}</td>
-      <td>${l.brand}</td>
-      <td><span class="prod-badge">${l.category}</span></td>
-      <td style="font-size:12px">${l.power}</td>
-      <td><div class="row-actions">
-        <button class="edit-btn" onclick="editLens(${l.id})">Edit</button>
-        <button class="del-btn" onclick="deleteLens(${l.id})">Delete</button>
-      </div></td>
-    </tr>`).join("") || `<tr><td colspan="6" style="text-align:center;color:var(--ink3);padding:2rem">No lenses yet. Click "Add lens" to start.</td></tr>`;
-}
-
-// SECTION SWITCH
-function switchSec(s) {
+// ── SECTION SWITCH ────────────────────────────
+function switchSec(s){
   document.querySelectorAll(".section").forEach(x=>x.classList.remove("on"));
   document.querySelectorAll(".sitem").forEach(x=>x.classList.remove("on"));
   document.getElementById("sec-"+s).classList.add("on");
-  document.getElementById("si-"+s) && document.getElementById("si-"+s).classList.add("on");
+  const si=document.getElementById("si-"+s);if(si)si.classList.add("on");
+  if(s==="images")loadLib();
 }
 
-// FRAME MODAL
-function openFrameModal(p) {
-  document.getElementById("frame-modal-title").textContent = p ? "Edit frame" : "Add frame";
-  document.getElementById("f-id").value = p ? p.id : "";
-  document.getElementById("f-name").value = p ? p.name : "";
-  document.getElementById("f-type").value = p ? p.type : "";
-  document.getElementById("f-category").value = p ? p.category : "Everyday";
-  document.getElementById("f-badge").value = p ? p.badge||"" : "";
-  document.getElementById("f-img").value = p ? p.img||"" : "";
-  document.getElementById("f-sizes").value = p ? (p.sizes||[]).join(", ") : "";
-  document.getElementById("f-material").value = p ? (p.specs||{}).Material||"" : "";
-  document.getElementById("f-style").value = p ? (p.specs||{}).Style||"" : "";
-  document.getElementById("f-lensw").value = p ? (p.specs||{})["Lens width"]||"" : "";
-  document.getElementById("f-bridge").value = p ? (p.specs||{}).Bridge||"" : "";
-  document.getElementById("f-coatings").value = p ? (p.coatings||[]).join(", ") : "";
-  document.getElementById("f-colors").value = p ? (p.colors||[]).map(c=>c.name+":"+c.hex).join(", ") : "";
-  document.getElementById("f-wa").value = p ? p.waMsg||"" : "";
+// ── TABLES ────────────────────────────────────
+function renderTables(){
+  document.getElementById("frames-tbody").innerHTML=DB.frames.map(p=>`
+    <tr>
+      <td>${p.img?`<img class="img-thumb" src="${p.img}" alt=""/>`:`<div class="no-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/></svg></div>`}</td>
+      <td class="prod-name">${p.name}</td><td>${p.category}</td>
+      <td>${p.badge?`<span class="prod-badge">${p.badge}</span>`:"—"}</td>
+      <td>${(p.colors||[]).map(c=>`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${c.hex};margin-right:3px;vertical-align:middle;border:1px solid rgba(0,0,0,.1)"></span>`).join("")}</td>
+      <td><div class="row-actions"><button class="edit-btn" onclick="editF(${p.id})">Edit</button><button class="del-btn" onclick="delF(${p.id})">Delete</button></div></td>
+    </tr>`).join("")||`<tr><td colspan="6" style="text-align:center;color:var(--ink3);padding:2rem">No frames yet.</td></tr>`;
+  document.getElementById("lenses-tbody").innerHTML=DB.lenses.map(l=>`
+    <tr>
+      <td>${l.img?`<img class="img-thumb" src="${l.img}" alt=""/>`:`<div class="no-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>`}</td>
+      <td class="prod-name">${l.name}</td><td>${l.brand}</td>
+      <td><span class="prod-badge">${l.category}</span></td>
+      <td style="font-size:12px">${l.power}</td>
+      <td><div class="row-actions"><button class="edit-btn" onclick="editL(${l.id})">Edit</button><button class="del-btn" onclick="delL(${l.id})">Delete</button></div></td>
+    </tr>`).join("")||`<tr><td colspan="6" style="text-align:center;color:var(--ink3);padding:2rem">No lenses yet.</td></tr>`;
+}
+
+// ── FRAME MODAL ───────────────────────────────
+function openFM(p){
+  document.getElementById("fm-title").textContent=p?"Edit frame":"Add frame";
+  const set=(id,v)=>document.getElementById(id).value=v||"";
+  set("f-id",p?p.id:"");set("f-name",p?p.name:"");set("f-type",p?p.type:"");
+  document.getElementById("f-cat").value=p?p.category:"Everyday";
+  document.getElementById("f-badge").value=p?p.badge||"":"";
+  set("f-img",p?p.img||"":"");set("f-sizes",p?(p.sizes||[]).join(", "):"");
+  set("f-material",p?(p.specs||{}).Material||"":"");set("f-style",p?(p.specs||{}).Style||"":"");
+  set("f-lensw",p?(p.specs||{})["Lens width"]||"":"");set("f-bridge",p?(p.specs||{}).Bridge||"":"");
+  set("f-coatings",p?(p.coatings||[]).join(", "):"");
+  set("f-colors",p?(p.colors||[]).map(c=>c.name+":"+c.hex).join(", "):"");
+  set("f-wa",p?p.waMsg||"":"");
+  clearMini("f");
+  if(p&&p.img){document.getElementById("fp-img").src=p.img;document.getElementById("fp-name").textContent=p.img;document.getElementById("fp-sub").textContent="Current photo";document.getElementById("fp-preview").classList.add("show");document.getElementById("f-dz").style.display="none";}
   document.getElementById("f-saving").classList.remove("show");
-  document.getElementById("f-save-btn").disabled = false;
-  document.getElementById("frame-modal").classList.add("open");
+  document.getElementById("f-save").disabled=false;
+  document.getElementById("fm").classList.add("open");
 }
-function editFrame(id) { openFrameModal(DB.frames.find(x=>x.id===id)); }
-async function deleteFrame(id) {
-  if(!confirm("Delete this frame?")) return;
-  DB.frames = DB.frames.filter(x=>x.id!==id);
-  const ok = await saveDB();
-  if(ok){ renderTables(); showToast("Frame deleted."); }
-}
-async function saveFrame() {
-  const btn = document.getElementById("f-save-btn");
-  const bar = document.getElementById("f-saving");
-  btn.disabled = true; bar.classList.add("show");
-  const id = parseInt(document.getElementById("f-id").value)||0;
-  const colors = document.getElementById("f-colors").value.split(",").map(s=>{
-    const [name,...rest] = s.trim().split(":");
-    return {name:name.trim(), hex:(rest.join(":").trim()||"#1a1a1a")};
-  }).filter(c=>c.name);
-  const frame = {
-    id: id || (Math.max(0,...DB.frames.map(x=>x.id))+1),
-    name: document.getElementById("f-name").value.trim(),
-    type: document.getElementById("f-type").value.trim(),
-    category: document.getElementById("f-category").value,
-    badge: document.getElementById("f-badge").value,
-    img: document.getElementById("f-img").value.trim(),
-    colors,
-    sizes: document.getElementById("f-sizes").value.split(",").map(s=>s.trim()).filter(Boolean),
-    specs: {
-      Material: document.getElementById("f-material").value.trim(),
-      Style: document.getElementById("f-style").value.trim(),
-      "Lens width": document.getElementById("f-lensw").value.trim(),
-      Bridge: document.getElementById("f-bridge").value.trim()
-    },
-    coatings: document.getElementById("f-coatings").value.split(",").map(s=>s.trim()).filter(Boolean),
-    waMsg: document.getElementById("f-wa").value.trim()
+function editF(id){openFM(DB.frames.find(x=>x.id===id));}
+async function delF(id){if(!confirm("Delete this frame?"))return;DB.frames=DB.frames.filter(x=>x.id!==id);const ok=await saveDB();if(ok){renderTables();toast("Frame deleted.");}}
+async function saveFrame(){
+  const btn=document.getElementById("f-save");const bar=document.getElementById("f-saving");
+  btn.disabled=true;bar.classList.add("show");
+  const imgPath=await uploadMini("f");
+  const id=parseInt(document.getElementById("f-id").value)||0;
+  const colors=document.getElementById("f-colors").value.split(",").map(s=>{const[n,...r]=s.trim().split(":");return{name:n.trim(),hex:(r.join(":").trim()||"#1a1a1a")};}).filter(c=>c.name);
+  const frame={
+    id:id||(Math.max(0,...DB.frames.map(x=>x.id))+1),
+    name:document.getElementById("f-name").value.trim(),
+    type:document.getElementById("f-type").value.trim(),
+    category:document.getElementById("f-cat").value,
+    badge:document.getElementById("f-badge").value,
+    img:imgPath,colors,
+    sizes:document.getElementById("f-sizes").value.split(",").map(s=>s.trim()).filter(Boolean),
+    specs:{Material:document.getElementById("f-material").value.trim(),Style:document.getElementById("f-style").value.trim(),"Lens width":document.getElementById("f-lensw").value.trim(),Bridge:document.getElementById("f-bridge").value.trim()},
+    coatings:document.getElementById("f-coatings").value.split(",").map(s=>s.trim()).filter(Boolean),
+    waMsg:document.getElementById("f-wa").value.trim()
   };
-  if(id) DB.frames = DB.frames.map(x=>x.id===id?frame:x);
-  else DB.frames.push(frame);
-  const ok = await saveDB();
-  bar.classList.remove("show"); btn.disabled = false;
-  if(ok){ closeModal("frame-modal"); renderTables(); showToast(id?"Frame updated!":"Frame added!"); }
+  if(id)DB.frames=DB.frames.map(x=>x.id===id?frame:x);else DB.frames.push(frame);
+  const ok=await saveDB();bar.classList.remove("show");btn.disabled=false;
+  if(ok){closeM("fm");renderTables();toast(id?"Frame updated!":"Frame added!",false,true);}
 }
 
-// LENS MODAL
-function openLensModal(l) {
-  document.getElementById("lens-modal-title").textContent = l ? "Edit lens" : "Add contact lens";
-  document.getElementById("l-id").value = l ? l.id : "";
-  document.getElementById("l-name").value = l ? l.name : "";
-  document.getElementById("l-brand").value = l ? l.brand : "";
-  document.getElementById("l-category").value = l ? l.category : "Daily";
-  document.getElementById("l-badge").value = l ? l.badge||"" : "";
-  document.getElementById("l-img").value = l ? l.img||"" : "";
-  document.getElementById("l-power").value = l ? l.power : "";
-  document.getElementById("l-material").value = l ? l.material : "";
-  document.getElementById("l-water").value = l ? l.water : "";
-  document.getElementById("l-duration").value = l ? l.duration : "";
-  document.getElementById("l-features").value = l ? (l.features||[]).join(", ") : "";
-  document.getElementById("l-wa").value = l ? l.waMsg||"" : "";
+// ── LENS MODAL ────────────────────────────────
+function openLM(l){
+  document.getElementById("lm-title").textContent=l?"Edit lens":"Add contact lens";
+  const set=(id,v)=>document.getElementById(id).value=v||"";
+  set("l-id",l?l.id:"");set("l-name",l?l.name:"");set("l-brand",l?l.brand:"");
+  document.getElementById("l-cat").value=l?l.category:"Daily";
+  document.getElementById("l-badge").value=l?l.badge||"":"";
+  set("l-img",l?l.img||"":"");set("l-power",l?l.power:"");set("l-material",l?l.material:"");
+  set("l-water",l?l.water:"");set("l-duration",l?l.duration:"");
+  set("l-features",l?(l.features||[]).join(", "):"");set("l-wa",l?l.waMsg||"":"");
+  clearMini("l");
+  if(l&&l.img){document.getElementById("lp-img").src=l.img;document.getElementById("lp-name").textContent=l.img;document.getElementById("lp-sub").textContent="Current photo";document.getElementById("lp-preview").classList.add("show");document.getElementById("l-dz").style.display="none";}
   document.getElementById("l-saving").classList.remove("show");
-  document.getElementById("l-save-btn").disabled = false;
-  document.getElementById("lens-modal").classList.add("open");
+  document.getElementById("l-save").disabled=false;
+  document.getElementById("lm").classList.add("open");
 }
-function editLens(id) { openLensModal(DB.lenses.find(x=>x.id===id)); }
-async function deleteLens(id) {
-  if(!confirm("Delete this lens?")) return;
-  DB.lenses = DB.lenses.filter(x=>x.id!==id);
-  const ok = await saveDB();
-  if(ok){ renderTables(); showToast("Lens deleted."); }
-}
-async function saveLens() {
-  const btn = document.getElementById("l-save-btn");
-  const bar = document.getElementById("l-saving");
-  btn.disabled = true; bar.classList.add("show");
-  const id = parseInt(document.getElementById("l-id").value)||0;
-  const lens = {
-    id: id || (Math.max(0,...DB.lenses.map(x=>x.id),100)+1),
-    name: document.getElementById("l-name").value.trim(),
-    brand: document.getElementById("l-brand").value.trim(),
-    category: document.getElementById("l-category").value,
-    badge: document.getElementById("l-badge").value,
-    img: document.getElementById("l-img").value.trim(),
-    power: document.getElementById("l-power").value.trim(),
-    material: document.getElementById("l-material").value.trim(),
-    water: document.getElementById("l-water").value.trim(),
-    duration: document.getElementById("l-duration").value.trim(),
-    features: document.getElementById("l-features").value.split(",").map(s=>s.trim()).filter(Boolean),
-    waMsg: document.getElementById("l-wa").value.trim()
+function editL(id){openLM(DB.lenses.find(x=>x.id===id));}
+async function delL(id){if(!confirm("Delete this lens?"))return;DB.lenses=DB.lenses.filter(x=>x.id!==id);const ok=await saveDB();if(ok){renderTables();toast("Lens deleted.");}}
+async function saveLens(){
+  const btn=document.getElementById("l-save");const bar=document.getElementById("l-saving");
+  btn.disabled=true;bar.classList.add("show");
+  const imgPath=await uploadMini("l");
+  const id=parseInt(document.getElementById("l-id").value)||0;
+  const lens={
+    id:id||(Math.max(0,...DB.lenses.map(x=>x.id),100)+1),
+    name:document.getElementById("l-name").value.trim(),
+    brand:document.getElementById("l-brand").value.trim(),
+    category:document.getElementById("l-cat").value,
+    badge:document.getElementById("l-badge").value,
+    img:imgPath,
+    power:document.getElementById("l-power").value.trim(),
+    material:document.getElementById("l-material").value.trim(),
+    water:document.getElementById("l-water").value.trim(),
+    duration:document.getElementById("l-duration").value.trim(),
+    features:document.getElementById("l-features").value.split(",").map(s=>s.trim()).filter(Boolean),
+    waMsg:document.getElementById("l-wa").value.trim()
   };
-  if(id) DB.lenses = DB.lenses.map(x=>x.id===id?lens:x);
-  else DB.lenses.push(lens);
-  const ok = await saveDB();
-  bar.classList.remove("show"); btn.disabled = false;
-  if(ok){ closeModal("lens-modal"); renderTables(); showToast(id?"Lens updated!":"Lens added!"); }
+  if(id)DB.lenses=DB.lenses.map(x=>x.id===id?lens:x);else DB.lenses.push(lens);
+  const ok=await saveDB();bar.classList.remove("show");btn.disabled=false;
+  if(ok){closeM("lm");renderTables();toast(id?"Lens updated!":"Lens added!",false,true);}
 }
 
-// UTILS
-function closeModal(id){ document.getElementById(id).classList.remove("open"); }
-function showToast(msg, err=false) {
-  const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.className = "toast show" + (err?" err":"");
-  setTimeout(()=>t.classList.remove("show"), 3200);
-}
-
-// INIT
-(async () => {
-  const done = await handleCallback();
-  if(!done) await tryAutoLogin();
-})();
+// ── UTILS ─────────────────────────────────────
+function closeM(id){document.getElementById(id).classList.remove("open");}
+function toast(msg,err=false,ok=false){const t=document.getElementById("toast");t.textContent=msg;t.className="toast show"+(err?" err":ok?" ok":"");setTimeout(()=>t.classList.remove("show"),3500);}
+(async()=>{const done=await handleCB();if(!done)await tryAuto();})();
 </script>
 </body>
 </html>
