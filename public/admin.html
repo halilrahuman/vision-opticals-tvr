@@ -171,23 +171,33 @@ code{background:var(--bg2);padding:1px 5px;border-radius:4px;font-size:11px;font
   <div class="login-card">
     <div class="login-logo">Vision <em>Opticals</em></div>
     <p class="login-sub">Admin panel — manage your frames, lenses and photos.</p>
-    <button class="gh-btn" onclick="doLogin()">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-      Sign in with GitHub
-    </button>
+
+    <form id="login-form" onsubmit="event.preventDefault(); doLogin();">
+      <input type="password" id="pat-input" placeholder="Paste your GitHub token" autocomplete="off"
+        style="width:100%;padding:11px 13px;font-family:var(--f);font-size:13px;border:0.5px solid var(--border2);border-radius:var(--rsm);margin-bottom:10px;background:var(--bg2);color:var(--ink)"/>
+      <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);margin-bottom:14px;cursor:pointer">
+        <input type="checkbox" id="remember-chk" checked style="margin:0"/>
+        Keep me signed in on this device
+      </label>
+      <button class="gh-btn" type="submit">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        Sign in
+      </button>
+    </form>
+
     <div class="setup-box">
       <h4>First time setup — do this once:</h4>
       <div class="step-row">
         <div class="step-n">1</div>
-        <p>Go to <strong>github.com → your profile photo (top right) → Settings → scroll to the bottom → Developer settings → Personal access tokens → Tokens (classic) → Generate new token (classic)</strong></p>
+        <p>Go to <strong>github.com → your profile photo (top right) → Settings → scroll to the bottom → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</strong></p>
       </div>
       <div class="step-row">
         <div class="step-n">2</div>
-        <p>Give it a name like <strong>Vision Opticals Admin</strong>. Under "Select scopes" tick the box next to <strong>repo</strong>. Scroll down and click <strong>Generate token</strong>. Copy the long code that appears (starts with <code>ghp_</code>).</p>
+        <p>Give it a name like <strong>Vision Opticals Admin</strong>. Under "Repository access" choose <strong>Only select repositories</strong> and pick <code>vision-opticals-tvr</code>. Under "Permissions" set <strong>Contents: Read and write</strong>. Click <strong>Generate token</strong> and copy the code that appears (starts with <code>github_pat_</code>).</p>
       </div>
       <div class="step-row">
         <div class="step-n">3</div>
-        <p>Open <code>admin.html</code> in your GitHub repo. Find the line that says <code>const PAT = ""</code> and paste the token between the quotes so it looks like <code>const PAT = "ghp_your_token_here"</code>. Commit and push. That's it!</p>
+        <p>Paste that token into the box above and click <strong>Sign in</strong>. Nothing is saved to the repo — the token only lives in your browser on this device.</p>
       </div>
     </div>
   </div>
@@ -465,14 +475,16 @@ code{background:var(--bg2);padding:1px 5px;border-radius:4px;font-size:11px;font
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  PASTE YOUR GITHUB PERSONAL ACCESS TOKEN BELOW
-const PAT  = "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";
-//  Example: const PAT = "ghp_abc123yourtoken";
+//  No token is stored here. You paste your GitHub token into
+//  the login form at runtime — it lives only in this browser
+//  (sessionStorage, or localStorage if "keep me signed in" is
+//  checked) and is never written back into this file or the repo.
 // ═══════════════════════════════════════════════════════
 const REPO    = "halilrahuman/vision-opticals-tvr";
 const ALLOWED = "halilrahuman";
 const API     = "https://api.github.com";
 const RAW     = `https://raw.githubusercontent.com/${REPO}/main`;
+const STORAGE_KEY = "vo_admin_token";
 
 let token = "";
 let DB = { frames:[], lenses:[] };
@@ -481,13 +493,18 @@ let LIB = []; // [{name,path,url,sha}]
 
 // ── AUTH ─────────────────────────────────────────────
 function doLogin() {
-  if (!PAT) { toast("Please add your GitHub token to admin.html first. See the instructions above.", "err"); return; }
-  token = PAT; verifyAndShow();
+  const input = document.getElementById("pat-input");
+  const pat = (input.value || "").trim();
+  if (!pat) { toast("Paste your GitHub token first.", "err"); return; }
+  token = pat;
+  verifyAndShow(document.getElementById("remember-chk").checked);
 }
-async function verifyAndShow() {
+async function verifyAndShow(remember) {
   try {
     const u = await api("/user");
     if (u.login !== ALLOWED) { toast("Wrong GitHub account. Only " + ALLOWED + " can log in.", "err"); token=""; return; }
+    if (remember) { localStorage.setItem(STORAGE_KEY, token); sessionStorage.removeItem(STORAGE_KEY); }
+    else { sessionStorage.setItem(STORAGE_KEY, token); localStorage.removeItem(STORAGE_KEY); }
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("main-screen").style.display  = "block";
     document.getElementById("user-name").textContent = u.login;
@@ -497,6 +514,9 @@ async function verifyAndShow() {
 }
 function logout() {
   token = "";
+  localStorage.removeItem(STORAGE_KEY);
+  sessionStorage.removeItem(STORAGE_KEY);
+  document.getElementById("pat-input").value = "";
   document.getElementById("main-screen").style.display="none";
   document.getElementById("login-screen").style.display="flex";
 }
@@ -846,8 +866,11 @@ function toast(msg,type=""){
 }
 
 // ── INIT ──────────────────────────────────────────────
-// Auto login if PAT is already filled in
-if (PAT) { token=PAT; verifyAndShow(); }
+// Auto login if a token was previously saved in this browser
+(function initAuth(){
+  const saved = localStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY);
+  if (saved) { token = saved; verifyAndShow(!!localStorage.getItem(STORAGE_KEY)); }
+})();
 </script>
 </body>
 </html>
