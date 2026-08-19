@@ -2,10 +2,11 @@
   "frames": [
     {
       "id": 1,
-      "name": "kumlim rectangle",
-      "type": "Everyday · Unisex",
+      "name": "slim rectangle",
+      "type": "Everyday Â· Unisex",
       "category": "Everyday",
       "badge": "Popular",
+      "img": "images/slim rectangle frame.png",
       "colors": [
         {
           "name": "Black",
@@ -36,13 +37,12 @@
         "Blue-cut",
         "UV400"
       ],
-      "waMsg": "Hi, I'm interested in the Slim Rectangle frame. Could you share details?",
-      "img": "images/slim rectangle frame.png"
+      "waMsg": "Hi, I'm interested in the Slim Rectangle frame. Could you share details?"
     },
     {
       "id": 2,
       "name": "Round acetate",
-      "type": "Premium · Unisex",
+      "type": "Premium Â· Unisex",
       "category": "Premium",
       "badge": "New",
       "img": "",
@@ -80,7 +80,7 @@
     {
       "id": 3,
       "name": "Oversized square",
-      "type": "Sunglasses · Unisex",
+      "type": "Sunglasses Â· Unisex",
       "category": "Sunglasses",
       "badge": "Popular",
       "img": "",
@@ -115,7 +115,7 @@
     {
       "id": 4,
       "name": "Cat-eye titanium",
-      "type": "Premium · Women",
+      "type": "Premium Â· Women",
       "category": "Premium",
       "badge": "New",
       "img": "",
@@ -153,7 +153,7 @@
     {
       "id": 5,
       "name": "Kids flex frame",
-      "type": "Kids · Boys & Girls",
+      "type": "Kids Â· Boys & Girls",
       "category": "Kids",
       "badge": "Kids",
       "img": "",
@@ -191,7 +191,7 @@
     {
       "id": 6,
       "name": "Aviator classic",
-      "type": "Sunglasses · Unisex",
+      "type": "Sunglasses Â· Unisex",
       "category": "Sunglasses",
       "badge": "Sale",
       "img": "",
@@ -224,7 +224,7 @@
     {
       "id": 7,
       "name": "Rimless lightweight",
-      "type": "Everyday · Unisex",
+      "type": "Everyday Â· Unisex",
       "category": "Everyday",
       "badge": "",
       "img": "",
@@ -259,7 +259,7 @@
     {
       "id": 8,
       "name": "Browline retro",
-      "type": "Everyday · Men",
+      "type": "Everyday Â· Men",
       "category": "Everyday",
       "badge": "",
       "img": "",
@@ -297,7 +297,7 @@
     {
       "id": 9,
       "name": "Hexagonal metal",
-      "type": "Premium · Men",
+      "type": "Premium Â· Men",
       "category": "Premium",
       "badge": "New",
       "img": "",
@@ -389,7 +389,7 @@
       "power": "-0.50 to -9.00",
       "material": "Senofilcon A",
       "water": "38%",
-      "duration": "Monthly — replace every 30 days",
+      "duration": "Monthly â replace every 30 days",
       "features": [
         "HydraLuxe technology",
         "Blue-light filtering",
@@ -407,7 +407,7 @@
       "power": "0.00 (Plano) to -6.00",
       "material": "Phemfilcon A",
       "water": "55%",
-      "duration": "Monthly — replace every 30 days",
+      "duration": "Monthly â replace every 30 days",
       "features": [
         "12 natural-looking shades",
         "3-in-1 colour blend",
@@ -425,7 +425,7 @@
       "power": "-0.75 to -2.25 CYL",
       "material": "Senofilcon A",
       "water": "38%",
-      "duration": "Bi-weekly — replace every 2 weeks",
+      "duration": "Bi-weekly â replace every 2 weeks",
       "features": [
         "Eyelid stabilisation design",
         "Crystal-clear vision",
@@ -461,7 +461,7 @@
       "power": "-0.50 to -6.00",
       "material": "Polymacon",
       "water": "38.6%",
-      "duration": "Monthly — replace every 30 days",
+      "duration": "Monthly â replace every 30 days",
       "features": [
         "High oxygen permeability",
         "Comfortable wear",
