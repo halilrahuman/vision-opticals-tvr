@@ -1,5 +1,33 @@
 {
-  "frames": [],
+  "frames": [
+    {
+      "id": 1,
+      "name": "rayban",
+      "type": "male",
+      "category": "Sunglasses",
+      "badge": "Popular",
+      "img": "images/favicon.png",
+      "colors": [
+        {
+          "name": "Terra tit",
+          "hex": "#1a1a1a"
+        }
+      ],
+      "sizes": [
+        "M"
+      ],
+      "specs": {
+        "Material": "shell",
+        "Style": "square",
+        "Lens width": "54mm",
+        "Bridge": "14mm"
+      },
+      "coatings": [
+        "UV 100"
+      ],
+      "waMsg": "Hello give me more detail about this"
+    }
+  ],
   "lenses": [
     {
       "id": 101,
