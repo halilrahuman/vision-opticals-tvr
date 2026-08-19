@@ -1,24 +1,5 @@
 {
-  "frames": [
-    {
-      "id": 1,
-      "name": "aop",
-      "type": "",
-      "category": "Everyday",
-      "badge": "",
-      "img": "",
-      "colors": [],
-      "sizes": [],
-      "specs": {
-        "Material": "",
-        "Style": "",
-        "Lens width": "",
-        "Bridge": ""
-      },
-      "coatings": [],
-      "waMsg": ""
-    }
-  ],
+  "frames": [],
   "lenses": [
     {
       "id": 101,
