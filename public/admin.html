@@ -532,7 +532,7 @@ async function api(path, opts={}) {
 // ── PRODUCTS.JSON ────────────────────────────────────
 async function loadDB() {
   try {
-    const d = await api(`/repos/${REPO}/contents/products.json`);
+    const d = await api(`/repos/${REPO}/contents/public/products.json`);
     dbSHA = d.sha;
     DB = JSON.parse(atob(d.content.replace(/\n/g,"")));
     renderTables();
@@ -541,7 +541,7 @@ async function loadDB() {
 async function saveDB() {
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(DB,null,2))));
   try {
-    const d = await api(`/repos/${REPO}/contents/products.json`, {
+    const d = await api(`/repos/${REPO}/contents/public/products.json`, {
       method:"PUT", body:JSON.stringify({ message:"Admin: update products", content, sha:dbSHA })
     });
     dbSHA = d.content.sha; return true;
@@ -551,9 +551,9 @@ async function saveDB() {
 // ── PHOTO LIBRARY ────────────────────────────────────
 async function loadLibrary() {
   try {
-    const files = await api(`/repos/${REPO}/contents/images`);
+    const files = await api(`/repos/${REPO}/contents/public/images`);
     LIB = files.filter(f=>f.type==="file"&&/\.(jpe?g|png|webp|gif)$/i.test(f.name))
-               .map(f=>({name:f.name, path:f.path, url:f.download_url, sha:f.sha}));
+               .map(f=>({name:f.name, repoPath:f.path, sitePath:f.path.replace(/^public\//,""), url:f.download_url, sha:f.sha}));
   } catch(_) { LIB=[]; }
   renderLib(); renderPickers();
 }
@@ -566,10 +566,10 @@ function renderLib() {
       <img src="${img.url}" alt="${img.name}" loading="lazy"/>
       <div class="lib-card-info">
         <div class="lib-card-name">${img.name}</div>
-        <div class="lib-card-path">${img.path}</div>
+        <div class="lib-card-path">${img.sitePath}</div>
       </div>
       <div class="lib-card-btns">
-        <button class="lib-copy" onclick="copyTxt('${img.path}')">Copy path</button>
+        <button class="lib-copy" onclick="copyTxt('${img.sitePath}')">Copy path</button>
         <button class="lib-del" onclick="deleteLibImg(${i})">Delete</button>
       </div>
     </div>`).join("");
@@ -580,7 +580,7 @@ function renderPickers() {
     const g = document.getElementById(p+"-picker-grid");
     if (!LIB.length) { g.innerHTML='<span style="font-size:12px;color:var(--ink3)">No photos yet — upload from Photo library first.</span>'; return; }
     g.innerHTML = LIB.map((img,i)=>`
-      <div class="pick-item" id="${p}-pick-${i}" onclick="pickImg('${p}','${img.path}','${img.url}',${i})">
+      <div class="pick-item" id="${p}-pick-${i}" onclick="pickImg('${p}','${img.sitePath}','${img.url}',${i})">
         <img src="${img.url}" alt="${img.name}" loading="lazy"/>
         <span>${img.name}</span>
       </div>`).join("");
@@ -598,7 +598,7 @@ function setImgVal(prefix, path, url) {
   const prev = document.getElementById(prefix+"-img-prev");
   const lbl  = document.getElementById(prefix+"-img-lbl");
   if (path) {
-    prev.src = url || (path.startsWith("http") ? path : RAW+"/"+path);
+    prev.src = url || (path.startsWith("http") ? path : RAW+"/public/"+path.replace(/^\//,""));
     prev.style.display = "block";
     lbl.textContent = path;
   } else {
@@ -611,7 +611,7 @@ async function deleteLibImg(idx) {
   const img = LIB[idx];
   if (!confirm(`Delete "${img.name}"? This cannot be undone.`)) return;
   try {
-    await api(`/repos/${REPO}/contents/${img.path}`, {
+    await api(`/repos/${REPO}/contents/${img.repoPath}`, {
       method:"DELETE", body:JSON.stringify({ message:"Delete image: "+img.name, sha:img.sha })
     });
     LIB.splice(idx,1); renderLib(); renderPickers();
@@ -653,13 +653,14 @@ async function uploadLibFiles(files) {
   for (const file of files) {
     const {bar,status} = makeProgressItem(prog, file.name);
     bar.style.width = "30%";
-    const path = "images/"+file.name;
+    const repoPath = "public/images/"+file.name;
+    const sitePath = "images/"+file.name;
     try {
-      await uploadFile(file, path);
+      await uploadFile(file, repoPath);
       bar.style.width="100%"; status.textContent="✓ Done"; status.className="u-status ok";
-      const url = RAW+"/"+path+"?v="+Date.now();
-      const existing = LIB.findIndex(x=>x.path===path);
-      if (existing>=0) LIB[existing].url=url; else LIB.push({name:file.name,path,url,sha:""});
+      const url = RAW+"/"+repoPath+"?v="+Date.now();
+      const existing = LIB.findIndex(x=>x.sitePath===sitePath);
+      if (existing>=0) LIB[existing].url=url; else LIB.push({name:file.name,repoPath,sitePath,url,sha:""});
       renderLib(); renderPickers();
     } catch(e) { status.textContent="✗ Failed"; status.className="u-status err"; }
   }
@@ -672,14 +673,15 @@ async function miniUpload(input, prefix) {
   const prog = document.getElementById(prefix+"-mini-progress");
   const {bar,status} = makeProgressItem(prog, file.name);
   bar.style.width="30%";
-  const path = "images/"+file.name;
+  const repoPath = "public/images/"+file.name;
+  const sitePath = "images/"+file.name;
   try {
-    await uploadFile(file, path);
+    await uploadFile(file, repoPath);
     bar.style.width="100%"; status.textContent="✓ Uploaded"; status.className="u-status ok";
-    const url = RAW+"/"+path+"?v="+Date.now();
-    if (!LIB.find(x=>x.path===path)) LIB.push({name:file.name,path,url,sha:""});
+    const url = RAW+"/"+repoPath+"?v="+Date.now();
+    if (!LIB.find(x=>x.sitePath===sitePath)) LIB.push({name:file.name,repoPath,sitePath,url,sha:""});
     renderLib(); renderPickers();
-    setImgVal(prefix, path, url);
+    setImgVal(prefix, sitePath, url);
     toast("Photo uploaded!", "ok");
   } catch(e) { status.textContent="✗ Failed"; status.className="u-status err"; toast("Upload failed: "+e.message,"err"); }
 }
@@ -687,8 +689,8 @@ async function miniUpload(input, prefix) {
 // ── SHOP PHOTO ───────────────────────────────────────
 async function loadShopPreview() {
   try {
-    await api(`/repos/${REPO}/contents/images/shop.jpg`);
-    const url = RAW+"/images/shop.jpg?v="+Date.now();
+    await api(`/repos/${REPO}/contents/public/images/shop.jpg`);
+    const url = RAW+"/public/images/shop.jpg?v="+Date.now();
     document.getElementById("shop-preview").innerHTML = `<img src="${url}" alt="Shop" style="width:100%;height:100%;object-fit:cover"/>`;
   } catch(_) {}
 }
@@ -698,9 +700,9 @@ async function uploadShopPhoto(file) {
   const {bar,status} = makeProgressItem(prog, file.name);
   bar.style.width="30%";
   try {
-    await uploadFile(file, "images/shop.jpg");
+    await uploadFile(file, "public/images/shop.jpg");
     bar.style.width="100%"; status.textContent="✓ Done"; status.className="u-status ok";
-    const url = RAW+"/images/shop.jpg?v="+Date.now();
+    const url = RAW+"/public/images/shop.jpg?v="+Date.now();
     document.getElementById("shop-preview").innerHTML = `<img src="${url}" alt="Shop" style="width:100%;height:100%;object-fit:cover"/>`;
     await patchShopImg();
     toast("Shop photo uploaded! Website updates in ~30 seconds.", "ok");
@@ -710,10 +712,10 @@ function handleShopDrop(e) { e.preventDefault(); e.currentTarget.classList.remov
 
 async function patchShopImg() {
   try {
-    const d = await api(`/repos/${REPO}/contents/index.html`);
+    const d = await api(`/repos/${REPO}/contents/public/index.html`);
     let html = atob(d.content.replace(/\n/g,""));
     html = html.replace(/const SHOP_IMG\s*=\s*"[^"]*"/, 'const SHOP_IMG = "images/shop.jpg"');
-    await api(`/repos/${REPO}/contents/index.html`, {
+    await api(`/repos/${REPO}/contents/public/index.html`, {
       method:"PUT", body:JSON.stringify({ message:"Auto: update shop photo", content:btoa(unescape(encodeURIComponent(html))), sha:d.sha })
     });
   } catch(_) {}
@@ -722,7 +724,7 @@ async function patchShopImg() {
 // ── TABLES ───────────────────────────────────────────
 function imgCell(path) {
   if (!path) return `<div class="no-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/></svg></div>`;
-  const src = path.startsWith("http") ? path : RAW+"/"+path;
+  const src = path.startsWith("http") ? path : RAW+"/public/"+path.replace(/^\//,"");
   return `<img class="img-thumb" src="${src}" alt=""/>`;
 }
 function renderTables() {
