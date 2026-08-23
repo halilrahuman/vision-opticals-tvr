@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "slim rectangle",
-      "type": "Everyday Â· Unisex",
+      "type": "Everyday ÃÂ· Unisex",
       "category": "Everyday",
       "badge": "Popular",
       "img": "images/slim rectangle frame.png",
@@ -42,7 +42,7 @@
     {
       "id": 2,
       "name": "Round acetate",
-      "type": "Premium Â· Unisex",
+      "type": "Premium ÃÂ· Unisex",
       "category": "Premium",
       "badge": "New",
       "img": "",
@@ -80,7 +80,7 @@
     {
       "id": 3,
       "name": "Oversized square",
-      "type": "Sunglasses Â· Unisex",
+      "type": "Sunglasses ÃÂ· Unisex",
       "category": "Sunglasses",
       "badge": "Popular",
       "img": "",
@@ -115,7 +115,7 @@
     {
       "id": 4,
       "name": "Cat-eye titanium",
-      "type": "Premium Â· Women",
+      "type": "Premium ÃÂ· Women",
       "category": "Premium",
       "badge": "New",
       "img": "",
@@ -153,7 +153,7 @@
     {
       "id": 5,
       "name": "Kids flex frame",
-      "type": "Kids Â· Boys & Girls",
+      "type": "Kids ÃÂ· Boys & Girls",
       "category": "Kids",
       "badge": "Kids",
       "img": "",
@@ -191,7 +191,7 @@
     {
       "id": 6,
       "name": "Aviator classic",
-      "type": "Sunglasses Â· Unisex",
+      "type": "Sunglasses ÃÂ· Unisex",
       "category": "Sunglasses",
       "badge": "Sale",
       "img": "",
@@ -224,7 +224,7 @@
     {
       "id": 7,
       "name": "Rimless lightweight",
-      "type": "Everyday Â· Unisex",
+      "type": "Everyday ÃÂ· Unisex",
       "category": "Everyday",
       "badge": "",
       "img": "",
@@ -259,7 +259,7 @@
     {
       "id": 8,
       "name": "Browline retro",
-      "type": "Everyday Â· Men",
+      "type": "Everyday ÃÂ· Men",
       "category": "Everyday",
       "badge": "",
       "img": "",
@@ -297,7 +297,7 @@
     {
       "id": 9,
       "name": "Hexagonal metal",
-      "type": "Premium Â· Men",
+      "type": "Premium ÃÂ· Men",
       "category": "Premium",
       "badge": "New",
       "img": "",
@@ -331,33 +331,6 @@
         "Anti-reflective"
       ],
       "waMsg": "Hi, I'm interested in the Hexagonal Metal frame. Could you share details?"
-    },
-    {
-      "id": 10,
-      "name": "rayban",
-      "type": "male",
-      "category": "Sunglasses",
-      "badge": "Popular",
-      "img": "images/favicon.png",
-      "colors": [
-        {
-          "name": "Terra tit",
-          "hex": "#1a1a1a"
-        }
-      ],
-      "sizes": [
-        "M"
-      ],
-      "specs": {
-        "Material": "shell",
-        "Style": "square",
-        "Lens width": "54mm",
-        "Bridge": "14mm"
-      },
-      "coatings": [
-        "UV 100"
-      ],
-      "waMsg": "Hello give me more detail about this"
     }
   ],
   "lenses": [
@@ -389,7 +362,7 @@
       "power": "-0.50 to -9.00",
       "material": "Senofilcon A",
       "water": "38%",
-      "duration": "Monthly â replace every 30 days",
+      "duration": "Monthly Ã¢ÂÂ replace every 30 days",
       "features": [
         "HydraLuxe technology",
         "Blue-light filtering",
@@ -407,7 +380,7 @@
       "power": "0.00 (Plano) to -6.00",
       "material": "Phemfilcon A",
       "water": "55%",
-      "duration": "Monthly â replace every 30 days",
+      "duration": "Monthly Ã¢ÂÂ replace every 30 days",
       "features": [
         "12 natural-looking shades",
         "3-in-1 colour blend",
@@ -425,7 +398,7 @@
       "power": "-0.75 to -2.25 CYL",
       "material": "Senofilcon A",
       "water": "38%",
-      "duration": "Bi-weekly â replace every 2 weeks",
+      "duration": "Bi-weekly Ã¢ÂÂ replace every 2 weeks",
       "features": [
         "Eyelid stabilisation design",
         "Crystal-clear vision",
@@ -461,7 +434,7 @@
       "power": "-0.50 to -6.00",
       "material": "Polymacon",
       "water": "38.6%",
-      "duration": "Monthly â replace every 30 days",
+      "duration": "Monthly Ã¢ÂÂ replace every 30 days",
       "features": [
         "High oxygen permeability",
         "Comfortable wear",
