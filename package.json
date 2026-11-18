@@ -1,0 +1,31 @@
+{
+  "name": "vision_opticals",
+  "version": "1.0.0",
+  "description": "Vision Opticals – Premium Digital Commerce & Store Management Platform",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "seed": "node server/db/seed.js",
+    "test": "node scripts/audit_apis.js",
+    "test:client": "node scripts/test_client_api.js"
+  },
+  "keywords": [
+    "optical",
+    "eyewear",
+    "store-management",
+    "ecommerce"
+  ],
+  "author": "Vision Opticals",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jimp": "^0.22.12",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.7"
+  }
+}

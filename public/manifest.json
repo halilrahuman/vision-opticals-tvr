@@ -1,0 +1,21 @@
+{
+  "name": "Vision Opticals Admin",
+  "short_name": "Vision Admin",
+  "start_url": "/admin",
+  "display": "standalone",
+  "background_color": "#f5f2ee",
+  "theme_color": "#1a1714",
+  "description": "Store and inventory management application for Vision Opticals",
+  "icons": [
+    {
+      "src": "/images/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

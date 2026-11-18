@@ -1,878 +1,1177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Admin – Vision Opticals</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f5f2ee;--bg2:#edeae4;--white:#fff;
-  --ink:#1a1714;--ink2:#5a5550;--ink3:#9a948e;
-  --border:rgba(26,23,20,0.12);--border2:rgba(26,23,20,0.2);
-  --green:#16a34a;--red:#dc2626;--blue:#2563eb;
-  --radius:12px;--rsm:8px;--f:'DM Sans',sans-serif;
-}
-body{font-family:var(--f);background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
-
-/* LOGIN */
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
-.login-card{background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:2.5rem 2rem;max-width:400px;width:100%}
-.login-logo{font-size:22px;font-weight:500;margin-bottom:6px;text-align:center}
-.login-logo em{font-style:italic;color:var(--ink2)}
-.login-sub{font-size:13px;color:var(--ink2);margin-bottom:1.75rem;line-height:1.65;text-align:center}
-.gh-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:var(--white);font-family:var(--f);font-size:14px;font-weight:500;padding:13px 20px;border-radius:var(--rsm);border:none;cursor:pointer;width:100%;transition:opacity .2s}
-.gh-btn:hover{opacity:.85}
-.gh-btn svg{width:20px;height:20px;fill:currentColor}
-.setup-box{margin-top:1.5rem;border-top:0.5px solid var(--border);padding-top:1.25rem}
-.setup-box h4{font-size:13px;font-weight:500;margin-bottom:10px}
-.step-row{display:flex;gap:10px;margin-bottom:10px}
-.step-n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--white);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.step-row p{font-size:12px;color:var(--ink2);line-height:1.6}
-.step-row strong{color:var(--ink);font-weight:500}
-code{background:var(--bg2);padding:1px 5px;border-radius:4px;font-size:11px;font-family:monospace;color:var(--ink)}
-
-/* TOPBAR */
-#main-screen{display:none}
-.topbar{background:var(--white);border-bottom:0.5px solid var(--border2);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.topbar-logo{font-size:15px;font-weight:500}
-.topbar-logo em{font-style:italic;color:var(--ink2)}
-.topbar-right{display:flex;align-items:center;gap:10px}
-.user-pill{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink2);background:var(--bg2);padding:5px 12px;border-radius:20px}
-.user-pill img{width:22px;height:22px;border-radius:50%}
-.logout-btn{font-size:12px;color:var(--ink3);background:none;border:0.5px solid var(--border2);padding:6px 12px;border-radius:20px;cursor:pointer;font-family:var(--f)}
-.logout-btn:hover{color:var(--red)}
-
-/* LAYOUT */
-.layout{display:grid;grid-template-columns:210px 1fr;min-height:calc(100vh - 56px)}
-.sidebar{background:var(--white);border-right:0.5px solid var(--border2);padding:1rem;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;align-self:start}
-.sitem{display:flex;align-items:center;gap:8px;font-size:13px;padding:9px 12px;border-radius:var(--rsm);cursor:pointer;color:var(--ink2);transition:all .15s;border:none;background:none;font-family:var(--f);width:100%;text-align:left;text-decoration:none}
-.sitem:hover{background:var(--bg2);color:var(--ink)}
-.sitem.on{background:var(--bg2);color:var(--ink);font-weight:500}
-.sitem svg{width:16px;height:16px;stroke:currentColor;flex-shrink:0}
-.sdiv{height:0.5px;background:var(--border);margin:8px 0}
-.content{padding:1.5rem}
-.section{display:none}.section.on{display:block}
-.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px}
-.sec-title{font-size:18px;font-weight:500}
-.add-btn{display:flex;align-items:center;gap:6px;background:var(--ink);color:var(--white);font-size:13px;padding:8px 16px;border-radius:var(--rsm);border:none;cursor:pointer;font-family:var(--f)}
-.add-btn svg{width:14px;height:14px;stroke:currentColor}
-
-/* TABLES */
-.table-wrap{overflow-x:auto;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--white)}
-.prod-table{width:100%;border-collapse:collapse;min-width:500px}
-.prod-table th{font-size:11px;font-weight:500;color:var(--ink3);text-align:left;padding:9px 14px;border-bottom:0.5px solid var(--border2);text-transform:uppercase;letter-spacing:.8px;background:var(--bg2)}
-.prod-table td{font-size:13px;padding:11px 14px;border-bottom:0.5px solid var(--border);color:var(--ink2);vertical-align:middle}
-.prod-table tr:last-child td{border-bottom:none}
-.prod-table tr:hover td{background:var(--bg)}
-.prod-name{font-weight:500;color:var(--ink)!important}
-.prod-badge{font-size:10px;padding:2px 7px;border-radius:6px;background:var(--bg2);color:var(--ink2);display:inline-block}
-.row-actions{display:flex;gap:6px}
-.edit-btn,.del-btn{font-size:11px;padding:5px 11px;border-radius:var(--rsm);border:0.5px solid var(--border2);cursor:pointer;font-family:var(--f);background:var(--white);transition:all .15s}
-.edit-btn{color:var(--blue)}.edit-btn:hover{background:#eff6ff;border-color:var(--blue)}
-.del-btn{color:var(--red)}.del-btn:hover{background:#fef2f2;border-color:var(--red)}
-.img-thumb{width:44px;height:34px;border-radius:6px;object-fit:cover;display:inline-block;vertical-align:middle;border:0.5px solid var(--border)}
-.no-img{width:44px;height:34px;border-radius:6px;background:var(--bg2);display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
-.no-img svg{width:14px;height:14px;stroke:var(--ink3)}
-.empty-row td{text-align:center;color:var(--ink3);padding:2.5rem!important}
-
-/* UPLOAD ZONE */
-.upload-zone{border:1.5px dashed var(--border2);border-radius:var(--radius);padding:2rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--white);position:relative}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--ink);background:var(--bg2)}
-.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.upload-zone svg{width:36px;height:36px;stroke:var(--ink3);margin-bottom:10px}
-.upload-zone h3{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px}
-.upload-zone p{font-size:12px;color:var(--ink3)}
-
-/* UPLOAD PROGRESS */
-.upload-progress{margin-top:10px}
-.u-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:var(--rsm);background:var(--bg2);margin-bottom:6px;font-size:12px}
-.u-name{flex:1;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.u-bar-wrap{width:80px;height:4px;background:var(--border2);border-radius:2px;overflow:hidden;flex-shrink:0}
-.u-bar{height:100%;background:var(--ink);border-radius:2px;width:0%;transition:width .3s}
-.u-status{font-size:11px;flex-shrink:0;min-width:60px;text-align:right}
-.u-status.ok{color:var(--green)}.u-status.err{color:var(--red)}.u-status.going{color:var(--ink3)}
-
-/* PHOTO LIBRARY */
-.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:1rem}
-.lib-card{border:0.5px solid var(--border2);border-radius:10px;overflow:hidden;background:var(--white)}
-.lib-card img{width:100%;height:96px;object-fit:cover;display:block}
-.lib-card-info{padding:7px 10px}
-.lib-card-name{font-size:11px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lib-card-path{font-size:10px;color:var(--ink3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lib-card-btns{display:flex;gap:5px;padding:0 10px 8px}
-.lib-copy,.lib-del{font-size:10px;padding:3px 8px;border-radius:6px;border:0.5px solid var(--border2);cursor:pointer;font-family:var(--f);background:var(--white)}
-.lib-copy{color:var(--blue)}.lib-copy:hover{background:#eff6ff}
-.lib-del{color:var(--red)}.lib-del:hover{background:#fef2f2}
-
-/* MODAL */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:500;overflow-y:auto;padding:2rem}
-.modal-bg.open{display:block}
-.modal{background:var(--white);border-radius:var(--radius);padding:1.75rem;width:100%;max-width:580px;margin:auto;position:relative}
-.modal-title{font-size:17px;font-weight:500;margin-bottom:1.5rem}
-.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:var(--ink3);padding:4px}
-.modal-close svg{width:18px;height:18px;stroke:currentColor}
-.form-row{margin-bottom:1rem}
-.form-row label{font-size:12px;color:var(--ink2);display:block;margin-bottom:5px;font-weight:500}
-.form-row input,.form-row select,.form-row textarea{width:100%;border:0.5px solid var(--border2);border-radius:var(--rsm);padding:8px 11px;font-size:13px;font-family:var(--f);color:var(--ink);background:var(--white);outline:none;transition:border-color .15s}
-.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--ink)}
-.form-row textarea{resize:vertical;min-height:60px}
-.form-hint{font-size:11px;color:var(--ink3);margin-top:4px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-/* IMAGE PICKER inside modal */
-.img-picker{border:0.5px solid var(--border2);border-radius:var(--rsm);overflow:hidden;margin-bottom:8px}
-.ip-tabs{display:flex;border-bottom:0.5px solid var(--border2)}
-.ip-tab{flex:1;font-size:12px;padding:8px;border:none;background:none;font-family:var(--f);color:var(--ink2);cursor:pointer;transition:all .15s}
-.ip-tab.on{background:var(--bg2);color:var(--ink);font-weight:500}
-.ip-body{padding:10px}
-.ip-panel{display:none}.ip-panel.on{display:block}
-.picker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:6px;max-height:150px;overflow-y:auto}
-.pick-item{border:1.5px solid transparent;border-radius:7px;overflow:hidden;cursor:pointer;transition:border-color .15s}
-.pick-item:hover{border-color:var(--ink2)}
-.pick-item.picked{border-color:var(--ink)}
-.pick-item img{width:100%;height:50px;object-fit:cover;display:block}
-.pick-item span{display:block;font-size:9px;padding:2px 3px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--bg2)}
-.mini-upload-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2);background:var(--bg2);padding:7px 13px;border-radius:var(--rsm);cursor:pointer;border:0.5px solid var(--border2);position:relative;transition:all .15s}
-.mini-upload-btn:hover{border-color:var(--ink);color:var(--ink)}
-.mini-upload-btn input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.mini-upload-btn svg{width:13px;height:13px;stroke:currentColor}
-.img-selected-row{display:flex;align-items:center;gap:10px;margin-top:8px;min-height:34px}
-.img-selected-row img{width:52px;height:38px;object-fit:cover;border-radius:6px;border:0.5px solid var(--border2);display:none}
-.img-selected-row span{font-size:11px;color:var(--ink3)}
-
-/* MODAL FOOTER */
-.modal-footer{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
-.save-btn{background:var(--ink);color:var(--white);font-size:13px;padding:9px 20px;border-radius:var(--rsm);border:none;cursor:pointer;font-family:var(--f)}
-.save-btn:disabled{opacity:.45;cursor:not-allowed}
-.cancel-btn{background:none;border:0.5px solid var(--border2);color:var(--ink2);font-size:13px;padding:9px 16px;border-radius:var(--rsm);cursor:pointer;font-family:var(--f)}
-.saving-bar{font-size:12px;color:var(--ink3);display:none;align-items:center;gap:6px;margin-right:auto}
-.saving-bar.show{display:flex}
-.spinner{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--ink);border-radius:50%;animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* TOAST */
-.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:var(--white);font-size:13px;padding:10px 16px;border-radius:var(--rsm);z-index:9999;display:none;max-width:320px;line-height:1.4}
-.toast.show{display:block}
-.toast.ok{background:var(--green)}.toast.err{background:var(--red)}
-
-@media(max-width:620px){
-  .layout{grid-template-columns:1fr}
-  .sidebar{display:none}
-  .form-grid{grid-template-columns:1fr}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vision Opticals – Store Management Portal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Vision Admin" />
+  <link rel="apple-touch-icon" href="/images/favicon.png" />
+  <meta name="theme-color" content="#1a1714" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login-screen">
-  <div class="login-card">
-    <div class="login-logo">Vision <em>Opticals</em></div>
-    <p class="login-sub">Admin panel — manage your frames, lenses and photos.</p>
-
-    <form id="login-form" onsubmit="event.preventDefault(); doLogin();">
-      <input type="password" id="pat-input" placeholder="Paste your GitHub token" autocomplete="off"
-        style="width:100%;padding:11px 13px;font-family:var(--f);font-size:13px;border:0.5px solid var(--border2);border-radius:var(--rsm);margin-bottom:10px;background:var(--bg2);color:var(--ink)"/>
-      <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);margin-bottom:14px;cursor:pointer">
-        <input type="checkbox" id="remember-chk" checked style="margin:0"/>
-        Keep me signed in on this device
-      </label>
-      <button class="gh-btn" type="submit">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        Sign in
-      </button>
-    </form>
-
-    <div class="setup-box">
-      <h4>First time setup — do this once:</h4>
-      <div class="step-row">
-        <div class="step-n">1</div>
-        <p>Go to <strong>github.com → your profile photo (top right) → Settings → scroll to the bottom → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</strong></p>
+  <!-- ═════════ LOGIN SCREEN ═════════ -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo">Vision <em>Opticals</em></div>
+        <p class="login-sub">Store & Inventory Administration Portal</p>
       </div>
-      <div class="step-row">
-        <div class="step-n">2</div>
-        <p>Give it a name like <strong>Vision Opticals Admin</strong>. Under "Repository access" choose <strong>Only select repositories</strong> and pick <code>vision-opticals-tvr</code>. Under "Permissions" set <strong>Contents: Read and write</strong>. Click <strong>Generate token</strong> and copy the code that appears (starts with <code>github_pat_</code>).</p>
-      </div>
-      <div class="step-row">
-        <div class="step-n">3</div>
-        <p>Paste that token into the box above and click <strong>Sign in</strong>. Nothing is saved to the repo — the token only lives in your browser on this device.</p>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" class="form-control" placeholder="admin" value="admin" autocomplete="username" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-control" placeholder="••••••••" value="vision123" autocomplete="current-password" required />
+        </div>
+        <button type="submit" class="btn-primary" id="btn-login-submit">
+          Sign In to Dashboard
+        </button>
+      </form>
+
+      <div class="login-hint">
+        <strong>Default Credentials:</strong><br />
+        Username: <code>admin</code> &nbsp;·&nbsp; Password: <code>vision123</code>
       </div>
     </div>
   </div>
-</div>
 
-<!-- MAIN -->
-<div id="main-screen">
-  <div class="topbar">
-    <div class="topbar-logo">Vision <em>Opticals</em> — Admin</div>
-    <div class="topbar-right">
-      <div class="user-pill">
-        <img id="user-avatar" src="" alt=""/>
-        <span id="user-name"></span>
+  <!-- ═════════ MAIN APPLICATION ═════════ -->
+  <div id="main-screen">
+
+    <!-- TOPBAR -->
+    <header class="admin-topbar">
+      <div class="admin-topbar-left">
+        <div class="admin-logo">Vision <em>Opticals</em></div>
+        <span class="admin-badge">Management Portal</span>
       </div>
-      <button class="logout-btn" onclick="logout()">Sign out</button>
-    </div>
-  </div>
-
-  <div class="layout">
-    <div class="sidebar">
-      <button class="sitem on" id="si-frames" onclick="switchSec('frames')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg>
-        Eyewear frames
-      </button>
-      <button class="sitem" id="si-lenses" onclick="switchSec('lenses')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-        Contact lenses
-      </button>
-      <div class="sdiv"></div>
-      <button class="sitem" id="si-photos" onclick="switchSec('photos')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        Photo library
-      </button>
-      <button class="sitem" id="si-shop" onclick="switchSec('shop')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Shop photo
-      </button>
-      <div class="sdiv"></div>
-      <a class="sitem" href="index.html" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        View live site
-      </a>
-    </div>
-
-    <div class="content">
-
-      <!-- FRAMES -->
-      <div class="section on" id="sec-frames">
-        <div class="sec-header">
-          <div class="sec-title">Eyewear frames</div>
-          <button class="add-btn" onclick="openFrameModal()">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add frame
-          </button>
+      <div class="admin-topbar-right">
+        <a href="/" target="_blank" class="btn-logout" style="text-decoration:none;display:flex;align-items:center;gap:4px;">
+          <svg style="width:13px;height:13px;stroke:currentColor;fill:none;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View Live Website
+        </a>
+        <div class="user-badge">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/></svg>
+          <span id="topbar-user-name">Admin</span>
         </div>
-        <div class="table-wrap">
-          <table class="prod-table">
-            <thead><tr><th>Photo</th><th>Name</th><th>Category</th><th>Badge</th><th>Colours</th><th>Actions</th></tr></thead>
-            <tbody id="frames-tbody"></tbody>
-          </table>
-        </div>
+        <button class="btn-logout" onclick="admin.logout()">Sign Out</button>
       </div>
+    </header>
 
-      <!-- LENSES -->
-      <div class="section" id="sec-lenses">
-        <div class="sec-header">
-          <div class="sec-title">Contact lenses</div>
-          <button class="add-btn" onclick="openLensModal()">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add lens
-          </button>
-        </div>
-        <div class="table-wrap">
-          <table class="prod-table">
-            <thead><tr><th>Photo</th><th>Name</th><th>Brand</th><th>Category</th><th>Power</th><th>Actions</th></tr></thead>
-            <tbody id="lenses-tbody"></tbody>
-          </table>
-        </div>
-      </div>
+    <div class="admin-layout">
 
-      <!-- PHOTO LIBRARY -->
-      <div class="section" id="sec-photos">
-        <div class="sec-title" style="margin-bottom:.5rem">Photo library</div>
-        <p style="font-size:13px;color:var(--ink2);margin-bottom:1.25rem;line-height:1.6">Upload your frame and lens photos here. Then when you add a product, you can pick the photo from this library — no typing needed.</p>
+      <!-- DESKTOP SIDEBAR -->
+      <aside class="admin-sidebar">
+        <div>
+          <div class="nav-group">
+            <span class="nav-label">Core Operations</span>
+            <button class="admin-nav-item active" data-sec="dashboard" onclick="admin.switchSection('dashboard')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              Dashboard Overview
+            </button>
+            <button class="admin-nav-item" data-sec="products" onclick="admin.switchSection('products')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg>
+              Products Catalog
+            </button>
+            <button class="admin-nav-item" data-sec="inventory" onclick="admin.switchSection('inventory')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+              Stock & Inventory
+            </button>
+            <button class="admin-nav-item" data-sec="appointments" onclick="admin.switchSection('appointments')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              In-Store Bookings
+            </button>
+            <button class="admin-nav-item" data-sec="orders" onclick="admin.switchSection('orders')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Orders & Lab Pipeline
+            </button>
+          </div>
 
-        <div class="upload-zone"
-             ondragover="event.preventDefault();this.classList.add('drag')"
-             ondragleave="this.classList.remove('drag')"
-             ondrop="handleLibDrop(event)">
-          <input type="file" accept="image/*" multiple onchange="uploadLibFiles(this.files)"/>
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
-          <h3>Click here or drag & drop photos</h3>
-          <p>You can select multiple photos at once · JPG, PNG, WEBP supported</p>
-        </div>
+          <div class="nav-group">
+            <span class="nav-label">Marketing & Content</span>
+            <button class="admin-nav-item" data-sec="offers" onclick="admin.switchSection('offers')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Offers & Promotions
+            </button>
+            <button class="admin-nav-item" data-sec="components" onclick="admin.switchSection('components')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><circle cx="6.5" cy="17.5" r="3.5"/></svg>
+              Modular Components (Undo)
+            </button>
+            <button class="admin-nav-item" data-sec="content" onclick="admin.switchSection('content')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+              Website Customizer
+            </button>
+            <button class="admin-nav-item" data-sec="library" onclick="admin.switchSection('library')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              Photo Library
+            </button>
+          </div>
 
-        <div id="lib-progress" style="margin-top:10px"></div>
-
-        <div style="margin-top:1.5rem">
-          <p style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:10px">Your uploaded photos</p>
-          <div class="lib-grid" id="lib-grid">
-            <p style="font-size:13px;color:var(--ink3)">No photos yet. Upload above!</p>
+          <div class="nav-group">
+            <span class="nav-label">Administration</span>
+            <button class="admin-nav-item" data-sec="bulk" onclick="admin.switchSection('bulk')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+              Bulk CSV Import/Export
+            </button>
+            <button class="admin-nav-item" data-sec="settings" onclick="admin.switchSection('settings')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              Store & Clinic Settings
+            </button>
           </div>
         </div>
-      </div>
 
-      <!-- SHOP PHOTO -->
-      <div class="section" id="sec-shop">
-        <div class="sec-title" style="margin-bottom:.5rem">Shop photo</div>
-        <p style="font-size:13px;color:var(--ink2);margin-bottom:1.25rem;line-height:1.6">Upload a photo of your shop front or inside. It will appear on your website's "Our store" page automatically.</p>
+        <div style="font-size:11px;color:var(--ink3);padding-top:1rem;border-top:0.5px solid var(--border);">
+          Vision Opticals v2.0<br>Centralized Node.js Engine
+        </div>
+      </aside>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start">
-          <div>
-            <div class="upload-zone"
-                 ondragover="event.preventDefault();this.classList.add('drag')"
-                 ondragleave="this.classList.remove('drag')"
-                 ondrop="handleShopDrop(event)">
-              <input type="file" accept="image/*" onchange="uploadShopPhoto(this.files[0])"/>
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              <h3>Upload shop photo</h3>
-              <p>Click or drag a photo here · Saved as <code>images/shop.jpg</code></p>
+      <!-- MAIN CONTENT -->
+      <main class="admin-content">
+
+        <!-- ═══ 1. DASHBOARD OVERVIEW SECTION ═══ -->
+        <section id="sec-dashboard" class="admin-section active">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Store Overview</h2>
+              <p class="sec-subtitle">Real-time inventory levels, active promotions, and catalog statistics.</p>
             </div>
-            <div id="shop-progress" style="margin-top:10px"></div>
+            <button class="btn-add" onclick="admin.openProductModal()">
+              <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Product
+            </button>
           </div>
-          <div>
-            <p style="font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:8px">Current shop photo</p>
-            <div id="shop-preview" style="border:0.5px solid var(--border2);border-radius:var(--radius);overflow:hidden;background:var(--bg2);height:180px;display:flex;align-items:center;justify-content:center">
-              <span style="font-size:12px;color:var(--ink3)">No shop photo yet</span>
+
+          <!-- KPI Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-lbl">Total Products</span>
+              <div class="kpi-val" id="kpi-total-prod">0</div>
+              <div class="kpi-sub"><span id="kpi-active-prod">0</span> published online</div>
             </div>
-            <p style="font-size:11px;color:var(--ink3);margin-top:8px;line-height:1.5">Once uploaded, your website updates automatically within 1 minute.</p>
+            <div class="kpi-card">
+              <span class="kpi-lbl">Stock Units</span>
+              <div class="kpi-val" id="kpi-total-units">0</div>
+              <div class="kpi-sub">Total catalog inventory</div>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-lbl" style="color:var(--amber);">Low Stock Alerts</span>
+              <div class="kpi-val" id="kpi-low-stock" style="color:var(--amber);">0</div>
+              <div class="kpi-sub">Below reorder threshold</div>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-lbl" style="color:var(--red);">Out of Stock</span>
+              <div class="kpi-val" id="kpi-out-stock" style="color:var(--red);">0</div>
+              <div class="kpi-sub">Requires restocking</div>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-lbl" style="color:var(--green);">Active Offers</span>
+              <div class="kpi-val" id="kpi-active-offers" style="color:var(--green);">0</div>
+              <div class="kpi-sub">Live on customer website</div>
+            </div>
           </div>
-        </div>
+
+          <!-- Quick Action Buttons -->
+          <div style="background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.5rem;margin-bottom:2rem;">
+            <h3 style="font-size:14.5px;font-weight:600;margin-bottom:12px;">Quick Store Actions</h3>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn-action edit" style="padding:8px 14px;font-size:12.5px;" onclick="admin.openProductModal()">+ Add New Frame / Lens</button>
+              <button class="btn-action" style="padding:8px 14px;font-size:12.5px;" onclick="admin.switchSection('inventory')">📦 Update Stock Quantities</button>
+              <button class="btn-action" style="padding:8px 14px;font-size:12.5px;" onclick="admin.switchSection('offers')">🏷️ Create Seasonal Offer</button>
+              <button class="btn-action" style="padding:8px 14px;font-size:12.5px;" onclick="admin.switchSection('content')">📢 Update Announcement Bar</button>
+            </div>
+          </div>
+
+          <!-- Recent Stock Activity -->
+          <div class="sec-header">
+            <div>
+              <h3 style="font-size:16px;font-weight:600;">Recent Stock Movement Audit</h3>
+              <p class="sec-subtitle">Immutable log of all stock increases, sales, and corrections.</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Change</th>
+                  <th>New Quantity</th>
+                  <th>Reason</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody id="dash-logs-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══ 2. PRODUCTS SECTION ═══ -->
+        <section id="sec-products" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Products Management</h2>
+              <p class="sec-subtitle">Add, edit, publish, draft, and organize all eyewear and contact lenses.</p>
+            </div>
+            <button class="btn-add" onclick="admin.openProductModal()">
+              <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Product
+            </button>
+          </div>
+
+          <!-- Filter Tabs & Search -->
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:1.25rem;">
+            <div style="display:flex;gap:6px;overflow-x:auto;">
+              <button class="btn-action prod-tab active" onclick="admin.filterProductCategory('all', this)">All</button>
+              <button class="btn-action prod-tab" onclick="admin.filterProductCategory('frames', this)">Frames</button>
+              <button class="btn-action prod-tab" onclick="admin.filterProductCategory('sunglasses', this)">Sunglasses</button>
+              <button class="btn-action prod-tab" onclick="admin.filterProductCategory('premium', this)">Premium</button>
+              <button class="btn-action prod-tab" onclick="admin.filterProductCategory('lenses', this)">Contact Lenses</button>
+              <button class="btn-action prod-tab" onclick="admin.filterProductCategory('kids', this)">Kids</button>
+            </div>
+            <div>
+              <input type="text" id="prod-search-input" class="form-control" placeholder="Search catalog…" style="width:200px;padding:6px 12px;font-size:12.5px;" oninput="admin.loadProductsData()" />
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Product & Brand</th>
+                  <th>Price</th>
+                  <th>Badge</th>
+                  <th>Inventory</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="products-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══ 3. INVENTORY SECTION ═══ -->
+        <section id="sec-inventory" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Stock & Inventory Ledger</h2>
+              <p class="sec-subtitle">Track quantities, reorder points, low-stock warnings, and SKUs.</p>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:1.25rem;">
+            <div style="display:flex;gap:6px;">
+              <button class="btn-action inv-tab active" onclick="admin.filterInventory('all', this)">All Stock</button>
+              <button class="btn-action inv-tab" onclick="admin.filterInventory('low_stock', this)">Low Stock</button>
+              <button class="btn-action inv-tab" onclick="admin.filterInventory('out_of_stock', this)">Out of Stock</button>
+              <button class="btn-action inv-tab" onclick="admin.filterInventory('in_stock', this)">Healthy</button>
+            </div>
+            <div>
+              <input type="text" id="inv-search-input" class="form-control" placeholder="Search SKU or name…" style="width:200px;padding:6px 12px;font-size:12.5px;" oninput="admin.loadInventoryData()" />
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>SKU</th>
+                  <th>Brand</th>
+                  <th>Quantity (Inline Adjust)</th>
+                  <th>Low Alert Level</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="inv-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══ 4. OFFERS SECTION ═══ -->
+        <section id="sec-offers" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Offers & Discounts</h2>
+              <p class="sec-subtitle">Create seasonal promotional banners, coupon codes, and category markdowns.</p>
+            </div>
+            <button class="btn-add" onclick="admin.openOfferModal()">
+              <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Create Offer
+            </button>
+          </div>
+
+          <div id="offers-list"></div>
+        </section>
+
+        <!-- ═══ 5. WEBSITE CONTENT SECTION ═══ -->
+        <section id="sec-content" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Website Content & Sections</h2>
+              <p class="sec-subtitle">Control homepage banners, announcement messages, and section display toggles.</p>
+            </div>
+          </div>
+
+          <!-- Announcement Bar Quick Editor -->
+          <div style="background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;">
+            <h3 style="font-size:15px;font-weight:600;margin-bottom:10px;">Top Announcement Ticker</h3>
+            <div class="form-row">
+              <label>Announcement Text</label>
+              <input type="text" id="cm-announcement-text" class="form-control" />
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
+              <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;">
+                <input type="checkbox" id="cm-announcement-toggle" />
+                Show Announcement Bar on Customer Website
+              </label>
+              <button class="btn-action edit" style="padding:8px 16px;" onclick="admin.saveAnnouncement()">Save Announcement</button>
+            </div>
+          </div>
+
+          <h3 style="font-size:15px;font-weight:600;margin-bottom:10px;">Homepage Layout Sections</h3>
+          <div id="sections-customizer-list"></div>
+        </section>
+
+        <!-- ═══ 6. STORE SETTINGS SECTION ═══ -->
+        <section id="sec-settings" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Store & Clinic Settings</h2>
+              <p class="sec-subtitle">Update contact phone, WhatsApp number, opening hours, and address.</p>
+            </div>
+          </div>
+
+          <form id="settings-form" onsubmit="admin.saveStoreSettings(event)" style="background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.75rem;margin-bottom:2rem;">
+            <div class="form-grid-2">
+              <div class="form-row">
+                <label>Store Name</label>
+                <input type="text" id="set-name" class="form-control" />
+              </div>
+              <div class="form-row">
+                <label>Clinic Phone Number</label>
+                <input type="text" id="set-phone" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-row">
+                <label>WhatsApp Number (With country code, e.g. 919486552324)</label>
+                <input type="text" id="set-wa" class="form-control" />
+              </div>
+              <div class="form-row">
+                <label>Email Address</label>
+                <input type="email" id="set-email" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label>Clinic Physical Address</label>
+              <textarea id="set-address" class="form-control" rows="2"></textarea>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-row">
+                <label>Weekday Hours (Mon–Sat)</label>
+                <input type="text" id="set-hours-wd" class="form-control" />
+              </div>
+              <div class="form-row">
+                <label>Sunday Hours</label>
+                <input type="text" id="set-hours-sun" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label>Google Maps Directions URL</label>
+              <input type="text" id="set-maps" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn-primary" id="btn-save-settings" style="width:fit-content;padding:10px 24px;">
+              Save All Settings
+            </button>
+          </form>
+
+          <!-- Password Change -->
+          <form id="password-form" onsubmit="admin.changePassword(event)" style="background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.75rem;">
+            <h3 style="font-size:15px;font-weight:600;margin-bottom:12px;">Change Admin Password</h3>
+            <div class="form-grid-2">
+              <div class="form-row">
+                <label>Current Password</label>
+                <input type="password" id="cp-cur" class="form-control" required />
+              </div>
+              <div class="form-row">
+                <label>New Password (min 6 characters)</label>
+                <input type="password" id="cp-new" class="form-control" required />
+              </div>
+            </div>
+            <button type="submit" class="btn-action edit" style="padding:9px 18px;">Update Password</button>
+          </form>
+        </section>
+
+        <!-- ═══ 7. PHOTO LIBRARY SECTION ═══ -->
+        <section id="sec-library" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Photo Library & Image Hosting</h2>
+              <p class="sec-subtitle">Upload product and store photos with automatic WebP compression.</p>
+            </div>
+          </div>
+
+          <div style="background:var(--white);border:1.5px dashed var(--border2);border-radius:var(--radius);padding:2.5rem 1.5rem;text-align:center;margin-bottom:2rem;cursor:pointer;position:relative;">
+            <input type="file" multiple accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;" onchange="admin.uploadFiles(this.files)" />
+            <svg style="width:38px;height:38px;stroke:var(--ink3);margin-bottom:8px;" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+            <h4 style="font-size:15px;font-weight:600;margin-bottom:4px;">Tap here or drag & drop photos</h4>
+            <p style="font-size:12.5px;color:var(--ink3);">Select from mobile gallery, camera, or desktop · JPG, PNG, WEBP</p>
+          </div>
+
+          <h3 style="font-size:15px;font-weight:600;margin-bottom:12px;">Uploaded Product & Store Images</h3>
+          <div id="lib-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;"></div>
+        </section>
+
+        <!-- ═══ 8. BULK CSV IMPORT / EXPORT ═══ -->
+        <section id="sec-bulk" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Bulk CSV Product Operations</h2>
+              <p class="sec-subtitle">Upload hundreds of optical frames or contact lenses at once via spreadsheet.</p>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem;">
+            <!-- Download Template -->
+            <div style="background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.5rem;">
+              <h4 style="font-size:15px;font-weight:600;margin-bottom:6px;">Step 1: Download CSV Template</h4>
+              <p style="font-size:12.5px;color:var(--ink2);margin-bottom:1rem;line-height:1.5;">Get the ready-to-fill spreadsheet template containing example frames and contact lenses.</p>
+              <a href="/api/bulk/template-csv" class="btn-action edit" style="text-decoration:none;display:inline-block;padding:8px 16px;">
+                Download Template (.CSV)
+              </a>
+            </div>
+
+            <!-- Export Catalog -->
+            <div style="background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.5rem;">
+              <h4 style="font-size:15px;font-weight:600;margin-bottom:6px;">Export Existing Catalog</h4>
+              <p style="font-size:12.5px;color:var(--ink2);margin-bottom:1rem;line-height:1.5;">Download your complete inventory, stock counts, and prices as an Excel-compatible CSV.</p>
+              <a href="/api/bulk/export-csv" class="btn-action" style="text-decoration:none;display:inline-block;padding:8px 16px;">
+                Export Full Catalog (.CSV)
+              </a>
+            </div>
+          </div>
+
+          <!-- Step 2: Upload CSV -->
+          <div style="background:var(--white);border:1.5px dashed var(--border2);border-radius:var(--radius);padding:2.5rem 1.5rem;text-align:center;position:relative;">
+            <input type="file" accept=".csv" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;" onchange="admin.handleCSVUpload(this.files[0])" />
+            <svg style="width:38px;height:38px;stroke:var(--ink3);margin-bottom:8px;" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <h4 style="font-size:15px;font-weight:600;margin-bottom:4px;">Upload Populated CSV File</h4>
+            <p style="font-size:12.5px;color:var(--ink3);">Tap to select file from mobile or drag & drop spreadsheet</p>
+          </div>
+
+          <!-- Import Results Container -->
+          <div id="bulk-import-result" style="display:none;background:var(--white);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.25rem;margin-top:1.5rem;"></div>
+        </section>
+
+        <!-- ═══ 8. IN-STORE APPOINTMENTS SECTION ═══ -->
+        <section id="sec-appointments" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">In-Store Eye Test Bookings</h2>
+              <p class="sec-subtitle">Manage customer clinical appointments, autorefractor trials, and consultation slots.</p>
+            </div>
+            <button class="btn-add" onclick="admin.loadAppointmentsData()">
+              <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh Bookings
+            </button>
+          </div>
+
+          <div style="display:flex;gap:6px;margin-bottom:1.25rem;overflow-x:auto;">
+            <button class="btn-action apt-tab active" onclick="admin.filterAppointments('all', this)">All Bookings</button>
+            <button class="btn-action apt-tab" onclick="admin.filterAppointments('pending', this)">Pending</button>
+            <button class="btn-action apt-tab" onclick="admin.filterAppointments('confirmed', this)">Confirmed</button>
+            <button class="btn-action apt-tab" onclick="admin.filterAppointments('completed', this)">Completed</button>
+            <button class="btn-action apt-tab" onclick="admin.filterAppointments('cancelled', this)">Cancelled</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Customer Name</th>
+                  <th>WhatsApp / Phone</th>
+                  <th>Date & Time Slot</th>
+                  <th>Service Type</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="appointments-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══ 9. ORDERS & OPTICAL LAB PIPELINE ═══ -->
+        <section id="sec-orders" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Customer Orders & Lab Pipeline</h2>
+              <p class="sec-subtitle">Track prescription verification, CNC robotic edging, laser QC, and dispatch.</p>
+            </div>
+            <button class="btn-add" onclick="admin.loadOrdersData()">
+              <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh Orders
+            </button>
+          </div>
+
+          <div style="display:flex;gap:6px;margin-bottom:1.25rem;overflow-x:auto;">
+            <button class="btn-action ord-tab active" onclick="admin.filterOrders('all', this)">All Orders</button>
+            <button class="btn-action ord-tab" onclick="admin.filterOrders('placed', this)">New Placed</button>
+            <button class="btn-action ord-tab" onclick="admin.filterOrders('prescription_verified', this)">Rx Verified</button>
+            <button class="btn-action ord-tab" onclick="admin.filterOrders('lab_fitting', this)">Lab Fitting</button>
+            <button class="btn-action ord-tab" onclick="admin.filterOrders('qc_passed', this)">Laser QC</button>
+            <button class="btn-action ord-tab" onclick="admin.filterOrders('dispatched', this)">Dispatched</button>
+            <button class="btn-action ord-tab" onclick="admin.filterOrders('delivered', this)">Delivered</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Date</th>
+                  <th>Customer Info</th>
+                  <th>Eyewear & Lens Package</th>
+                  <th>Total Amount</th>
+                  <th>Payment</th>
+                  <th>Lab Pipeline Status</th>
+                  <th>Prescription</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══ 10. MODULAR COMPONENTS (WITH UNDO) ═══ -->
+        <section id="sec-components" class="admin-section">
+          <div class="sec-header">
+            <div>
+              <h2 class="sec-title">Modular Website Components</h2>
+              <p class="sec-subtitle">Dynamically customize homepage sections. Deleted components can be safely restored via Undo.</p>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-action" id="btn-undo-component" style="display:none;background:var(--amber-bg);color:var(--amber);font-weight:600;" onclick="admin.undoLastDeletedComponent()">
+                ↺ Undo Last Deletion
+              </button>
+              <button class="btn-add" onclick="admin.openAddComponentModal()">
+                <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Component
+              </button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Component Title</th>
+                  <th>Type</th>
+                  <th>Subtitle / Content</th>
+                  <th>Display Order</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="components-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ═══ MOBILE BOTTOM NAVIGATION ═══ -->
+    <nav class="mobile-bottom-nav">
+      <button class="m-nav-btn active" data-sec="dashboard" onclick="admin.switchSection('dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="m-nav-btn" data-sec="products" onclick="admin.switchSection('products')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/><circle cx="12" cy="12" r="2"/></svg>
+        <span>Products</span>
+      </button>
+      <button class="m-nav-btn" data-sec="inventory" onclick="admin.switchSection('inventory')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <span>Stock</span>
+      </button>
+      <button class="m-nav-btn" data-sec="offers" onclick="admin.switchSection('offers')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Offers</span>
+      </button>
+      <button class="m-nav-btn" data-sec="settings" onclick="admin.switchSection('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <!-- MOBILE FLOATING ADD BUTTON -->
+    <button class="fab-add" onclick="admin.openProductModal()" title="Add Product">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+
+  </div>
+
+  <!-- ═════════ PRODUCT ADD/EDIT MODAL ═════════ -->
+  <div class="admin-modal-overlay" id="product-modal">
+    <div class="admin-modal-card">
+      <div class="modal-head">
+        <h3 id="pm-title">Add Product</h3>
+        <button class="modal-close-icon" onclick="admin.closeModal('product-modal')">
+          <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
 
+      <form id="product-form" onsubmit="admin.saveProduct(event)">
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Product Name *</label>
+            <input type="text" id="pm-name" class="form-control" placeholder="e.g. Slim Rectangle Acetate" required />
+          </div>
+          <div class="form-row">
+            <label>Category *</label>
+            <select id="pm-cat" class="form-control" onchange="admin.onProductCategoryChange()">
+              <option value="frames">Optical Frames</option>
+              <option value="sunglasses">Sunglasses</option>
+              <option value="premium">Premium Eyewear</option>
+              <option value="lenses">Contact Lenses</option>
+              <option value="kids">Kids' Eyewear</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Brand</label>
+            <input type="text" id="pm-brand" class="form-control" placeholder="e.g. Ray-Ban, Essilor, Vision" />
+          </div>
+          <div class="form-row">
+            <label>Product Badge</label>
+            <select id="pm-badge" class="form-control">
+              <option value="">None</option>
+              <option value="Popular">Popular</option>
+              <option value="New">New Arrival</option>
+              <option value="Bestseller">Bestseller</option>
+              <option value="Sale">Special Sale</option>
+              <option value="Premium">Premium</option>
+              <option value="Daily">Daily</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Coloured">Coloured</option>
+              <option value="Toric">Toric</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Selling Price (₹)</label>
+            <input type="number" id="pm-price" class="form-control" placeholder="1299" />
+          </div>
+          <div class="form-row">
+            <label>Original Price (₹ Compare-at)</label>
+            <input type="number" id="pm-compare-price" class="form-control" placeholder="1899" />
+          </div>
+        </div>
+
+        <!-- Primary Image Picker Widget -->
+        <div class="form-row">
+          <label>Product Primary Photo (Front View)</label>
+          <div class="img-picker-box">
+            <div class="ip-tabs">
+              <button type="button" class="ip-tab active" onclick="this.parentElement.querySelectorAll('.ip-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active');document.getElementById('ip-upload').style.display='block';document.getElementById('ip-lib').style.display='none';">Upload New</button>
+              <button type="button" class="ip-tab" onclick="this.parentElement.querySelectorAll('.ip-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active');document.getElementById('ip-upload').style.display='none';document.getElementById('ip-lib').style.display='block';admin.loadPickerLibrary();">Pick From Library</button>
+            </div>
+            <div class="ip-body">
+              <div id="ip-upload">
+                <input type="file" accept="image/*" class="form-control" onchange="admin.uploadProductPhotoDirect(this.files[0])" />
+                <div class="form-hint">Upload front view from mobile gallery or desktop</div>
+              </div>
+              <div id="ip-lib" style="display:none;">
+                <div class="photo-lib-picker" id="pm-picker-grid"></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
+            <img id="pm-img-preview" src="" style="width:50px;height:40px;object-fit:cover;border-radius:6px;border:0.5px solid var(--border2);display:none;" alt="" />
+            <span id="pm-img-lbl" style="font-size:11.5px;color:var(--ink3);">No photo selected</span>
+          </div>
+        </div>
+
+        <!-- Secondary Angle View Image (For Dual-Image Hover Transition) -->
+        <div class="form-row">
+          <label>Secondary Angle View Photo (Shown on Mouse Hover)</label>
+          <div class="form-grid-2">
+            <div>
+              <input type="file" accept="image/*" class="form-control" onchange="admin.uploadSecondaryPhotoDirect(this.files[0])" />
+              <div class="form-hint">Side/3/4 angle view for interactive hover flip</div>
+            </div>
+            <div>
+              <input type="text" id="pm-secondary-img" class="form-control" placeholder="images/filename.jpg" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Color Family</label>
+            <select id="pm-color-family" class="form-control">
+              <option value="">Select Primary Color</option>
+              <option value="Tortoise">Tortoise Shell</option>
+              <option value="Black">Matte & Gloss Black</option>
+              <option value="Gold">Royal Gold</option>
+              <option value="Silver">Titanium Silver</option>
+              <option value="Crystal Clear">Crystal Transparent</option>
+              <option value="Blue">Ocean Blue</option>
+              <option value="Brown">Earthy Brown</option>
+              <option value="Gunmetal">Gunmetal Grey</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Discovery Lifestyle Tags (comma separated)</label>
+            <input type="text" id="pm-tags" class="form-control" placeholder="computer, reading, metallic, new_design, men, women" />
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Lens UV Cut (e.g. 100% UV400)</label>
+            <input type="text" id="pm-uv-cut" class="form-control" placeholder="100% UV400" />
+          </div>
+          <div class="form-row">
+            <label>Lens Blue Light Cut (e.g. 98% @ 420nm)</label>
+            <input type="text" id="pm-blue-cut" class="form-control" placeholder="98% @ 420nm" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Description</label>
+          <textarea id="pm-desc" class="form-control" rows="2" placeholder="Brief description of frame style, material, and comfort"></textarea>
+        </div>
+
+        <!-- Frame-Specific Fields -->
+        <div id="pm-frame-fields">
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label>Frame Shape</label>
+              <select id="pm-shape" class="form-control">
+                <option value="Rectangle">Rectangle</option>
+                <option value="Round">Round</option>
+                <option value="Aviator">Aviator</option>
+                <option value="Square">Square</option>
+                <option value="Cat-Eye">Cat-Eye</option>
+                <option value="Hexagonal">Hexagonal</option>
+                <option value="Browline">Browline</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Frame Rim Type</label>
+              <select id="pm-frametype" class="form-control">
+                <option value="Full Rim">Full Rim</option>
+                <option value="Half Rim">Half Rim</option>
+                <option value="Rimless">Rimless</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label>Frame Material</label>
+              <input type="text" id="pm-material" class="form-control" placeholder="Acetate, Titanium, Metal, TR90" />
+            </div>
+            <div class="form-row">
+              <label>Gender</label>
+              <select id="pm-gender" class="form-control">
+                <option value="Unisex">Unisex</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label>Lens Width (e.g. 52 mm)</label>
+              <input type="text" id="pm-lensw" class="form-control" placeholder="52 mm" />
+            </div>
+            <div class="form-row">
+              <label>Bridge Size (e.g. 16 mm)</label>
+              <input type="text" id="pm-bridge" class="form-control" placeholder="16 mm" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label>Temple Length</label>
+            <input type="text" id="pm-temple" class="form-control" placeholder="140 mm" />
+          </div>
+
+          <div class="form-row">
+            <label>Colours (Format: Name:Hex comma separated)</label>
+            <input type="text" id="pm-colors" class="form-control" placeholder="Black:#1a1a1a, Brown:#7b4f2e, Clear:#e5e7eb" />
+          </div>
+
+          <div class="form-row">
+            <label>Available Sizes (comma separated)</label>
+            <input type="text" id="pm-sizes" class="form-control" placeholder="S, M, L" />
+          </div>
+
+          <div class="form-row">
+            <label>Available Lens Coatings (comma separated)</label>
+            <input type="text" id="pm-coatings" class="form-control" placeholder="Anti-reflective, Blue-cut, UV400, Polarized" />
+          </div>
+        </div>
+
+        <!-- Contact Lens-Specific Fields -->
+        <div id="pm-lens-fields" style="display:none;">
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label>Power Range</label>
+              <input type="text" id="pm-lens-power" class="form-control" placeholder="-0.50 to -8.00 D" />
+            </div>
+            <div class="form-row">
+              <label>Water Content</label>
+              <input type="text" id="pm-lens-water" class="form-control" placeholder="58%" />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label>Wear Duration</label>
+              <input type="text" id="pm-lens-duration" class="form-control" placeholder="Daily disposable / Monthly" />
+            </div>
+            <div class="form-row">
+              <label>Lens Material</label>
+              <input type="text" id="pm-lens-mat" class="form-control" placeholder="Silicone Hydrogel" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label>Health Features (comma separated)</label>
+            <input type="text" id="pm-lens-features" class="form-control" placeholder="UV blocking, Moisture lock, Thin edge design" />
+          </div>
+        </div>
+
+        <!-- Inventory Settings -->
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Initial Stock Quantity</label>
+            <input type="number" id="pm-stock" class="form-control" value="10" min="0" />
+          </div>
+          <div class="form-row">
+            <label>Low Stock Alert Level</label>
+            <input type="number" id="pm-low-stock" class="form-control" value="3" min="1" />
+          </div>
+        </div>
+
+        <!-- Display Toggles -->
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem;padding-top:1rem;border-top:0.5px solid var(--border);">
+          <label style="font-size:12.5px;display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <input type="checkbox" id="pm-published" checked />
+            Publish on Live Website
+          </label>
+          <label style="font-size:12.5px;display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <input type="checkbox" id="pm-featured" />
+            Mark as Featured
+          </label>
+          <label style="font-size:12.5px;display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <input type="checkbox" id="pm-trending" />
+            Show in Trending
+          </label>
+        </div>
+
+        <div class="modal-foot">
+          <button type="button" class="btn-secondary" onclick="admin.closeModal('product-modal')">Cancel</button>
+          <button type="submit" class="btn-primary" id="pm-save-btn" style="width:fit-content;padding:9px 20px;">Save Product</button>
+        </div>
+      </form>
     </div>
   </div>
-</div>
 
-<!-- FRAME MODAL -->
-<div class="modal-bg" id="frame-modal">
-  <div class="modal">
-    <div class="modal-title" id="fm-title">Add frame</div>
-    <button class="modal-close" onclick="closeModal('frame-modal')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    <input type="hidden" id="f-id"/>
-
-    <div class="form-grid">
-      <div class="form-row"><label>Frame name *</label><input id="f-name" placeholder="e.g. Slim rectangle"/></div>
-      <div class="form-row"><label>Type / subtitle</label><input id="f-type" placeholder="e.g. Everyday · Unisex"/></div>
-    </div>
-    <div class="form-grid">
-      <div class="form-row"><label>Category</label>
-        <select id="f-cat"><option>Everyday</option><option>Premium</option><option>Sunglasses</option><option>Kids</option></select>
+  <!-- ═════════ STOCK OVERRIDE MODAL ═════════ -->
+  <div class="admin-modal-overlay" id="stock-override-modal">
+    <div class="admin-modal-card" style="max-width:440px;">
+      <div class="modal-head">
+        <h3>Adjust Product Inventory</h3>
+        <button class="modal-close-icon" onclick="admin.closeModal('stock-override-modal')">
+          <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-      <div class="form-row"><label>Badge label</label>
-        <select id="f-badge"><option value="">None</option><option>New</option><option>Popular</option><option>Sale</option><option>Kids</option></select>
-      </div>
-    </div>
 
-    <div class="form-row">
-      <label>Frame photo</label>
-      <div class="img-picker">
-        <div class="ip-tabs">
-          <button class="ip-tab on" onclick="ipSwitch(this,'f-lib')">Pick from library</button>
-          <button class="ip-tab" onclick="ipSwitch(this,'f-upload')">Upload now</button>
-          <button class="ip-tab" onclick="ipSwitch(this,'f-manual')">Type path</button>
+      <form onsubmit="admin.saveStockOverride(event)">
+        <input type="hidden" id="so-product-id" />
+        <div class="form-row">
+          <label>Current Stock Quantity</label>
+          <input type="number" id="so-qty" class="form-control" min="0" required />
         </div>
-        <div class="ip-body">
-          <div class="ip-panel on" id="f-lib"><div class="picker-grid" id="f-picker-grid"><span style="font-size:12px;color:var(--ink3)">No photos in library yet.</span></div></div>
-          <div class="ip-panel" id="f-upload">
-            <div class="mini-upload-btn">
-              <input type="file" accept="image/*" onchange="miniUpload(this,'f')"/>
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/></svg>
-              Choose a photo from your device
-            </div>
-            <div id="f-mini-progress" style="margin-top:8px"></div>
-          </div>
-          <div class="ip-panel" id="f-manual"><input id="f-img-manual" placeholder="images/your-photo.jpg" oninput="setImgVal('f',this.value,'')"/></div>
+        <div class="form-row">
+          <label>Low Stock Warning Threshold</label>
+          <input type="number" id="so-threshold" class="form-control" min="1" required />
         </div>
-      </div>
-      <div class="img-selected-row">
-        <img id="f-img-prev" src="" alt=""/>
-        <span id="f-img-lbl">No photo selected</span>
-      </div>
-      <input type="hidden" id="f-img"/>
-    </div>
+        <div class="form-row">
+          <label>Reason for Adjustment</label>
+          <select id="so-reason" class="form-control">
+            <option value="Restock / Shipment Arrival">Restock / Shipment Arrival</option>
+            <option value="Store Sale / Counter Order">Store Sale / Counter Order</option>
+            <option value="Stock Audit Correction">Stock Audit Correction</option>
+            <option value="Damaged / Returned to Supplier">Damaged / Returned to Supplier</option>
+          </select>
+        </div>
 
-    <div class="form-row"><label>Sizes (comma separated)</label><input id="f-sizes" placeholder="S, M, L"/></div>
-    <div class="form-grid">
-      <div class="form-row"><label>Material</label><input id="f-material" placeholder="Acetate"/></div>
-      <div class="form-row"><label>Style</label><input id="f-style" placeholder="Rectangle"/></div>
-    </div>
-    <div class="form-grid">
-      <div class="form-row"><label>Lens width</label><input id="f-lensw" placeholder="52 mm"/></div>
-      <div class="form-row"><label>Bridge</label><input id="f-bridge" placeholder="16 mm"/></div>
-    </div>
-    <div class="form-row"><label>Lens coatings (comma separated)</label><input id="f-coatings" placeholder="Anti-reflective, Blue-cut, UV400"/></div>
-    <div class="form-row"><label>Frame colours — Name:Hex (comma separated)</label><input id="f-colors" placeholder="Black:#1a1a1a, Brown:#7b4f2e"/></div>
-    <div class="form-row"><label>WhatsApp message</label><textarea id="f-wa" rows="2" placeholder="Hi, I'm interested in the … frame."></textarea></div>
-
-    <div class="modal-footer">
-      <div class="saving-bar" id="f-saving"><div class="spinner"></div>Saving to GitHub…</div>
-      <button class="cancel-btn" onclick="closeModal('frame-modal')">Cancel</button>
-      <button class="save-btn" id="f-savebtn" onclick="saveFrame()">Save frame</button>
+        <div class="modal-foot">
+          <button type="button" class="btn-secondary" onclick="admin.closeModal('stock-override-modal')">Cancel</button>
+          <button type="submit" class="btn-primary" style="width:fit-content;padding:8px 18px;">Update Stock</button>
+        </div>
+      </form>
     </div>
   </div>
-</div>
 
-<!-- LENS MODAL -->
-<div class="modal-bg" id="lens-modal">
-  <div class="modal">
-    <div class="modal-title" id="lm-title">Add contact lens</div>
-    <button class="modal-close" onclick="closeModal('lens-modal')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    <input type="hidden" id="l-id"/>
-
-    <div class="form-grid">
-      <div class="form-row"><label>Lens name *</label><input id="l-name" placeholder="e.g. 1-Day Acuvue Moist"/></div>
-      <div class="form-row"><label>Brand</label><input id="l-brand" placeholder="e.g. Johnson & Johnson"/></div>
-    </div>
-    <div class="form-grid">
-      <div class="form-row"><label>Category</label>
-        <select id="l-cat"><option>Daily</option><option>Monthly</option><option>Coloured</option><option>Toric</option></select>
+  <!-- ═════════ CREATE/EDIT OFFER MODAL ═════════ -->
+  <div class="admin-modal-overlay" id="offer-modal">
+    <div class="admin-modal-card">
+      <div class="modal-head">
+        <h3 id="om-title">Create Promotion Offer</h3>
+        <button class="modal-close-icon" onclick="admin.closeModal('offer-modal')">
+          <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-      <div class="form-row"><label>Badge</label>
-        <select id="l-badge"><option value="">None</option><option>New</option><option>Popular</option><option>Sale</option></select>
-      </div>
-    </div>
 
-    <div class="form-row">
-      <label>Lens photo</label>
-      <div class="img-picker">
-        <div class="ip-tabs">
-          <button class="ip-tab on" onclick="ipSwitch(this,'l-lib')">Pick from library</button>
-          <button class="ip-tab" onclick="ipSwitch(this,'l-upload')">Upload now</button>
-          <button class="ip-tab" onclick="ipSwitch(this,'l-manual')">Type path</button>
+      <form id="offer-form" onsubmit="admin.saveOffer(event)">
+        <div class="form-row">
+          <label>Offer Title *</label>
+          <input type="text" id="o-title" class="form-control" placeholder="e.g. Festive Vision Fest — 20% Off" required />
         </div>
-        <div class="ip-body">
-          <div class="ip-panel on" id="l-lib"><div class="picker-grid" id="l-picker-grid"><span style="font-size:12px;color:var(--ink3)">No photos in library yet.</span></div></div>
-          <div class="ip-panel" id="l-upload">
-            <div class="mini-upload-btn">
-              <input type="file" accept="image/*" onchange="miniUpload(this,'l')"/>
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/></svg>
-              Choose a photo from your device
-            </div>
-            <div id="l-mini-progress" style="margin-top:8px"></div>
+        <div class="form-row">
+          <label>Offer Subtitle / Description</label>
+          <input type="text" id="o-sub" class="form-control" placeholder="Upgrade to premium blue-cut prescription eyewear" />
+        </div>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Promo Code (Optional)</label>
+            <input type="text" id="o-code" class="form-control" placeholder="VISION20" />
           </div>
-          <div class="ip-panel" id="l-manual"><input id="l-img-manual" placeholder="images/your-photo.jpg" oninput="setImgVal('l',this.value,'')"/></div>
+          <div class="form-row">
+            <label>Applicable Category</label>
+            <select id="o-cat" class="form-control">
+              <option value="all">All Products</option>
+              <option value="frames">Optical Frames Only</option>
+              <option value="sunglasses">Sunglasses Only</option>
+              <option value="premium">Premium Only</option>
+              <option value="lenses">Contact Lenses Only</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div class="img-selected-row">
-        <img id="l-img-prev" src="" alt=""/>
-        <span id="l-img-lbl">No photo selected</span>
-      </div>
-      <input type="hidden" id="l-img"/>
-    </div>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Discount Type</label>
+            <select id="o-type" class="form-control">
+              <option value="percentage">Percentage Discount (%)</option>
+              <option value="fixed">Fixed Amount Discount (₹)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Discount Value *</label>
+            <input type="number" id="o-val" class="form-control" placeholder="20" required />
+          </div>
+        </div>
 
-    <div class="form-grid">
-      <div class="form-row"><label>Power range</label><input id="l-power" placeholder="-0.50 to -6.00"/></div>
-      <div class="form-row"><label>Material</label><input id="l-material" placeholder="Etafilcon A"/></div>
-    </div>
-    <div class="form-grid">
-      <div class="form-row"><label>Water content</label><input id="l-water" placeholder="58%"/></div>
-      <div class="form-row"><label>Wear duration</label><input id="l-duration" placeholder="Daily disposable"/></div>
-    </div>
-    <div class="form-row"><label>Key features (comma separated)</label><textarea id="l-features" rows="2" placeholder="UV blocking, Moisture technology, Thin edge design"></textarea></div>
-    <div class="form-row"><label>WhatsApp message</label><textarea id="l-wa" rows="2" placeholder="Hi, I'm interested in … lenses."></textarea></div>
+        <div class="form-row">
+          <label style="font-size:12.5px;display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <input type="checkbox" id="o-active" checked />
+            Activate Offer Immediately
+          </label>
+        </div>
 
-    <div class="modal-footer">
-      <div class="saving-bar" id="l-saving"><div class="spinner"></div>Saving to GitHub…</div>
-      <button class="cancel-btn" onclick="closeModal('lens-modal')">Cancel</button>
-      <button class="save-btn" id="l-savebtn" onclick="saveLens()">Save lens</button>
+        <div class="modal-foot">
+          <button type="button" class="btn-secondary" onclick="admin.closeModal('offer-modal')">Cancel</button>
+          <button type="submit" class="btn-primary" style="width:fit-content;padding:8px 18px;">Save Offer</button>
+        </div>
+      </form>
     </div>
   </div>
-</div>
 
-<div class="toast" id="toast"></div>
-
-<script>
-// ═══════════════════════════════════════════════════════
-//  No token is stored here. You paste your GitHub token into
-//  the login form at runtime — it lives only in this browser
-//  (sessionStorage, or localStorage if "keep me signed in" is
-//  checked) and is never written back into this file or the repo.
-// ═══════════════════════════════════════════════════════
-const REPO    = "halilrahuman/vision-opticals-tvr";
-const ALLOWED = "halilrahuman";
-const API     = "https://api.github.com";
-const RAW     = `https://raw.githubusercontent.com/${REPO}/main`;
-const STORAGE_KEY = "vo_admin_token";
-
-let token = "";
-let DB = { frames:[], lenses:[] };
-let dbSHA = "";
-let LIB = []; // [{name,path,url,sha}]
-
-// ── AUTH ─────────────────────────────────────────────
-function doLogin() {
-  const input = document.getElementById("pat-input");
-  const pat = (input.value || "").trim();
-  if (!pat) { toast("Paste your GitHub token first.", "err"); return; }
-  token = pat;
-  verifyAndShow(document.getElementById("remember-chk").checked);
-}
-async function verifyAndShow(remember) {
-  try {
-    const u = await api("/user");
-    if (u.login !== ALLOWED) { toast("Wrong GitHub account. Only " + ALLOWED + " can log in.", "err"); token=""; return; }
-    if (remember) { localStorage.setItem(STORAGE_KEY, token); sessionStorage.removeItem(STORAGE_KEY); }
-    else { sessionStorage.setItem(STORAGE_KEY, token); localStorage.removeItem(STORAGE_KEY); }
-    document.getElementById("login-screen").style.display = "none";
-    document.getElementById("main-screen").style.display  = "block";
-    document.getElementById("user-name").textContent = u.login;
-    if (u.avatar_url) document.getElementById("user-avatar").src = u.avatar_url;
-    loadAll();
-  } catch(e) { toast("GitHub login failed. Check your token.", "err"); token=""; }
-}
-function logout() {
-  token = "";
-  localStorage.removeItem(STORAGE_KEY);
-  sessionStorage.removeItem(STORAGE_KEY);
-  document.getElementById("pat-input").value = "";
-  document.getElementById("main-screen").style.display="none";
-  document.getElementById("login-screen").style.display="flex";
-}
-async function loadAll() { await Promise.all([loadDB(), loadLibrary(), loadShopPreview()]); }
-
-// ── GITHUB API ───────────────────────────────────────
-async function api(path, opts={}) {
-  const r = await fetch(API+path, { ...opts, headers:{ Authorization:"token "+token, "Content-Type":"application/json", ...(opts.headers||{}) } });
-  if (!r.ok) { const e=await r.json().catch(()=>({})); throw new Error(e.message||r.status); }
-  return r.json();
-}
-
-// ── PRODUCTS.JSON ────────────────────────────────────
-async function loadDB() {
-  try {
-    const d = await api(`/repos/${REPO}/contents/public/products.json`);
-    dbSHA = d.sha;
-    DB = JSON.parse(atob(d.content.replace(/\n/g,"")));
-    renderTables();
-  } catch(e) { toast("Could not load products.json: " + e.message, "err"); }
-}
-async function saveDB() {
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(DB,null,2))));
-  try {
-    const d = await api(`/repos/${REPO}/contents/public/products.json`, {
-      method:"PUT", body:JSON.stringify({ message:"Admin: update products", content, sha:dbSHA })
-    });
-    dbSHA = d.content.sha; return true;
-  } catch(e) { toast("Save failed: "+e.message,"err"); return false; }
-}
-
-// ── PHOTO LIBRARY ────────────────────────────────────
-async function loadLibrary() {
-  try {
-    const files = await api(`/repos/${REPO}/contents/public/images`);
-    LIB = files.filter(f=>f.type==="file"&&/\.(jpe?g|png|webp|gif)$/i.test(f.name))
-               .map(f=>({name:f.name, repoPath:f.path, sitePath:f.path.replace(/^public\//,""), url:f.download_url, sha:f.sha}));
-  } catch(_) { LIB=[]; }
-  renderLib(); renderPickers();
-}
-
-function renderLib() {
-  const g = document.getElementById("lib-grid");
-  if (!LIB.length) { g.innerHTML='<p style="font-size:13px;color:var(--ink3)">No photos yet. Upload above!</p>'; return; }
-  g.innerHTML = LIB.map((img,i)=>`
-    <div class="lib-card">
-      <img src="${img.url}" alt="${img.name}" loading="lazy"/>
-      <div class="lib-card-info">
-        <div class="lib-card-name">${img.name}</div>
-        <div class="lib-card-path">${img.sitePath}</div>
+  <!-- ═════════ SECTION CONTENT MODAL ═════════ -->
+  <div class="admin-modal-overlay" id="section-editor-modal">
+    <div class="admin-modal-card">
+      <div class="modal-head">
+        <h3>Edit Homepage Section Content</h3>
+        <button class="modal-close-icon" onclick="admin.closeModal('section-editor-modal')">
+          <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-      <div class="lib-card-btns">
-        <button class="lib-copy" onclick="copyTxt('${img.sitePath}')">Copy path</button>
-        <button class="lib-del" onclick="deleteLibImg(${i})">Delete</button>
+
+      <form onsubmit="admin.saveSectionEditor(event)">
+        <input type="hidden" id="se-key" />
+        <div class="form-row">
+          <label>Section Heading</label>
+          <input type="text" id="se-title" class="form-control" />
+        </div>
+        <div class="form-row">
+          <label>Section Subtitle</label>
+          <textarea id="se-sub" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Badge / Tag Text</label>
+          <input type="text" id="se-badge" class="form-control" />
+        </div>
+
+        <div class="modal-foot">
+          <button type="button" class="btn-secondary" onclick="admin.closeModal('section-editor-modal')">Cancel</button>
+          <button type="submit" class="btn-primary" style="width:fit-content;padding:8px 18px;">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═════════ VIEW PRESCRIPTION MODAL ═════════ -->
+  <div class="admin-modal-overlay" id="view-rx-modal">
+    <div class="admin-modal-card" style="max-width:560px;">
+      <div class="modal-head">
+        <h3>Customer Optical Prescription</h3>
+        <button class="modal-close-icon" onclick="admin.closeModal('view-rx-modal')">
+          <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-    </div>`).join("");
-}
 
-function renderPickers() {
-  ["f","l"].forEach(p=>{
-    const g = document.getElementById(p+"-picker-grid");
-    if (!LIB.length) { g.innerHTML='<span style="font-size:12px;color:var(--ink3)">No photos yet — upload from Photo library first.</span>'; return; }
-    g.innerHTML = LIB.map((img,i)=>`
-      <div class="pick-item" id="${p}-pick-${i}" onclick="pickImg('${p}','${img.sitePath}','${img.url}',${i})">
-        <img src="${img.url}" alt="${img.name}" loading="lazy"/>
-        <span>${img.name}</span>
-      </div>`).join("");
-  });
-}
+      <div style="background:var(--bg2);padding:10px 14px;border-radius:var(--rsm);margin-bottom:1rem;font-size:12.5px;">
+        <div><strong>Order:</strong> <span id="rx-view-orderno"></span></div>
+        <div style="margin-top:2px;"><strong>Customer:</strong> <span id="rx-view-cust"></span> (<span id="rx-view-phone"></span>)</div>
+      </div>
 
-function pickImg(prefix, path, url, idx) {
-  document.querySelectorAll(`#${prefix}-picker-grid .pick-item`).forEach(x=>x.classList.remove("picked"));
-  const el = document.getElementById(prefix+"-pick-"+idx); if(el) el.classList.add("picked");
-  setImgVal(prefix, path, url);
-}
+      <div id="rx-view-matrix-container">
+        <table class="data-table" style="font-size:12px;margin-bottom:1rem;">
+          <thead>
+            <tr>
+              <th>Eye</th>
+              <th>Sphere (SPH)</th>
+              <th>Cylinder (CYL)</th>
+              <th>Axis</th>
+              <th>Near Add</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Right (OD)</strong></td>
+              <td id="rx-od-sph">-</td>
+              <td id="rx-od-cyl">-</td>
+              <td id="rx-od-axis">-</td>
+              <td id="rx-od-add">-</td>
+            </tr>
+            <tr>
+              <td><strong>Left (OS)</strong></td>
+              <td id="rx-os-sph">-</td>
+              <td id="rx-os-cyl">-</td>
+              <td id="rx-os-axis">-</td>
+              <td id="rx-os-add">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-function setImgVal(prefix, path, url) {
-  document.getElementById(prefix+"-img").value = path;
-  const prev = document.getElementById(prefix+"-img-prev");
-  const lbl  = document.getElementById(prefix+"-img-lbl");
-  if (path) {
-    prev.src = url || (path.startsWith("http") ? path : RAW+"/public/"+path.replace(/^\//,""));
-    prev.style.display = "block";
-    lbl.textContent = path;
-  } else {
-    prev.style.display = "none";
-    lbl.textContent = "No photo selected";
-  }
-}
+      <div id="rx-view-file-container" style="display:none;text-align:center;padding:1rem;background:var(--bg);border-radius:var(--rsm);">
+        <p style="font-size:12px;color:var(--ink2);margin-bottom:8px;">Uploaded prescription document:</p>
+        <a id="rx-view-file-link" href="#" target="_blank" class="btn-primary" style="display:inline-flex;width:fit-content;padding:8px 16px;">
+          View Prescription Document →
+        </a>
+      </div>
 
-async function deleteLibImg(idx) {
-  const img = LIB[idx];
-  if (!confirm(`Delete "${img.name}"? This cannot be undone.`)) return;
-  try {
-    await api(`/repos/${REPO}/contents/${img.repoPath}`, {
-      method:"DELETE", body:JSON.stringify({ message:"Delete image: "+img.name, sha:img.sha })
-    });
-    LIB.splice(idx,1); renderLib(); renderPickers();
-    toast("Photo deleted.", "ok");
-  } catch(e) { toast("Delete failed: "+e.message,"err"); }
-}
+      <div id="rx-view-wa-container" style="display:none;padding:1rem;background:var(--bg);border-radius:var(--rsm);font-size:12.5px;color:var(--ink2);">
+        💬 Customer requested to send their prescription slip directly over WhatsApp. Check WhatsApp chat with customer phone number above.
+      </div>
 
-// ── UPLOAD ENGINE ─────────────────────────────────────
-function makeProgressItem(container, filename) {
-  const id = "up_"+Math.random().toString(36).slice(2);
-  const div = document.createElement("div");
-  div.className = "u-item";
-  div.innerHTML = `<span class="u-name">${filename}</span><div class="u-bar-wrap"><div class="u-bar" id="${id}b"></div></div><span class="u-status going" id="${id}s">Uploading…</span>`;
-  container.appendChild(div);
-  return { bar: document.getElementById(id+"b"), status: document.getElementById(id+"s") };
-}
+      <div class="modal-foot">
+        <button type="button" class="btn-primary" onclick="admin.closeModal('view-rx-modal')">Close</button>
+      </div>
+    </div>
+  </div>
 
-async function uploadFile(file, targetPath) {
-  return new Promise((resolve,reject)=>{
-    const reader = new FileReader();
-    reader.onload = async e => {
-      const b64 = e.target.result.split(",")[1];
-      let sha;
-      try { sha = (await api(`/repos/${REPO}/contents/${targetPath}`)).sha; } catch(_){}
-      try {
-        const body = { message:"Upload: "+file.name, content:b64 };
-        if (sha) body.sha = sha;
-        await api(`/repos/${REPO}/contents/${targetPath}`, { method:"PUT", body:JSON.stringify(body) });
-        resolve(targetPath);
-      } catch(e) { reject(e); }
-    };
-    reader.readAsDataURL(file);
-  });
-}
+  <!-- ═════════ MODULAR COMPONENT ADD/EDIT MODAL ═════════ -->
+  <div class="admin-modal-overlay" id="component-modal">
+    <div class="admin-modal-card">
+      <div class="modal-head">
+        <h3 id="cm-modal-title">Add Website Component</h3>
+        <button class="modal-close-icon" onclick="admin.closeModal('component-modal')">
+          <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
 
-async function uploadLibFiles(files) {
-  if (!token||!files.length) return;
-  const prog = document.getElementById("lib-progress");
-  for (const file of files) {
-    const {bar,status} = makeProgressItem(prog, file.name);
-    bar.style.width = "30%";
-    const repoPath = "public/images/"+file.name;
-    const sitePath = "images/"+file.name;
-    try {
-      await uploadFile(file, repoPath);
-      bar.style.width="100%"; status.textContent="✓ Done"; status.className="u-status ok";
-      const url = RAW+"/"+repoPath+"?v="+Date.now();
-      const existing = LIB.findIndex(x=>x.sitePath===sitePath);
-      if (existing>=0) LIB[existing].url=url; else LIB.push({name:file.name,repoPath,sitePath,url,sha:""});
-      renderLib(); renderPickers();
-    } catch(e) { status.textContent="✗ Failed"; status.className="u-status err"; }
-  }
-  toast("Upload complete!", "ok");
-}
-function handleLibDrop(e) { e.preventDefault(); e.currentTarget.classList.remove("drag"); uploadLibFiles(e.dataTransfer.files); }
+      <form id="component-form" onsubmit="admin.saveComponent(event)">
+        <input type="hidden" id="cm-id" />
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Component Title *</label>
+            <input type="text" id="cm-title" class="form-control" placeholder="e.g. Authorized Lens Dispenser Spotlight" required />
+          </div>
+          <div class="form-row">
+            <label>Component Type *</label>
+            <select id="cm-type" class="form-control">
+              <option value="banner">Promotional Banner / Hero</option>
+              <option value="brand_marquee">Official Brand Marquee</option>
+              <option value="features">Clinic Service Highlights</option>
+              <option value="lens_advantages">Lens Advantage Grid</option>
+              <option value="custom_html">Custom Section</option>
+            </select>
+          </div>
+        </div>
 
-async function miniUpload(input, prefix) {
-  const file = input.files[0]; if (!file||!token) return;
-  const prog = document.getElementById(prefix+"-mini-progress");
-  const {bar,status} = makeProgressItem(prog, file.name);
-  bar.style.width="30%";
-  const repoPath = "public/images/"+file.name;
-  const sitePath = "images/"+file.name;
-  try {
-    await uploadFile(file, repoPath);
-    bar.style.width="100%"; status.textContent="✓ Uploaded"; status.className="u-status ok";
-    const url = RAW+"/"+repoPath+"?v="+Date.now();
-    if (!LIB.find(x=>x.sitePath===sitePath)) LIB.push({name:file.name,repoPath,sitePath,url,sha:""});
-    renderLib(); renderPickers();
-    setImgVal(prefix, sitePath, url);
-    toast("Photo uploaded!", "ok");
-  } catch(e) { status.textContent="✗ Failed"; status.className="u-status err"; toast("Upload failed: "+e.message,"err"); }
-}
+        <div class="form-row">
+          <label>Subtitle / Description</label>
+          <textarea id="cm-subtitle" class="form-control" rows="2" placeholder="Essilor Crizal, Carl Zeiss, Varilux progressive specialists in Thiruvarur."></textarea>
+        </div>
 
-// ── SHOP PHOTO ───────────────────────────────────────
-async function loadShopPreview() {
-  try {
-    await api(`/repos/${REPO}/contents/public/images/shop.jpg`);
-    const url = RAW+"/public/images/shop.jpg?v="+Date.now();
-    document.getElementById("shop-preview").innerHTML = `<img src="${url}" alt="Shop" style="width:100%;height:100%;object-fit:cover"/>`;
-  } catch(_) {}
-}
-async function uploadShopPhoto(file) {
-  if (!file||!token) return;
-  const prog = document.getElementById("shop-progress");
-  const {bar,status} = makeProgressItem(prog, file.name);
-  bar.style.width="30%";
-  try {
-    await uploadFile(file, "public/images/shop.jpg");
-    bar.style.width="100%"; status.textContent="✓ Done"; status.className="u-status ok";
-    const url = RAW+"/public/images/shop.jpg?v="+Date.now();
-    document.getElementById("shop-preview").innerHTML = `<img src="${url}" alt="Shop" style="width:100%;height:100%;object-fit:cover"/>`;
-    await patchShopImg();
-    toast("Shop photo uploaded! Website updates in ~30 seconds.", "ok");
-  } catch(e) { status.textContent="✗ Failed"; status.className="u-status err"; toast("Upload failed: "+e.message,"err"); }
-}
-function handleShopDrop(e) { e.preventDefault(); e.currentTarget.classList.remove("drag"); uploadShopPhoto(e.dataTransfer.files[0]); }
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Display Sort Order (Lower displays higher)</label>
+            <input type="number" id="cm-order" class="form-control" value="10" />
+          </div>
+          <div class="form-row">
+            <label style="font-size:12.5px;display:flex;align-items:center;gap:6px;cursor:pointer;margin-top:24px;">
+              <input type="checkbox" id="cm-active" checked />
+              Display on Website Immediately
+            </label>
+          </div>
+        </div>
 
-async function patchShopImg() {
-  try {
-    const d = await api(`/repos/${REPO}/contents/public/index.html`);
-    let html = atob(d.content.replace(/\n/g,""));
-    html = html.replace(/const SHOP_IMG\s*=\s*"[^"]*"/, 'const SHOP_IMG = "images/shop.jpg"');
-    await api(`/repos/${REPO}/contents/public/index.html`, {
-      method:"PUT", body:JSON.stringify({ message:"Auto: update shop photo", content:btoa(unescape(encodeURIComponent(html))), sha:d.sha })
-    });
-  } catch(_) {}
-}
+        <div class="modal-foot">
+          <button type="button" class="btn-secondary" onclick="admin.closeModal('component-modal')">Cancel</button>
+          <button type="submit" class="btn-primary" style="width:fit-content;padding:8px 18px;">Save Component</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-// ── TABLES ───────────────────────────────────────────
-function imgCell(path) {
-  if (!path) return `<div class="no-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M2 10s3-3 10-3 10 3 10 3v4s-3 3-10 3-10-3-10-3v-4z"/></svg></div>`;
-  const src = path.startsWith("http") ? path : RAW+"/public/"+path.replace(/^\//,"");
-  return `<img class="img-thumb" src="${src}" alt=""/>`;
-}
-function renderTables() {
-  document.getElementById("frames-tbody").innerHTML = DB.frames.map(p=>`
-    <tr>
-      <td>${imgCell(p.img)}</td>
-      <td class="prod-name">${p.name}</td>
-      <td>${p.category}</td>
-      <td>${p.badge?`<span class="prod-badge">${p.badge}</span>`:"—"}</td>
-      <td>${(p.colors||[]).map(c=>`<span style="display:inline-block;width:13px;height:13px;border-radius:50%;background:${c.hex};margin-right:3px;vertical-align:middle;border:1px solid rgba(0,0,0,.1)"></span>`).join("")}</td>
-      <td><div class="row-actions"><button class="edit-btn" onclick="editFrame(${p.id})">Edit</button><button class="del-btn" onclick="delFrame(${p.id})">Delete</button></div></td>
-    </tr>`).join("") || `<tr class="empty-row"><td colspan="6">No frames yet — click "Add frame"</td></tr>`;
+  <!-- TOAST CONTAINER -->
+  <div class="toast-msg" id="toast"></div>
 
-  document.getElementById("lenses-tbody").innerHTML = DB.lenses.map(l=>`
-    <tr>
-      <td>${imgCell(l.img)}</td>
-      <td class="prod-name">${l.name}</td>
-      <td>${l.brand}</td>
-      <td><span class="prod-badge">${l.category}</span></td>
-      <td style="font-size:12px">${l.power}</td>
-      <td><div class="row-actions"><button class="edit-btn" onclick="editLens(${l.id})">Edit</button><button class="del-btn" onclick="delLens(${l.id})">Delete</button></div></td>
-    </tr>`).join("") || `<tr class="empty-row"><td colspan="6">No lenses yet — click "Add lens"</td></tr>`;
-}
-
-// ── SECTIONS ─────────────────────────────────────────
-function switchSec(s) {
-  document.querySelectorAll(".section").forEach(x=>x.classList.remove("on"));
-  document.querySelectorAll(".sitem").forEach(x=>x.classList.remove("on"));
-  document.getElementById("sec-"+s).classList.add("on");
-  const si=document.getElementById("si-"+s); if(si) si.classList.add("on");
-}
-function ipSwitch(el, panel) {
-  const picker=el.closest(".img-picker");
-  picker.querySelectorAll(".ip-tab").forEach(t=>t.classList.remove("on"));
-  picker.querySelectorAll(".ip-panel").forEach(p=>p.classList.remove("on"));
-  el.classList.add("on"); document.getElementById(panel).classList.add("on");
-}
-
-// ── FRAME MODAL ──────────────────────────────────────
-function openFrameModal(p) {
-  document.getElementById("fm-title").textContent = p?"Edit frame":"Add frame";
-  document.getElementById("f-id").value=p?.id||"";
-  document.getElementById("f-name").value=p?.name||"";
-  document.getElementById("f-type").value=p?.type||"";
-  document.getElementById("f-cat").value=p?.category||"Everyday";
-  document.getElementById("f-badge").value=p?.badge||"";
-  document.getElementById("f-sizes").value=(p?.sizes||[]).join(", ");
-  document.getElementById("f-material").value=p?.specs?.Material||"";
-  document.getElementById("f-style").value=p?.specs?.Style||"";
-  document.getElementById("f-lensw").value=p?.specs?.["Lens width"]||"";
-  document.getElementById("f-bridge").value=p?.specs?.Bridge||"";
-  document.getElementById("f-coatings").value=(p?.coatings||[]).join(", ");
-  document.getElementById("f-colors").value=(p?.colors||[]).map(c=>c.name+":"+c.hex).join(", ");
-  document.getElementById("f-wa").value=p?.waMsg||"";
-  document.getElementById("f-img-manual").value=p?.img||"";
-  setImgVal("f",p?.img||"","");
-  document.getElementById("f-saving").classList.remove("show");
-  document.getElementById("f-savebtn").disabled=false;
-  document.getElementById("f-mini-progress").innerHTML="";
-  document.getElementById("frame-modal").classList.add("open");
-  renderPickers();
-}
-function editFrame(id){openFrameModal(DB.frames.find(x=>x.id===id));}
-async function delFrame(id){
-  if(!confirm("Delete this frame?")) return;
-  DB.frames=DB.frames.filter(x=>x.id!==id);
-  if(await saveDB()){renderTables();toast("Frame deleted.","ok");}
-}
-async function saveFrame(){
-  const btn=document.getElementById("f-savebtn"),bar=document.getElementById("f-saving");
-  btn.disabled=true; bar.classList.add("show");
-  const id=parseInt(document.getElementById("f-id").value)||0;
-  const colors=document.getElementById("f-colors").value.split(",").map(s=>{const[n,...r]=s.trim().split(":");return{name:n.trim(),hex:(r.join(":").trim()||"#1a1a1a")};}).filter(c=>c.name);
-  const frame={
-    id:id||(Math.max(0,...DB.frames.map(x=>x.id),0)+1),
-    name:v("f-name"),type:v("f-type"),category:v("f-cat"),badge:v("f-badge"),img:v("f-img"),colors,
-    sizes:v("f-sizes").split(",").map(s=>s.trim()).filter(Boolean),
-    specs:{Material:v("f-material"),Style:v("f-style"),"Lens width":v("f-lensw"),Bridge:v("f-bridge")},
-    coatings:v("f-coatings").split(",").map(s=>s.trim()).filter(Boolean),
-    waMsg:v("f-wa")
-  };
-  if(id) DB.frames=DB.frames.map(x=>x.id===id?frame:x); else DB.frames.push(frame);
-  const ok=await saveDB();
-  bar.classList.remove("show"); btn.disabled=false;
-  if(ok){closeModal("frame-modal");renderTables();toast(id?"Frame updated!":"Frame added!","ok");}
-}
-
-// ── LENS MODAL ───────────────────────────────────────
-function openLensModal(l){
-  document.getElementById("lm-title").textContent=l?"Edit lens":"Add contact lens";
-  document.getElementById("l-id").value=l?.id||"";
-  document.getElementById("l-name").value=l?.name||"";
-  document.getElementById("l-brand").value=l?.brand||"";
-  document.getElementById("l-cat").value=l?.category||"Daily";
-  document.getElementById("l-badge").value=l?.badge||"";
-  document.getElementById("l-power").value=l?.power||"";
-  document.getElementById("l-material").value=l?.material||"";
-  document.getElementById("l-water").value=l?.water||"";
-  document.getElementById("l-duration").value=l?.duration||"";
-  document.getElementById("l-features").value=(l?.features||[]).join(", ");
-  document.getElementById("l-wa").value=l?.waMsg||"";
-  document.getElementById("l-img-manual").value=l?.img||"";
-  setImgVal("l",l?.img||"","");
-  document.getElementById("l-saving").classList.remove("show");
-  document.getElementById("l-savebtn").disabled=false;
-  document.getElementById("l-mini-progress").innerHTML="";
-  document.getElementById("lens-modal").classList.add("open");
-  renderPickers();
-}
-function editLens(id){openLensModal(DB.lenses.find(x=>x.id===id));}
-async function delLens(id){
-  if(!confirm("Delete this lens?")) return;
-  DB.lenses=DB.lenses.filter(x=>x.id!==id);
-  if(await saveDB()){renderTables();toast("Lens deleted.","ok");}
-}
-async function saveLens(){
-  const btn=document.getElementById("l-savebtn"),bar=document.getElementById("l-saving");
-  btn.disabled=true; bar.classList.add("show");
-  const id=parseInt(document.getElementById("l-id").value)||0;
-  const lens={
-    id:id||(Math.max(0,...DB.lenses.map(x=>x.id),100)+1),
-    name:v("l-name"),brand:v("l-brand"),category:v("l-cat"),badge:v("l-badge"),img:v("l-img"),
-    power:v("l-power"),material:v("l-material"),water:v("l-water"),duration:v("l-duration"),
-    features:v("l-features").split(",").map(s=>s.trim()).filter(Boolean),
-    waMsg:v("l-wa")
-  };
-  if(id) DB.lenses=DB.lenses.map(x=>x.id===id?lens:x); else DB.lenses.push(lens);
-  const ok=await saveDB();
-  bar.classList.remove("show"); btn.disabled=false;
-  if(ok){closeModal("lens-modal");renderTables();toast(id?"Lens updated!":"Lens added!","ok");}
-}
-
-// ── UTILS ─────────────────────────────────────────────
-const v = id => document.getElementById(id).value.trim();
-function closeModal(id){document.getElementById(id).classList.remove("open");}
-function copyTxt(t){navigator.clipboard.writeText(t).then(()=>toast("Copied: "+t,"ok")).catch(()=>toast(t));}
-function toast(msg,type=""){
-  const el=document.getElementById("toast");
-  el.textContent=msg; el.className="toast show"+(type?" "+type:"");
-  clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove("show"),3500);
-}
-
-// ── INIT ──────────────────────────────────────────────
-// Auto login if a token was previously saved in this browser
-(function initAuth(){
-  const saved = localStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY);
-  if (saved) { token = saved; verifyAndShow(!!localStorage.getItem(STORAGE_KEY)); }
-})();
-</script>
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/admin.js"></script>
 </body>
 </html>
