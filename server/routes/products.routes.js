@@ -104,7 +104,7 @@ router.get('/', async (req, res) => {
 
     // Gender
     if (gender && gender !== 'all') {
-      sql += ' AND (LOWER(p.gender) = LOWER(?) OR LOWER(p.gender) = "unisex")';
+      sql += " AND (LOWER(p.gender) = LOWER(?) OR LOWER(p.gender) = 'unisex')";
       params.push(gender);
     }
 

@@ -79,7 +79,7 @@ async function getInventorySummary() {
     FROM inventory i
   `);
   const activeOffers = await db.get(
-    'SELECT COUNT(*) as count FROM offers WHERE is_active = 1 AND (end_date IS NULL OR end_date > CURRENT_TIMESTAMP)'
+    'SELECT COUNT(*) as count FROM offers WHERE is_active = 1 AND (end_date IS NULL OR end_date::timestamptz > CURRENT_TIMESTAMP)'
   );
 
   return {
